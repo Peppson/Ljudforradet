@@ -1,8 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 
-NotFoundPage.route = {
-  path: '*'
-};
 
 export default function NotFoundPage() {
   return <>
