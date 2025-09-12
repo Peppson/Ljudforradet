@@ -1,0 +1,5 @@
+
+Colors:
+logo = #DC3545
+grautext = #9797A2
+
