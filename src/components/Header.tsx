@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import routes from '../routes';
 import { Row, Col } from 'react-bootstrap';
-import Logo from './Logo';
+import Logo from './logo';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);

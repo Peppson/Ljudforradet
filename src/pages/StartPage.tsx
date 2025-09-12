@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import InstrumentCard from "../components/InstrumentCard";
+import Divider from "../components/divider";
 
 
 export default function StartPage() {
@@ -15,6 +16,7 @@ export default function StartPage() {
 
     </section>
 
+
     <section className="page-section">
       <div className="container">
         <div className="text-center pd-5 mb-4">
@@ -23,12 +25,14 @@ export default function StartPage() {
           <p>Vi erbjuder ett brett sortiment av produkter för både privatpersoner och företag.</p>
         </div>
         <div className="d-flex justify-content-center">
-          <button onClick={() => navigate("/products")} className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
+          <button onClick={() => navigate("/login")} className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
             Kom igång!
           </button>
         </div>
       </div>
     </section>
+
+    <Divider />
 
     <section className="bg-black w-100">
       <div className="container">
@@ -36,6 +40,7 @@ export default function StartPage() {
           <h2 className="display-4">Upptäck vårt utbud</h2>
           <p className="lead text-light">Utforska vårt breda sortiment av instrument och utrustning för alla dina ljudbehov.</p>
         </div>
+
         <div className="row g-4 pb-5">
           <InstrumentCard
             imgSrc="/images/guitar.png"
