@@ -11,9 +11,10 @@ interface Route {
 }
 
 const routes: Route[] = [
-  { element: <StartPage />, path: '/', menuLabel: 'Start' },
+  { element: <StartPage />, path: '/', menuLabel: 'Home' },
+  { element: <ProductsPage />, path: '/products', menuLabel: 'Products' },
   { element: <AboutPage />, path: '/about-us', menuLabel: 'About us' },
-  { element: <ProductsPage />, path: '/products', menuLabel: 'Our products' },
+  { element: <AboutPage />, path: '/login', menuLabel: 'Login' },
   { element: <NotFoundPage />, path: '*' }
 ];
 

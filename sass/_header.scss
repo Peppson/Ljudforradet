@@ -1,0 +1,15 @@
+@use 'bootstrap';
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+img {
+    height: 44px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
