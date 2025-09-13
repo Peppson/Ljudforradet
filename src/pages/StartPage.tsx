@@ -6,16 +6,11 @@ import Divider from "../components/divider";
 export default function StartPage() {
   const navigate = useNavigate();
   return <>
-    <section className="start-page-video">
-
+    <section className="background-container">
       <video autoPlay muted loop playsInline className="background-video">
         <source src="video/video.mp4" type="video/mp4" />
       </video>
-
-      {/* <img src="images/video-still.png" alt="TODO" className="background-video" /> */}
-
     </section>
-
 
     <section className="page-section">
       <div className="container">
@@ -32,6 +27,8 @@ export default function StartPage() {
       </div>
     </section>
 
+    <Divider />
+
     <section className="bg-black w-100">
       <div className="container py-3">
         <div className="text-center py-5">
@@ -39,6 +36,7 @@ export default function StartPage() {
           <p className="lead text-light">Utforska vårt breda sortiment av instrument och utrustning för alla dina ljudbehov.</p>
         </div>
 
+        {/* Static content on /home incase of backend failure */}
         <div className="row g-4 pb-5">
           <InstrumentCard
             imgSrc="/images/guitar.png"
@@ -56,10 +54,10 @@ export default function StartPage() {
             description="Perfekt för övning, livespelningar eller studio."
           />
         </div>
-
-
       </div>
+
       <Divider />
+
     </section>
   </>;
 }
