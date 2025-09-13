@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import InstrumentCard from "../components/InstrumentCard";
 import Divider from "../components/divider";
 
-
 export default function StartPage() {
   const navigate = useNavigate();
+
   return <>
     <section className="background-container">
       <video autoPlay muted loop playsInline className="background-video">
