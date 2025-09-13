@@ -14,7 +14,7 @@ $light: #9797A2; // #9797A2;
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
 
-// Global css overrides
+// Css overrides
 * {
   box-sizing: border-box;
   margin: 0;
@@ -51,7 +51,7 @@ $light: #9797A2; // #9797A2;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(20%) brightness(50%);
+  filter: grayscale(20%) brightness(40%);
 }
 
 .page-section {
@@ -63,4 +63,8 @@ $light: #9797A2; // #9797A2;
   align-items: center;
   width: 100%;
   height: 100vh;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
 }

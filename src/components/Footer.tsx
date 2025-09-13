@@ -1,10 +1,12 @@
 import { Row, Col, Container } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import routes from '../routes';
+import Divider from './divider';
 
 export default function Footer() {
   return (
     <footer className="bg-black">
+      <Divider />
       <div className="pt-5">
         <Container>
           <Row>
@@ -16,8 +18,7 @@ export default function Footer() {
                     <p className="mb-2" key={i}>
                       <NavLink
                         to={route.path}
-                        className="text-decoration-none"
-                      >
+                        className="text-decoration-none">
                         {route.menuLabel}
                       </NavLink>
                     </p>

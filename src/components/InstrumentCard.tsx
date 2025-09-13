@@ -1,8 +1,4 @@
-interface InstrumentCardProps {
-    imgSrc: string;
-    title: string;
-    description: string;
-}
+import type InstrumentCardProps from "../interfaces/InstrumentCardProps";
 
 export default function InstrumentCard({ imgSrc, title, description }: InstrumentCardProps) {
     return (

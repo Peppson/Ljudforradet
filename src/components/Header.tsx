@@ -23,7 +23,7 @@ export default function Header() {
         <Container className="d-flex justify-content-between align-items-center">
 
           <div className="p-3">
-            <Link to="/" className="text-decoration-none">
+            <Link to="/" className="text-decoration-none hover-underline">
               <div className="d-flex">
                 <div className="pe-2">
                   <Logo />
@@ -43,7 +43,7 @@ export default function Header() {
                     as={Link}
                     key={i}
                     to={path}
-                    className="text-white ps-3"
+                    className="text-white ps-3 fs-5"
                     onClick={() => setTimeout(() => setExpanded(false), 100)}>
                     {menuLabel}
                   </Nav.Link>
