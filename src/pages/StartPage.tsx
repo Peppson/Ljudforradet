@@ -32,10 +32,8 @@ export default function StartPage() {
       </div>
     </section>
 
-    <Divider />
-
     <section className="bg-black w-100">
-      <div className="container">
+      <div className="container py-3">
         <div className="text-center py-5">
           <h2 className="display-4">Upptäck vårt utbud</h2>
           <p className="lead text-light">Utforska vårt breda sortiment av instrument och utrustning för alla dina ljudbehov.</p>
@@ -49,7 +47,7 @@ export default function StartPage() {
           />
           <InstrumentCard
             imgSrc="/images/synth.png"
-            title="Keyboard"
+            title="Synth"
             description="Utforska nya sound och rytmer med våra keyboards och synthar, från enkla melodier till avancerade beats."
           />
           <InstrumentCard
@@ -58,7 +56,10 @@ export default function StartPage() {
             description="Perfekt för övning, livespelningar eller studio."
           />
         </div>
+
+
       </div>
+      <Divider />
     </section>
   </>;
 }

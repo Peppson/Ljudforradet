@@ -8,7 +8,7 @@ $enable-negative-margins: true;
 
 // Color overrides
 $primary: rgb(255, 255, 255);
-$light: #9797A2;
+$light: #9797A2; // #9797A2;
 
 
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
@@ -37,6 +37,6 @@ $light: #9797A2;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 }
