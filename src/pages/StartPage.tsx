@@ -85,7 +85,7 @@ export default function StartPage() {
           <FeatureCard
             imgSrc={"/svg/chat.svg"}
             title={"Enkelhet"}
-            description={"Hyr utrustning snabbt och smidigt – vi gör processen enkel så att du kan komma igång direkt."}
+            description={"Hyr utrustning snabbt och smidigt, vi gör processen enkel så att du kan komma igång direkt."}
             padding="ps-0"
           />
         </div>
