@@ -5,7 +5,7 @@ import Divider from './divider';
 
 export default function Footer() {
   return (
-    <footer className="bg-black">
+    <footer className="background-color-overlay">
       <Divider />
       <div className="pt-5">
         <Container>

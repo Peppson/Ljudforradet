@@ -54,6 +54,10 @@ $light: #9797A2; // #9797A2;
   filter: grayscale(20%) brightness(40%);
 }
 
+.background-color-overlay {
+  background-color: #1A1A1E;
+}
+
 .page-section {
   position: relative;
   z-index: 2;

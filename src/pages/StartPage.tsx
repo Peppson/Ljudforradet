@@ -40,7 +40,7 @@ export default function StartPage() {
 
     <Divider />
 
-    <section id="discover-section" className="bg-black w-100">
+    <section id="discover-section" className="background-color-overlay w-100">
       <div className="container py-3">
 
         <div className="text-center py-5">
