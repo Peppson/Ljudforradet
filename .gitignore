@@ -443,6 +443,7 @@ node_modules
 dist
 dist-ssr
 *.local
+backend/_db.sqlite3
 
 # Editor directories and files
 .vscode/*
