@@ -6,7 +6,7 @@ export default function StartPage() {
   const scrollToNextSection = () => {
     const targetElement = document.getElementById('discover-section'); // ById ugh...
     if (targetElement) {
-      const headerHeight = 99;
+      const headerHeight = 99; // Header h + 1px
       const targetPosition = targetElement.offsetTop - headerHeight;
 
       window.scrollTo({

@@ -1,12 +1,12 @@
 // Global settings
 Globals = Obj(new
 {
-    debugOn = true,
+    debugOn = true, // todo
     detailedAclDebug = false,
     aclOn = true,
     isSpa = true,
     port = args[0],
-    serverName = "Minimal API Backend",
+    serverName = "Ljudförrådet Backend",
     frontendPath = args[1],
     dbPath = args[2],
     sessionLifeTimeHours = 2

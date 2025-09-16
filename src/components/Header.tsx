@@ -6,20 +6,19 @@ import Logo from "./logo";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [expanded, setExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className={isScrolled || expanded ? "header scrolled" : "header"}>
-      <Navbar expanded={expanded} expand="md" variant="dark">
+    <header className={isScrolled || isExpanded ? "header scrolled" : "header"}>
+      <Navbar expanded={isExpanded} expand="md" variant="dark">
         <Container className="d-flex justify-content-between align-items-center">
 
           <div className="p-3">
@@ -33,7 +32,7 @@ export default function Header() {
             </Link>
           </div>
 
-          <Navbar.Toggle onClick={() => setExpanded(!expanded)} />
+          <Navbar.Toggle onClick={() => setIsExpanded(!isExpanded)} />
 
           <Navbar.Collapse className="justify-content-end">
             <Nav>
@@ -44,7 +43,7 @@ export default function Header() {
                     key={i}
                     to={path}
                     className="text-white ps-3 fs-5"
-                    onClick={() => setTimeout(() => setExpanded(false), 100)}>
+                    onClick={() => setTimeout(() => setIsExpanded(false), 100)}>
                     {menuLabel}
                   </Nav.Link>
               )}

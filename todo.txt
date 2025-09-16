@@ -1,10 +1,15 @@
 
 Colors:
 logo = #DC3545
-grautext = #9797A2
+graytext = #9797A2
+background-color = #1A1A1E
+
+
+todo:
+app.cs ej debug 
 
 
 
+
+info:
 responsive ner till ca 310px
-
-
