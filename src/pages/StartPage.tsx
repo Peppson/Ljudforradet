@@ -4,7 +4,7 @@ import FeatureCard from "../components/FeatureCard";
 
 export default function StartPage() {
   const scrollToNextSection = () => {
-    const targetElement = document.getElementById('discover-section'); // ById ugh...
+    const targetElement = document.getElementById('discover-section'); // ById ugh... useRef?
     if (targetElement) {
       const headerHeight = 99; // Header h + 1px
       const targetPosition = targetElement.offsetTop - headerHeight;
