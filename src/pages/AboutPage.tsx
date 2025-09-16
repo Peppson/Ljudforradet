@@ -2,7 +2,7 @@ export default function AboutPage() {
   return <>
     <section className="page-section px-2 background-color-overlay">
       <div className="container mt-5">
-        <div className="row bg-dark py-3 p-2 p-md-4 bg-opacity-75 rounded-3 mt-5">
+        <div className="row bg-dark py-3 p-2 p-md-4 bg-opacity-75 mt-5">
           <div className="col-md-6">
             <h6 className="pb-2">Om oss</h6>
             <div className="d-flex flex-column justify-content-center">
@@ -17,7 +17,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="col-md-6">
-            <img src="images/team.jpg" className="w-100  " />
+            <img src="images/team.jpg" className="w-100" />
           </div>
         </div>
       </div >
