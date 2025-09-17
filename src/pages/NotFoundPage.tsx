@@ -1,3 +1,4 @@
+import { Container } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function NotFoundPage() {
@@ -10,7 +11,7 @@ export default function NotFoundPage() {
     </section>
 
     <section className="page-section">
-      <div className="container">
+      <Container>
         <div className="text-center pd-5 mb-4">
           <h2 className="pb-2 display-4">404: Sidan kunde inte hittas</h2>
           <p className="m-1">Tyvärr verkar det inte finnas någon sida som matchar den angivna adressen:</p>
@@ -22,7 +23,7 @@ export default function NotFoundPage() {
             Till startsidan!
           </button>
         </div>
-      </div>
+      </Container>
     </section>
   </>;
 }

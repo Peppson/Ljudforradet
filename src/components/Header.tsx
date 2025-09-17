@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import routes from "../routes";
@@ -7,6 +7,8 @@ import Logo from "./logo";
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const pathName = useLocation().pathname;
+  const isActive = (path: string) => pathName === path;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +24,7 @@ export default function Header() {
         <Container className="d-flex justify-content-between align-items-center">
 
           <div className="p-3">
-            <Link to="/" className="text-decoration-none hover-underline">
+            <Link to="/" className="text-decoration-none">
               <div className="d-flex">
                 <div className="pe-2">
                   <Logo />
@@ -42,7 +44,7 @@ export default function Header() {
                     as={Link}
                     key={i}
                     to={path}
-                    className="text-white ps-3 fs-5"
+                    className={`${isActive(path) ? 'navLinkActive' : ''} text-white ps-3 fs-5`}
                     onClick={() => setTimeout(() => setIsExpanded(false), 100)}>
                     {menuLabel}
                   </Nav.Link>

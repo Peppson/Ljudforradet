@@ -9,6 +9,7 @@ $enable-negative-margins: true;
 // Color overrides
 $primary: rgb(255, 255, 255);
 $light: #9797A2;
+$tertiary: #DC3545;
 
 
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
@@ -29,6 +30,12 @@ $light: #9797A2;
 
 .hover-grow:hover {
   transform: scale(1.05);
+}
+
+.navLinkActive {
+  text-underline-offset: 4px;
+  text-decoration-line: underline;
+  text-decoration-color: $tertiary;
 }
 
 .background-container {
@@ -67,14 +74,6 @@ $light: #9797A2;
   align-items: center;
   width: 100%;
   min-height: 100vh;
-}
-
-.margin-top {
-  margin-top: 100px; // header height
-}
-
-.hover-underline:hover {
-  text-decoration: underline;
 }
 
 .img-hover-zoom {
