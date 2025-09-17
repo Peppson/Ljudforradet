@@ -24,7 +24,7 @@ export default function StartPage() {
     </section>
 
     <section className="page-section">
-      <div className="container">
+      <div className="container space-top-header">
         <div className="text-center pd-5 mb-4">
           <h2 className="pb-2 display-4">Välkommen till Ljudförrådet</h2>
           <p className="m-1">Din lokala plats för uthyrning av ljudutrustning, instrument och tillbehör.</p>
@@ -67,7 +67,7 @@ export default function StartPage() {
           />
         </div>
 
-        <h2 className="text-center py-3 pb-4 display-6">Varför Ljudförrådet?</h2>
+        <h2 className="text-center py-4 display-6">Varför Ljudförrådet?</h2>
 
         <div className="row pb-5 g-3">
           <FeatureCard

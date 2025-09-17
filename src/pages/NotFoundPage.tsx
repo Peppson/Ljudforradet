@@ -11,7 +11,7 @@ export default function NotFoundPage() {
     </section>
 
     <section className="page-section">
-      <Container>
+      <Container className="space-top-header">
         <div className="text-center pd-5 mb-4">
           <h2 className="pb-2 display-4">404: Sidan kunde inte hittas</h2>
           <p className="m-1">Tyvärr verkar det inte finnas någon sida som matchar den angivna adressen:</p>

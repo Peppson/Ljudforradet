@@ -8,8 +8,70 @@ background-color = #1A1A1E
 todo:
 app.cs ej debug 
 react key på alla foreach
-startpage margin-top fucked on mobile horizontal
+om oss och login fucked  margin-top fucked on mobile horizontal alla sidor med background image is fucked
+primereact table maker for admin page
 
+
+remove bootstrap breakpoints when done
 
 info:
 responsive ner till ca 310px
+
+
+
+
+
+
+
+
+
+<Row>
+          <Col>
+
+            <h2 className="mb-4">Add a new pet</h2>
+            <Form onSubmit={() => { }}>
+              <Form.Group>
+                <Form.Label className="d-block">
+                  <p className="mb-1">Pet name</p>
+                  <Form.Control
+                    onChange={() => { }}
+                    type="text"
+                    name="name"
+                    placeholder="Pet name"
+                  />
+                </Form.Label>
+              </Form.Group>
+              <Form.Group className="mt-4">
+                <Form.Label className="d-block">
+                  <p className="mb-1">Species</p>
+                  <Form.Control
+                    onChange={() => { }}
+                    type="text"
+                    name="species"
+                    placeholder="Species"
+                    autoComplete="off"
+                  />
+                </Form.Label>
+              </Form.Group>
+              <Form.Group className="mt-4">
+                <Form.Label>
+                  <p className="mb-1">Owner</p>
+
+                  <Form.Select name="ownerId" onChange={() => { }}>
+                    <option value="null">No owner</option>
+                    {/* {owners.map(({ id, firstName, lastName, email }) => <option
+                      key={id}
+                      value={id}
+                    >
+                      {firstName} {lastName} ({email})
+                    </option>)} */}
+                  </Form.Select>
+                </Form.Label>
+              </Form.Group>
+              <Button type="submit" className="mt-4 float-end">Add pet</Button>
+            </Form>
+          </Col>
+
+
+
+        </Row>

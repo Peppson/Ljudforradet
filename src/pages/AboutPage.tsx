@@ -6,9 +6,9 @@ export default function AboutPage() {
       <img src="/images/video-still-1.png" className="background-img" />
     </section>
 
-    <section className="page-section px-2 ">
-      <Container className="mt-5">
-        <Row className="bg-dark py-3 p-2 p-md-4 mt-5">
+    <section className="page-section px-2">
+      <Container className="mb-0 mb-md-5">
+        <Row className="background-color-overlay py-3 p-2 p-md-4">
           <Col md={6}>
             <h6 className="pb-2">Om oss</h6>
             <div className="d-flex flex-column justify-content-center">
@@ -27,7 +27,6 @@ export default function AboutPage() {
           </Col>
         </Row>
       </Container >
-      <div className="my-3"> </div>
     </section >
   </>;
 }

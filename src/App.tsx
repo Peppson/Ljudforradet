@@ -2,6 +2,9 @@ import { useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
+import BootstrapBreakpoints from './utils/BootstrapBreakpoints';
+
+const showBootstrapBreakpoints = true;
 
 export default function App() {
   useLocation();
@@ -11,5 +14,6 @@ export default function App() {
     <Header />
     <Main />
     <Footer />
+    {showBootstrapBreakpoints ? <BootstrapBreakpoints /> : null}
   </>;
 };
