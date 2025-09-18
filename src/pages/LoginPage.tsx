@@ -1,43 +1,33 @@
-import { Row, Col, Container, Form, Button } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
+import { useState } from 'react';
+import Register from '../components/Register';
 import Login from '../components/Login';
 
-
 export default function LoginPage() {
-
-
-
-
+  const [isLogin, setIsLogin] = useState(true);
 
   return <>
-    <section className="background-container">
+    <section className="background-container" >
       <img src="/images/video-still-1.png" className="background-img" />
-    </section>
+    </section >
 
-    <section className="page-section px-2 ">
+    <section className="page-section px-2">
       <Container className="h-custom background-color-overlay py-5">
+        <Row className="d-flex justify-content-center align-items-center h-100">
 
-
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          <Login />
-
-          <div className="col-md-9 col-lg-6 col-xl-5">
+          <Col md={9} lg={6} xl={5}>
             <img
-              src="images/guitar.png"
+              src="images/crowd.jpg"
               className="img-fluid"
               alt="login image" />
-          </div>
+          </Col>
 
+          {isLogin
+            ? <Login setLoginPage={setIsLogin} />
+            : <Register setLoginPage={setIsLogin} />}
 
-
-
-
-
-        </div>
+        </Row>
       </Container>
-
-    </section>
-
-
-
+    </section >
   </>;
 }

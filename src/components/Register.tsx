@@ -2,25 +2,26 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login({ setLoginPage }: { setLoginPage: (value: boolean) => void }) {
+export default function Register({ setLoginPage: setIsLogin }: { setLoginPage: (value: boolean) => void }) {
   const navigate = useNavigate();
 
-  let [user, setUser] = useState({
+  let [createUser, setCreateUser] = useState({
+    name: "",
     email: "",
     password: ""
   });
 
   function setFormProp(event: React.ChangeEvent) {
     let { name, value }: { name: string, value: string | null } = event.target as HTMLInputElement;
-    setUser({ ...user, [name]: value });
+    setCreateUser({ ...createUser, [name]: value });
   }
 
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
-    const payload: any = { ...user };
+    const payload: any = { ...createUser };
 
     // todo
-    await fetch('/api/login', {
+    await fetch('/api/user', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -30,16 +31,32 @@ export default function Login({ setLoginPage }: { setLoginPage: (value: boolean)
     if (success) {
       navigate("/profile"); */
 
+
+
     navigate("/");
   }
 
   return <>
     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
       <div className="divider d-flex align-items-center my-4">
-        <p className="text-center fw-bold mx-3 mb-0">Logga in</p>
+        <p className="text-center fw-bold mx-3 mb-0">Registrera dig</p>
       </div>
-
       <Form onSubmit={sendForm}>
+
+        <Form.Group className="mb-3">
+          <Form.Label className="d-block">
+            <p className="mb-1 text-light">Namn</p>
+            <Form.Control
+              name="name"
+              onChange={setFormProp}
+              autoComplete="off"
+              placeholder="Ange ditt namn"
+              maxLength={100}
+              minLength={2}
+              required
+            />
+          </Form.Label>
+        </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label className="d-block">
@@ -51,6 +68,7 @@ export default function Login({ setLoginPage }: { setLoginPage: (value: boolean)
               autoComplete="email"
               placeholder="Ange din e-postadress"
               maxLength={100}
+              minLength={5}
               required
               inputMode="email"
               pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
@@ -68,6 +86,7 @@ export default function Login({ setLoginPage }: { setLoginPage: (value: boolean)
               autoComplete='off'
               placeholder="Ange ditt lösenord"
               maxLength={100}
+              minLength={6}
               required
             />
           </Form.Label>
@@ -77,18 +96,18 @@ export default function Login({ setLoginPage }: { setLoginPage: (value: boolean)
           <Button
             type="submit"
             className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
-            Logga in
+            Registrera
           </Button>
           <p className="small mt-4">
-            Har du inget konto?{" "}
+            Har du redan ett konto?{" "}
             <a
               className="text-light"
               onClick={(e) => {
                 e.preventDefault();
-                setLoginPage(false);
+                setIsLogin(true);
               }}
             >
-              Registrera dig
+              Logga in
             </a>
           </p>
         </div>
