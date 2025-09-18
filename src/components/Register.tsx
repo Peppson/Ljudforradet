@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
+import SubmitButton from './SubmitButton';
 
 export default function Register({ setLoginPage: setIsLogin }: { setLoginPage: (value: boolean) => void }) {
-  const navigate = useNavigate();
-
-  let [createUser, setCreateUser] = useState({
+  const [isLoading, setIsLoading] = useState(false);
+  const [createUser, setCreateUser] = useState({
     name: "",
     email: "",
     password: ""
@@ -18,22 +17,28 @@ export default function Register({ setLoginPage: setIsLogin }: { setLoginPage: (
 
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
+    const minSpinnerTime = 800;
     const payload: any = { ...createUser };
+    setIsLoading(true);
 
-    // todo
-    await fetch('/api/user', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+
+    const fetchPromise = await fetch("/api/user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
 
+    // todo
     /* const success = await loginUser(email, password);
     if (success) {
       navigate("/profile"); */
+    //await Promise.all([fetchPromise, new Promise((res) => setTimeout(res, minSpinnerTime))]);
 
+    await new Promise((resolve) => setTimeout(resolve, minSpinnerTime));
 
-
-    navigate("/");
+    setIsLoading(false);
+    alert("Konto skapat! Logga in med dina uppgifter.");
+    setIsLogin(true);
   }
 
   return <>
@@ -93,15 +98,15 @@ export default function Register({ setLoginPage: setIsLogin }: { setLoginPage: (
         </Form.Group>
 
         <div className="text-lg-start pt-2 align-items-center d-flex flex-column">
-          <Button
-            type="submit"
-            className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
+
+          <SubmitButton isLoading={isLoading}>
             Registrera
-          </Button>
+          </SubmitButton>
+
           <p className="small mt-4">
             Har du redan ett konto?{" "}
             <a
-              className="text-light"
+              className="text-light cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 setIsLogin(true);

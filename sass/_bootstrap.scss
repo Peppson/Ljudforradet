@@ -34,15 +34,6 @@ $danger: #DC3545;
   z-index: 1;
 }
 
-.background-container-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
 .background-video {
   width: 100%;
   height: 100%;
@@ -50,11 +41,24 @@ $danger: #DC3545;
   filter: grayscale(50%) brightness(50%);
 }
 
-.background-img {
+.background-container-img {
+  position: relative;
+  z-index: 0;
+}
+
+.background-container-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  background-image: url('/images/video-still-1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   filter: grayscale(20%) brightness(40%);
+  z-index: -1;
 }
 
 .page-section {
@@ -91,4 +95,12 @@ $danger: #DC3545;
 
 .space-top-header {
   margin-top: -99px;
+}
+
+.button-exact-width {
+  max-width: 200px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

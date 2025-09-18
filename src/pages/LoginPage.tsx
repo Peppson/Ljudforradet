@@ -7,17 +7,13 @@ export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
 
   return <>
-    <section className="background-container" >
-      <img src="/images/video-still-1.png" className="background-img" />
-    </section >
-
-    <section className="page-section px-2">
-      <Container className="h-custom background-color-overlay py-5">
-        <Row className="d-flex justify-content-center align-items-center h-100">
+    <section className="page-section px-2 background-container-img">
+      <Container className="h-custom background-color-overlay py-5 mb-5 mb-lg-0">
+        <Row className="d-flex justify-content-center align-items-center h-100 p-2 p-md-0">
 
           <Col md={9} lg={6} xl={5}>
             <img
-              src="images/crowd.jpg"
+              src="images/drums.jpg"
               className="img-fluid"
               alt="login image" />
           </Col>

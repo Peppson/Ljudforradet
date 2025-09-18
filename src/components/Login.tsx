@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import SubmitButton from './SubmitButton';
 
 export default function Login({ setLoginPage }: { setLoginPage: (value: boolean) => void }) {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   let [user, setUser] = useState({
     email: "",
@@ -17,15 +19,20 @@ export default function Login({ setLoginPage }: { setLoginPage: (value: boolean)
 
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
+    const minSpinnerTime = 800;
     const payload: any = { ...user };
 
-    // todo
-    await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+    setIsLoading(true);
+
+    const fetchPromise = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
 
+    //await Promise.all([fetchPromise, new Promise((res) => setTimeout(res, minSpinnerTime))]);
+
+    await new Promise((resolve) => setTimeout(resolve, minSpinnerTime));
     /* const success = await loginUser(email, password);
     if (success) {
       navigate("/profile"); */
@@ -74,15 +81,15 @@ export default function Login({ setLoginPage }: { setLoginPage: (value: boolean)
         </Form.Group>
 
         <div className="text-lg-start pt-2 align-items-center d-flex flex-column">
-          <Button
-            type="submit"
-            className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
+
+          <SubmitButton isLoading={isLoading}>
             Logga in
-          </Button>
+          </SubmitButton>
+
           <p className="small mt-4">
             Har du inget konto?{" "}
             <a
-              className="text-light"
+              className="text-light cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 setLoginPage(false);

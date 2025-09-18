@@ -6,11 +6,7 @@ export default function NotFoundPage() {
   const location = useLocation();
 
   return <>
-    <section className="background-container">
-      <img src="/images/video-still-1.png" className="background-img" />
-    </section>
-
-    <section className="page-section">
+    <section className="page-section background-container-img">
       <Container className="space-top-header">
         <div className="text-center pd-5 mb-4">
           <h2 className="pb-2 display-4">404: Sidan kunde inte hittas</h2>

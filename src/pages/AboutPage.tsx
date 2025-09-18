@@ -2,12 +2,8 @@ import { Col, Container, Row } from "react-bootstrap";
 
 export default function AboutPage() {
   return <>
-    <section className="background-container">
-      <img src="/images/video-still-1.png" className="background-img" />
-    </section>
-
-    <section className="page-section px-2">
-      <Container className="mb-0 mb-md-5">
+    <section className="page-section px-2 background-container-img">
+      <Container className="mb-0 mb-md-5 mb-5 mb-lg-0">
         <Row className="background-color-overlay py-3 p-2 p-md-4">
           <Col md={6}>
             <h6 className="pb-2">Om oss</h6>
