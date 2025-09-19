@@ -10,5 +10,6 @@ export default function ShowBootstrapBreakPoints() {
         {size}
       </div>
     ))}
+    <a href="/admin">Admin</a>
   </aside>;
 }

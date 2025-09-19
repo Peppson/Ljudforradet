@@ -34,7 +34,7 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
 
     // Register successful
     setIsLoading(false);
-    alert(`Välkommen ${createUser.name}! Logga in med dina uppgifter.`);
+    alert(`Välkommen ${createUser.name}!`);
     setIsLoginPage(true);
   }
 
@@ -52,7 +52,7 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
   return <>
     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
       <div className="divider d-flex align-items-center my-4">
-        <p className="text-center fw-bold mx-3 mb-0">Registrera dig</p>
+        <p className="text-center fw-bold mx-3 mb-0">Registrera</p>
       </div>
       <Form onSubmit={sendForm}>
 

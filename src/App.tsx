@@ -7,12 +7,14 @@ import { AuthProvider } from "./context/AuthProvider";
 import config from "./config/Config";
 
 export default function App() {
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   useLocation();
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
   return <>
     <AuthProvider>
-      <Header />
+      {!isAdminRoute && <Header />}
       <Main />
       <Footer />
       {config.showBootstrapBreakpoints ? <BootstrapBreakpoints /> : null}

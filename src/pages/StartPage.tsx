@@ -2,10 +2,13 @@ import InstrumentCard from "../components/InstrumentCard";
 import Divider from "../components/Divider";
 import FeatureCard from "../components/FeatureCard";
 import config from "../config/Config";
+import { useAuth } from "../context/AuthProvider";
 
 export default function StartPage() {
+  const { user } = useAuth();
+
   const scrollToNextSection = () => {
-    const targetElement = document.getElementById('discover-section'); // ById ugh... useRef?
+    const targetElement = document.getElementById("discover-section"); // ById... useRef?
     if (targetElement) {
       const headerHeight = 99; // Header h + 1px
       const targetPosition = targetElement.offsetTop - headerHeight;
@@ -17,6 +20,18 @@ export default function StartPage() {
     }
   };
 
+  function getWelcomeMessage(user: any, config: any) {
+    if (!user)
+      return `Välkommen till ${config.appName}`;
+
+    const trimmedName =
+      user.name.split(" ")[0].length > 8
+        ? user.name.split(" ")[0].slice(0, 14) + ".."
+        : user.name.split(" ")[0]
+
+    return `Välkommen ${trimmedName}!`;
+  }
+
   return <>
     <section className="background-container">
       <video autoPlay muted loop playsInline className="background-video">
@@ -27,7 +42,9 @@ export default function StartPage() {
     <section className="page-section">
       <div className="container space-top-header">
         <div className="text-center pd-5 mb-4">
-          <h2 className="pb-2 display-4">Välkommen till {config.appName}</h2>
+          <h2 className="pb-2 display-4">
+            {getWelcomeMessage(user, config)}
+          </h2>
           <p className="m-1">Din lokala plats för uthyrning av ljudutrustning, instrument och tillbehör.</p>
           <p>Vi erbjuder ett brett sortiment av produkter för både privatpersoner och företag.</p>
         </div>
