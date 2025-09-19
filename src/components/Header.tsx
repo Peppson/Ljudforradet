@@ -73,18 +73,18 @@ export default function Header() {
                       <Dropdown.Toggle
                         variant="link"
                         className="nav-link text-white ps-3 fs-5">
-                        {user.name}
+                        {user.name.split(" ")[0].length > 8
+                          ? user.name.split(" ")[0].slice(0, 10) + ".."
+                          : user.name.split(" ")[0]}
                       </Dropdown.Toggle>
                       <Dropdown.Menu
                         align="start"
                         className="background-color-overlay border-1 border-white">
-
                         {user.role === "admin" && (
-                          <Dropdown.Item as={NavLink} to="/admin" className="text-white dropdown-menu-item">
+                          <Dropdown.Item as={NavLink} to="/admin" className="text-white dropdown-menu-item ">
                             Admin
                           </Dropdown.Item>
                         )}
-
                         <Dropdown.Item onClick={logoutUser} className="text-white dropdown-menu-item">
                           Logga ut
                         </Dropdown.Item>
