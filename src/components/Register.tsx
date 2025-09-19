@@ -25,7 +25,7 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
 
     const success = await postFetch("/api/users", createUser);
     await Promise.all([success, new Promise((res) => setTimeout(res, config.loadingSpinnerMinDuration))]);
-    const responseData = await success!.json();
+    const responseData = await success;
 
     if (success == null || !success.ok) {
       error(responseData);
