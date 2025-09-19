@@ -5,7 +5,7 @@ import SubmitButton from './SubmitButton';
 import { useAuth } from '../context/AuthProvider';
 import config from '../config/Config';
 
-export default function Login({ setLoginPage }: { setLoginPage: (value: boolean) => void }) {
+export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { loginUser } = useAuth();
@@ -22,18 +22,18 @@ export default function Login({ setLoginPage }: { setLoginPage: (value: boolean)
 
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
-    const minSpinnerTime = config.loadingSpinnerMinDuration;
     setIsLoading(true);
 
-    const loggedIn = await loginUser(payload.email, payload.password);
-    await Promise.all([loggedIn, new Promise((res) => setTimeout(res, minSpinnerTime))]);
+    const success = await loginUser(payload.email, payload.password);
+    await Promise.all([success, new Promise((res) => setTimeout(res, config.loadingSpinnerMinDuration))]);
 
-    if (!loggedIn) {
-      alert("Inloggning misslyckades, kontrollera dina uppgifter och försök igen.");
+    if (!success) {
+      alert("Inloggning misslyckades, kontrollera dina uppgifter och försök igen."); // alert....
       setIsLoading(false);
       return;
     }
 
+    // Login successful
     navigate("/");
   }
 
@@ -89,7 +89,7 @@ export default function Login({ setLoginPage }: { setLoginPage: (value: boolean)
               className="text-light cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
-                setLoginPage(false);
+                setIsLoginPage(false);
               }}
             >
               Registrera dig

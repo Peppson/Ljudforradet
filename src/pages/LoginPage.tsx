@@ -4,7 +4,7 @@ import Register from '../components/Register';
 import Login from '../components/Login';
 
 export default function LoginPage() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLoginPage, setIsLoginPage] = useState(true);
 
   return <>
     <section className="page-section px-2 background-container-img">
@@ -18,9 +18,9 @@ export default function LoginPage() {
               alt="login image" />
           </Col>
 
-          {isLogin
-            ? <Login setLoginPage={setIsLogin} />
-            : <Register setLoginPage={setIsLogin} />}
+          {isLoginPage
+            ? <Login setIsLoginPage={setIsLoginPage} />
+            : <Register setIsLoginPage={setIsLoginPage} />}
 
         </Row>
       </Container>

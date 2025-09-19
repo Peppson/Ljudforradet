@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import SubmitButton from './SubmitButton';
 import config from '../config/Config';
 
-export default function Register({ setLoginPage: setIsLogin }: { setLoginPage: (value: boolean) => void }) {
+export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
   const [isLoading, setIsLoading] = useState(false);
   const [createUser, setCreateUser] = useState({
     name: "",
@@ -39,7 +39,7 @@ export default function Register({ setLoginPage: setIsLogin }: { setLoginPage: (
 
     setIsLoading(false);
     alert("Konto skapat! Logga in med dina uppgifter.");
-    setIsLogin(true);
+    setIsLoginPage(true);
   }
 
   return <>
@@ -110,7 +110,7 @@ export default function Register({ setLoginPage: setIsLogin }: { setLoginPage: (
               className="text-light cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
-                setIsLogin(true);
+                setIsLoginPage(true);
               }}
             >
               Logga in
