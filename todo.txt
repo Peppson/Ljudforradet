@@ -10,11 +10,11 @@ app.cs ej debug
 react key på alla foreach
 om oss och login fucked  margin-top fucked on mobile horizontal alla sidor med background image is fucked
 primereact table maker for admin page
+loader?
 
 
 remove bootstrap breakpoints when done
 
 info:
 responsive ner till ca 310px
-
 

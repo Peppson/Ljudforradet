@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import SubmitButton from './SubmitButton';
+import config from '../config/Config';
 
 export default function Register({ setLoginPage: setIsLogin }: { setLoginPage: (value: boolean) => void }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +18,7 @@ export default function Register({ setLoginPage: setIsLogin }: { setLoginPage: (
 
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
-    const minSpinnerTime = 800;
+    const minSpinnerTime = config.loadingSpinnerMinDuration;
     const payload: any = { ...createUser };
     setIsLoading(true);
 

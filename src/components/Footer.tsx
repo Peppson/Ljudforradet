@@ -2,6 +2,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import routes from "../routes";
 import Divider from './divider';
+import config from "../config/Config";
 
 export default function Footer() {
   return (
@@ -59,7 +60,7 @@ export default function Footer() {
 
       <Container className="text-center py-4">
         <small className="text-secondary">
-          © {new Date().getFullYear()} Ljudförrådet. Alla rättigheter förbehållna.
+          © {new Date().getFullYear()} {config.appName}. Alla rättigheter förbehållna.
         </small>
       </Container>
     </footer>

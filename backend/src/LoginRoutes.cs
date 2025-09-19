@@ -1,5 +1,4 @@
 namespace WebApp;
-
 public static class LoginRoutes
 {
     private static Obj GetUser(HttpContext context)

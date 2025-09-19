@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import routes from "../routes";
 import Logo from "./logo";
+import config from "../config/Config";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,7 +30,7 @@ export default function Header() {
                 <div className="pe-2">
                   <Logo />
                 </div>
-                <h2>Ljudförrådet</h2>
+                <h2>{config.appName}</h2>
               </div>
             </Link>
           </div>

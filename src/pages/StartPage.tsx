@@ -1,6 +1,7 @@
 import InstrumentCard from "../components/InstrumentCard";
-import Divider from "../components/divider";
+import Divider from "../components/Divider";
 import FeatureCard from "../components/FeatureCard";
+import config from "../config/Config";
 
 export default function StartPage() {
   const scrollToNextSection = () => {
@@ -26,7 +27,7 @@ export default function StartPage() {
     <section className="page-section">
       <div className="container space-top-header">
         <div className="text-center pd-5 mb-4">
-          <h2 className="pb-2 display-4">Välkommen till Ljudförrådet</h2>
+          <h2 className="pb-2 display-4">Välkommen till {config.appName}</h2>
           <p className="m-1">Din lokala plats för uthyrning av ljudutrustning, instrument och tillbehör.</p>
           <p>Vi erbjuder ett brett sortiment av produkter för både privatpersoner och företag.</p>
         </div>
@@ -67,7 +68,7 @@ export default function StartPage() {
           />
         </div>
 
-        <h2 className="text-center py-4 display-6">Varför Ljudförrådet?</h2>
+        <h2 className="text-center py-4 display-6">Varför {config.appName}?</h2>
 
         <div className="row pb-5 g-3">
           <FeatureCard

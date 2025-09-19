@@ -2,40 +2,37 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import SubmitButton from './SubmitButton';
+import { useAuth } from '../context/AuthProvider';
+import config from '../config/Config';
 
 export default function Login({ setLoginPage }: { setLoginPage: (value: boolean) => void }) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { loginUser } = useAuth();
 
-  let [user, setUser] = useState({
+  let [payload, setPayload] = useState<{ email: string; password: string }>({
     email: "",
     password: ""
   });
 
   function setFormProp(event: React.ChangeEvent) {
     let { name, value }: { name: string, value: string | null } = event.target as HTMLInputElement;
-    setUser({ ...user, [name]: value });
+    setPayload({ ...payload, [name]: value.trim() });
   }
 
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
-    const minSpinnerTime = 800;
-    const payload: any = { ...user };
-
+    const minSpinnerTime = config.loadingSpinnerMinDuration;
     setIsLoading(true);
 
-    const fetchPromise = await fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    const loggedIn = await loginUser(payload.email, payload.password);
+    await Promise.all([loggedIn, new Promise((res) => setTimeout(res, minSpinnerTime))]);
 
-    //await Promise.all([fetchPromise, new Promise((res) => setTimeout(res, minSpinnerTime))]);
-
-    await new Promise((resolve) => setTimeout(resolve, minSpinnerTime));
-    /* const success = await loginUser(email, password);
-    if (success) {
-      navigate("/profile"); */
+    if (!loggedIn) {
+      alert("Inloggning misslyckades, kontrollera dina uppgifter och försök igen.");
+      setIsLoading(false);
+      return;
+    }
 
     navigate("/");
   }
