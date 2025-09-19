@@ -73,7 +73,7 @@ export default function Header() {
                       <Dropdown.Toggle
                         variant="link"
                         className="nav-link text-white ps-3 fs-5">
-                        {user.firstName}
+                        {user.name}
                       </Dropdown.Toggle>
                       <Dropdown.Menu
                         align="start"

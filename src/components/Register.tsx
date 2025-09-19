@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import SubmitButton from './SubmitButton';
 import config from '../config/Config';
+import { useApi } from '../hooks/useApi';
 
 export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [createUser, setCreateUser] = useState({
+  const { postFetch } = useApi();
+
+  let [createUser, setCreateUser] = useState({
     name: "",
     email: "",
     password: ""
@@ -13,33 +16,37 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
 
   function setFormProp(event: React.ChangeEvent) {
     let { name, value }: { name: string, value: string | null } = event.target as HTMLInputElement;
-    setCreateUser({ ...createUser, [name]: value });
+    setCreateUser({ ...createUser, [name]: value.trim() });
   }
 
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
-    const minSpinnerTime = config.loadingSpinnerMinDuration;
-    const payload: any = { ...createUser };
     setIsLoading(true);
 
+    const success = await postFetch("/api/users", createUser);
+    await Promise.all([success, new Promise((res) => setTimeout(res, config.loadingSpinnerMinDuration))]);
+    const responseData = await success!.json();
 
-    const fetchPromise = await fetch("/api/user", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    if (success == null || !success.ok) {
+      error(responseData);
+      return;
+    }
 
-    // todo
-    /* const success = await loginUser(email, password);
-    if (success) {
-      navigate("/profile"); */
-    //await Promise.all([fetchPromise, new Promise((res) => setTimeout(res, minSpinnerTime))]);
-
-    await new Promise((resolve) => setTimeout(resolve, minSpinnerTime));
-
+    // Register successful
     setIsLoading(false);
-    alert("Konto skapat! Logga in med dina uppgifter.");
+    alert(`Välkommen ${createUser.name}! Logga in med dina uppgifter.`);
     setIsLoginPage(true);
+  }
+
+  function error(responseData: any) {
+    if (!responseData) {
+      alert("Något gick fel, försök igen.");
+    } else if (responseData.error && responseData.error.includes("UNIQUE constraint failed: users.email")) {
+      alert("En användare med denna e-postadress finns redan.");
+    } else {
+      alert("Registrering misslyckades, kontrollera dina uppgifter och försök igen.");
+    }
+    setIsLoading(false);
   }
 
   return <>
@@ -119,5 +126,5 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
         </div>
       </Form>
     </div>
-  </>
+  </>;
 }
