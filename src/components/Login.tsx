@@ -32,7 +32,6 @@ export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPa
       setIsLoading(false);
       return;
     }
-
     // Login successful
     navigate("/");
   }

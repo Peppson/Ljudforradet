@@ -1,10 +1,12 @@
 import { Row, Col, Container } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import routes from "../routes";
-import Divider from './divider';
+import Divider from './Divider';
 import config from "../config/Config";
 
 export default function Footer() {
+  const allowedPaths = ["/", "/about-us", "/products"];
+
   return (
     <footer className="background-color-overlay">
       <Divider />
@@ -14,7 +16,7 @@ export default function Footer() {
             <Col md={4} xs={12} className="d-flex flex-column align-items-md-center pb-3">
               <div>
                 {routes
-                  .filter(route => route.menuLabel)
+                  .filter(route => route.menuLabel && allowedPaths.includes(route.path))
                   .map((route, i) => (
                     <p className="mb-2" key={i}>
                       <NavLink

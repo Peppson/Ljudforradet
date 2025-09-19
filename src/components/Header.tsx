@@ -7,9 +7,11 @@ import config from "../config/Config";
 import { useAuth } from "../context/AuthProvider";
 
 export default function Header() {
+  const { user, logoutUser } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const { user, logoutUser } = useAuth();
+
+  const allowedPaths = ["/", "/products", "/about-us", "/login"];
   const pathName = useLocation().pathname;
   const isActive = (path: string) => pathName === path;
 
@@ -42,10 +44,10 @@ export default function Header() {
           <Navbar.Collapse className="justify-content-end">
             <Nav>
               {routes.filter(x => x.menuLabel)
+                .filter(route => route.menuLabel && allowedPaths.includes(route.path))
                 .filter(route => {
                   const path = route.path.toLowerCase();
-                  // Hide /login if user is logged in
-                  if (path === "/login" && user)
+                  if (path === "/login" && user) // Hide /login if user is logged in
                     return false;
                   return true;
                 })
@@ -65,31 +67,54 @@ export default function Header() {
               {/* Display user dropdown if logged in */}
               {user ? (
                 <>
-                  <Dropdown as={ButtonGroup}>
-                    <Dropdown.Toggle
-                      variant="link"
-                      className="nav-link text-white ps-3 fs-5">
-                      {user.firstName}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu
-                      align="start"
-                      className="background-color-overlay border-1 border-white">
+                  {/* Desktop view */}
+                  <div className="d-none d-md-block">
+                    <Dropdown as={ButtonGroup}>
+                      <Dropdown.Toggle
+                        variant="link"
+                        className="nav-link text-white ps-3 fs-5">
+                        {user.firstName}
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu
+                        align="start"
+                        className="background-color-overlay border-1 border-white">
 
-                      {user.role === "admin" && (
-                        <Dropdown.Item as={NavLink} to="/admin" className="text-white dropdown-menu-item">
-                          Admin
+                        {user.role === "admin" && (
+                          <Dropdown.Item as={NavLink} to="/admin" className="text-white dropdown-menu-item">
+                            Admin
+                          </Dropdown.Item>
+                        )}
+
+                        <Dropdown.Item onClick={logoutUser} className="text-white dropdown-menu-item">
+                          Logga ut
                         </Dropdown.Item>
-                      )}
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </div>
 
-                      <Dropdown.Item onClick={logoutUser} className="text-white dropdown-menu-item">
-                        Logga ut
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                  {/* Mobile view */}
+                  <div className="d-md-none">
+                    {user.role === "admin" && (
+                      <Nav.Link
+                        as={Link}
+                        to="/admin"
+                        className="text-white ps-3 fs-5"
+                        onClick={() => setTimeout(() => setIsExpanded(false), 100)}>
+                        Admin
+                      </Nav.Link>
+                    )}
+                    <Nav.Link
+                      className="text-white ps-3 fs-5"
+                      onClick={() => {
+                        logoutUser();
+                        setIsExpanded(false);
+                      }}>
+                      Logga ut
+                    </Nav.Link>
+                  </div>
                 </>
               ) : null}
             </Nav>
-
           </Navbar.Collapse>
         </Container>
       </Navbar>
