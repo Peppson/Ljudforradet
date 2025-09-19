@@ -6,3 +6,27 @@
     font-size: 1rem;
   }
 }
+
+.pagination-dark {
+  color: #FFFFFF;
+
+  .page-link {
+    background-color: #1A1A1E;
+    border-color: #6c757d;
+  }
+
+  .page-link:hover {
+    background-color: #323539;
+    border-color: #6c757d;
+  }
+
+  .page-item.active .page-link {
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    color: black
+  }
+
+  .page-item.disabled .page-link {
+    background-color: #323539;
+  }
+}

@@ -23,12 +23,13 @@ const routes: Route[] = [
   { element: <LoginPage />, path: '/login', menuLabel: 'Logga in' },
   { element: <NotFoundPage />, path: '*' },
 
-
   {
     element: <AdminPage />, path: '/admin', menuLabel: 'Admin',
-    loader: async () => await getFetch("api/products")
-
-
+    loader: async () => {
+      const gear = await getFetch("api/products");
+      const users = await getFetch("api/users");
+      return { gear, users };
+    }
   }
 ];
 
