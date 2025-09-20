@@ -61,7 +61,7 @@ export default function Footer() {
       </div>
 
       <Container className="text-center py-4">
-        <small className="text-secondary">
+        <small className="text-light">
           © {new Date().getFullYear()} {config.appName}. Alla rättigheter förbehållna.
         </small>
       </Container>

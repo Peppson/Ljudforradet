@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import SubmitButton from './SubmitButton';
 import { useAuth } from '../context/AuthProvider';
 import config from '../config/Config';
+import FormEmail from './FormFields/FormEmail';
+import FormPassword from './FormFields/FormPassword';
 
 export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
   const navigate = useNavigate();
@@ -43,38 +45,14 @@ export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPa
       </div>
 
       <Form onSubmit={sendForm}>
-
-        <Form.Group className="mb-3">
-          <Form.Label className="d-block">
-            <p className="mb-1 text-light">E-postadress</p>
-            <Form.Control
-              name="email"
-              type="email"
-              onChange={setFormProp}
-              autoComplete="email"
-              placeholder="Ange din e-postadress"
-              maxLength={100}
-              required
-              inputMode="email"
-              pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
-            />
-          </Form.Label>
-        </Form.Group>
-
-        <Form.Group className="mb-4">
-          <Form.Label className="d-block">
-            <p className="mb-1 text-light">Lösenord</p>
-            <Form.Control
-              name="password"
-              type="password"
-              onChange={setFormProp}
-              autoComplete='off'
-              placeholder="Ange ditt lösenord"
-              maxLength={100}
-              required
-            />
-          </Form.Label>
-        </Form.Group>
+        <FormEmail
+          setFormProp={setFormProp}
+          label="E-postadress"
+          placeholder="Ange din e-postadress" />
+        <FormPassword
+          setFormProp={setFormProp}
+          label="Lösenord"
+          placeholder="Ange ditt lösenord" />
 
         <div className="text-lg-start pt-2 align-items-center d-flex flex-column">
 

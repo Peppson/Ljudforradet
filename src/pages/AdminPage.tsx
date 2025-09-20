@@ -1,25 +1,28 @@
-import { Row, Tab, Tabs } from "react-bootstrap";
-import { Link, useLoaderData } from "react-router-dom";
+import { Button, Modal, Row, Tab, Tabs } from "react-bootstrap";
+import { Link, useLoaderData, useRevalidator } from "react-router-dom";
 import { useState } from "react";
-import Logo from "../components/logo";
 import type Gear from "../interfaces/Gear";
 import type Users from "../interfaces/Users";
+import Logo from "../components/logo";
 import TableGear from "../components/TableGear";
 import SharedPagination from "../components/SharedPagination";
 import TableUsers from "../components/TableUsers";
 import config from "../config/Config";
+import UserCreate from "../components/Admin/UserCreate";
+import ProductCreate from "../components/Admin/ProductCreate";
 
 export default function AdminPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("1");
+  const [showModal, setShowModal] = useState(false);
   const itemsPerPage = config.AdminPagePaginationSize;
+  const revalidator = useRevalidator();
 
   const { gear, users } = useLoaderData() as {
     gear: Gear[];
     users: Users[];
   };
 
-  // Get current data based on active tab
   const getCurrentData = () => {
     switch (activeTab) {
       case "1": return gear;
@@ -53,7 +56,7 @@ export default function AdminPage() {
 
   return <>
     <section className="background-color-overlay">
-      <div className="vh-100 mx-5">
+      <div className="mx-5">
         <Row>
           <div className="py-4">
             <Link to="/" className="text-decoration-none">
@@ -69,8 +72,10 @@ export default function AdminPage() {
 
         <Row className="my-4">
           <div className="d-flex justify-content-start">
-            <Link to="/admin/create">
-              <button className="btn btn-primary">Skapa ny {getCurrentTabName()}</button>
+            <Link to="#">
+              <button
+                onClick={() => setShowModal(true)}
+                className="btn btn-primary">Skapa ny {getCurrentTabName()}</button>
             </Link>
           </div>
         </Row>
@@ -80,23 +85,47 @@ export default function AdminPage() {
             <Tab eventKey="1" title="Utrustning">
               <TableGear gear={paginatedData as Gear[]} />
             </Tab>
-
             <Tab eventKey="2" title="Användare">
               <TableUsers user={paginatedData as Users[]} />
             </Tab>
-
             <Tab eventKey="3" title="Ordrar">
-              <h1>Sad :(</h1>
+              <h1>Sad :(</h1> {/* todo */}
             </Tab>
           </Tabs>
-
         </div>
+
         <SharedPagination
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+          onPageChange={setCurrentPage}>
+        </SharedPagination>
       </div >
+
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered size="lg">
+        <Modal.Header
+          closeButton
+          className="modal-background border-secondary"
+          closeVariant="white">
+          <Modal.Title>
+            Skapa ny {getCurrentTabName()}
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body className="modal-background p-4">
+          {activeTab === "1" && <ProductCreate revalidator={revalidator} onSuccess={() => setShowModal(false)} />}
+          {activeTab === "2" && <UserCreate revalidator={revalidator} onSuccess={() => setShowModal(false)} />}
+          {activeTab === "3" && <h1>Order</h1>}
+        </Modal.Body>
+
+        <Modal.Footer className="border-secondary modal-background">
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Stäng
+          </Button>
+          <Button type="submit" form="registerForm" variant="primary">
+            Skapa
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </section >
   </>;
 }

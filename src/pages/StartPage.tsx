@@ -3,6 +3,7 @@ import Divider from "../components/Divider";
 import FeatureCard from "../components/FeatureCard";
 import config from "../config/Config";
 import { useAuth } from "../context/AuthProvider";
+import { getTrimmedName } from "../utils/Utilities";
 
 export default function StartPage() {
   const { user } = useAuth();
@@ -24,12 +25,7 @@ export default function StartPage() {
     if (!user)
       return `Välkommen till ${config.appName}`;
 
-    const trimmedName =
-      user.name.split(" ")[0].length > 8
-        ? user.name.split(" ")[0].slice(0, 14) + ".."
-        : user.name.split(" ")[0]
-
-    return `Välkommen ${trimmedName}!`;
+    return `Välkommen ${getTrimmedName(user.name)}!`;
   }
 
   return <>

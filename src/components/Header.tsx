@@ -5,6 +5,7 @@ import routes from "../routes";
 import Logo from "./logo";
 import config from "../config/Config";
 import { useAuth } from "../context/AuthProvider";
+import { getTrimmedName } from "../utils/Utilities";
 
 export default function Header() {
   const { user, logoutUser } = useAuth();
@@ -73,9 +74,7 @@ export default function Header() {
                       <Dropdown.Toggle
                         variant="link"
                         className="nav-link text-white ps-3 fs-5">
-                        {user.name.split(" ")[0].length > 8
-                          ? user.name.split(" ")[0].slice(0, 10) + ".."
-                          : user.name.split(" ")[0]}
+                        {getTrimmedName(user.name)}
                       </Dropdown.Toggle>
                       <Dropdown.Menu
                         align="start"

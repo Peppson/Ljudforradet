@@ -6,7 +6,7 @@ export default function TableUsers({ user }: { user: Users[] }) {
     <Table striped bordered hover variant="dark" responsive className="admin-tabs">
       <thead>
         <tr>
-          <th>#</th>
+          <th>Id</th>
           <th>Namn</th>
           <th>Email</th>
           <th>Roll</th>

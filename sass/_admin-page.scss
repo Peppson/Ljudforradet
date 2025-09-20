@@ -8,7 +8,7 @@
 }
 
 .table-set-height {
-  height: 500px;
+  min-height: 500px;
 }
 
 .pagination-dark {
@@ -33,4 +33,12 @@
   .page-item.disabled .page-link {
     background-color: #323539;
   }
+}
+
+.modal-background {
+  background-color: #1A1A1E;
+}
+
+.modal-select-options option {
+  color: black;
 }

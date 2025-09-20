@@ -7,7 +7,7 @@ export function useApi() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      return response.json();
+      return response;
     }
     catch (error) {
       console.error("Fetch error: ", error);
@@ -21,7 +21,7 @@ export function useApi() {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
-      return response.json();
+      return response;
     }
     catch (error) {
       console.error("Fetch error: ", error);
@@ -36,7 +36,7 @@ export function useApi() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      return response.json();
+      return response;
     }
     catch (error) {
       console.error("Fetch error: ", error);
@@ -50,7 +50,7 @@ export function useApi() {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
-      return response.json();
+      return response;
     }
     catch (error) {
       console.error("Fetch error: ", error);

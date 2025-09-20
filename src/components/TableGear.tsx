@@ -6,7 +6,7 @@ export default function TableGear({ gear }: { gear: Gear[] }) {
     <Table striped bordered hover variant="dark" responsive className="admin-tabs">
       <thead>
         <tr>
-          <th>#</th>
+          <th>Id</th>
           <th>Namn</th>
           <th>Märke</th>
           <th>Modell</th>

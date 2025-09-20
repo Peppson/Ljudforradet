@@ -26,8 +26,9 @@ const routes: Route[] = [
   {
     element: <AdminPage />, path: '/admin', menuLabel: 'Admin',
     loader: async () => {
-      const gear = await getFetch("api/products");
-      const users = await getFetch("api/users");
+      const gear = await (await getFetch("api/products"))!.json();
+      const users = await (await getFetch("api/users"))!.json();
+
       return { gear, users };
     }
   }
