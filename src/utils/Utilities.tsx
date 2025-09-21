@@ -12,12 +12,11 @@ export function getTrimmedName(name: string | null | undefined, maxLength: numbe
     : firstName;
 }
 
-export function error(responseData: any) {
-  if (!responseData) {
-    alert("Något gick fel, försök igen.");
-  } else if (responseData.error && responseData.error.includes("UNIQUE constraint failed: users.email")) {
-    alert("En användare med denna e-postadress finns redan.");
-  } else {
-    alert("Registrering misslyckades, kontrollera dina uppgifter och försök igen.");
+export function getCurrentTabName(activeTab: string) {
+  switch (activeTab) {
+    case "1": return "utrustning";
+    case "2": return "användare";
+    case "3": return "order";
+    default: return "utrustning";
   }
 }

@@ -10,7 +10,7 @@ export default function FormPassword({ setFormProp, label, placeholder }: FormPr
           name="password"
           type="password"
           onChange={setFormProp}
-          autoComplete='off'
+          autoComplete="off"
           placeholder={placeholder}
           maxLength={100}
           minLength={6}

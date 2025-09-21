@@ -1,5 +1,5 @@
 export function useApi() {
-  
+
   const postFetch = async (url: string, data: any) => { // any ;)
     try {
       const response = await fetch(url, {
@@ -12,7 +12,7 @@ export function useApi() {
     catch (error) {
       console.error("Fetch error: ", error);
       return null;
-    } 
+    }
   };
 
   const getFetch = async (url: string) => {
@@ -57,6 +57,6 @@ export function useApi() {
       return null;
     }
   };
-    
-  return { postFetch, getFetch, putFetch, deleteFetch};
+
+  return { postFetch, getFetch, putFetch, deleteFetch };
 }

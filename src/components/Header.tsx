@@ -59,7 +59,7 @@ export default function Header() {
                       as={Link}
                       key={i}
                       to={path}
-                      className={`${isActive(path) ? 'navLinkActive' : ''} text-white ps-3 fs-5`}
+                      className={`${isActive(path) ? "navLinkActive" : ""} text-white ps-3 fs-5`}
                       onClick={() => setTimeout(() => setIsExpanded(false), 100)}>
                       {menuLabel}
                     </Nav.Link>

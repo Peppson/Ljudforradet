@@ -1,16 +1,19 @@
-import { useState } from 'react';
-import { Form } from 'react-bootstrap';
-import SubmitButton from './SubmitButton';
-import config from '../../config/Config';
-import { useApi } from '../../hooks/useApi';
-import { error } from '../../utils/Utilities';
-import FormText from '../FormFields/FormText';
-import FormEmail from '../FormFields/FormEmail';
-import FormPassword from '../FormFields/FormPassword';
+import { useState } from "react";
+import { Form } from "react-bootstrap";
+import { useApi } from "../../hooks/useApi";
+import { useErrorHandler } from "../../hooks/useErrorMessage";
+import { useShowAlert } from "../../context/AlertProvider";
+import SubmitButton from "./SubmitButton";
+import config from "../../config/Config";
+import FormText from "../FormFields/FormText";
+import FormEmail from "../FormFields/FormEmail";
+import FormPassword from "../FormFields/FormPassword";
 
 export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
-  const [isLoading, setIsLoading] = useState(false);
+  const { showErrorMsg } = useErrorHandler();
+  const { showAlert } = useShowAlert();
   const { postFetch } = useApi();
+  const [isLoading, setIsLoading] = useState(false);
 
   let [createUser, setCreateUser] = useState({
     name: "",
@@ -32,14 +35,18 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
     const responseData = await success?.json();
 
     if (success == null || !success.ok) {
-      error(responseData);
+      showErrorMsg(responseData);
       setIsLoading(false);
       return;
     }
 
     // Register successful
     setIsLoading(false);
-    alert(`Välkommen ${createUser.name}!`);
+    await showAlert({
+      title: `Välkommen ${createUser.name}!`,
+      message: "Ditt konto är skapat och du kan nu logga in.",
+      variant: "success"
+    })
     setIsLoginPage(true);
   }
 

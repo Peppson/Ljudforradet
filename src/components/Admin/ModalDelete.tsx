@@ -1,10 +1,11 @@
 import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
-import { useApi } from '../../hooks/useApi';
-import Logo from "../logo";
+import { useApi } from "../../hooks/useApi";
+import { useShowAlert } from "../../context/AlertProvider";
 import type Gear from "../../interfaces/Gear";
 import type User from "../../interfaces/User";
 import type Order from "../../interfaces/Order";
+import Logo from "../logo";
 
 interface DeleteModalProps {
   show: boolean;
@@ -14,21 +15,22 @@ interface DeleteModalProps {
   revalidator: { revalidate: () => void };
 }
 
-export default function DeleteModal({ show, onHide, item, type, revalidator }: DeleteModalProps) {
+export default function ModalDelete({ show, onHide, item, type, revalidator }: DeleteModalProps) {
   const [isDeleting, setIsDeleting] = useState(false);
+  const { showAlert } = useShowAlert();
   const { deleteFetch } = useApi();
 
   const getItemName = () => {
-    if (!item) return '';
-    return (item as any).name || '';
+    if (!item) return "";
+    return (item as any).name || "";
   };
 
   const getItemTypeName = () => {
     switch (type) {
-      case 'gear': return 'utrustning';
-      case 'user': return 'användare';
-      case 'order': return 'order';
-      default: return 'objekt';
+      case "gear": return "utrustning";
+      case "user": return "användare";
+      case "order": return "order";
+      default: return "objekt";
     }
   };
 
@@ -37,15 +39,17 @@ export default function DeleteModal({ show, onHide, item, type, revalidator }: D
     setIsDeleting(true);
     const typeName = type == "gear" ? "products" : `${type}s`;
 
-    try {
-      await deleteFetch(`/api/${typeName}/${item.id}`);
-      revalidator.revalidate();
-      onHide();
-    } catch (error) {
-      alert('Något gick fel vid borttagning. Försök igen.');
-    } finally {
+    const response = await deleteFetch(`/api/${typeName}/${item.id}`);
+
+    if (!response) {
+      await showAlert({ title: "Error", message: "Något gick fel vid borttagning. Försök igen.", variant: "danger" })
       setIsDeleting(false);
+      return;
     }
+
+    setIsDeleting(false);
+    revalidator.revalidate();
+    onHide();
   };
 
   return <>
@@ -53,6 +57,7 @@ export default function DeleteModal({ show, onHide, item, type, revalidator }: D
       show={show}
       onHide={onHide}
       centered
+      backdrop="static"
       dialogClassName="custom-modal-border">
       <Modal.Header
         closeButton

@@ -1,9 +1,9 @@
+import { useAuth } from "../context/AuthProvider";
+import { getTrimmedName } from "../utils/Utilities";
 import InstrumentCard from "../components/StartPage/InstrumentCard";
 import Divider from "../components/Divider";
 import FeatureCard from "../components/StartPage/FeatureCard";
 import config from "../config/Config";
-import { useAuth } from "../context/AuthProvider";
-import { getTrimmedName } from "../utils/Utilities";
 
 export default function StartPage() {
   const { user } = useAuth();
@@ -16,7 +16,7 @@ export default function StartPage() {
 
       window.scrollTo({
         top: targetPosition,
-        behavior: 'smooth'
+        behavior: "smooth"
       });
     }
   };

@@ -7,7 +7,7 @@ export default function AdminRouteWrapper() {
 
   // Dumb fix for redirect...
   // ACL wont accept pats as input, Api wont work but the view will oterwise render
-  if (!user || user.role !== 'admin') {
+  if (!user || user.role !== "admin") {
     return <Navigate to="/not-found" replace />;
   }
 

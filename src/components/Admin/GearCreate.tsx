@@ -1,7 +1,7 @@
 import { Col, Form, Row } from "react-bootstrap";
 import { useApi } from "../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { error } from "../../utils/Utilities";
+import { useErrorHandler } from "../../hooks/useErrorMessage";
 import type Gear from "../../interfaces/Gear";
 import FormText from "../FormFields/FormText";
 
@@ -12,6 +12,7 @@ interface GearCreateProps {
 }
 
 export default function GearCreate({ revalidator, onSuccess, editItem }: GearCreateProps) {
+  const { showErrorMsg } = useErrorHandler();
   const { postFetch, putFetch } = useApi();
   const isEditMode = !!editItem;
 
@@ -54,8 +55,8 @@ export default function GearCreate({ revalidator, onSuccess, editItem }: GearCre
 
     const responseData = await success?.json();
 
-    if (success == null || !success.ok) {
-      error(responseData);
+    if (!success || !success.ok) {
+      showErrorMsg(responseData);
       return;
     }
 

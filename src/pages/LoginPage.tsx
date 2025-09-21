@@ -1,7 +1,7 @@
-import { Row, Col, Container } from 'react-bootstrap';
-import { useState } from 'react';
-import Register from '../components/LoginPage/Register';
-import Login from '../components/LoginPage/Login';
+import { Row, Col, Container } from "react-bootstrap";
+import { useState } from "react";
+import Register from "../components/LoginPage/Register";
+import Login from "../components/LoginPage/Login";
 
 export default function LoginPage() {
   const [isLoginPage, setIsLoginPage] = useState(true);

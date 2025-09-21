@@ -1,16 +1,18 @@
-import { useState } from 'react';
-import { Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import SubmitButton from './SubmitButton';
-import { useAuth } from '../../context/AuthProvider';
-import config from '../../config/Config';
-import FormEmail from '../FormFields/FormEmail';
-import FormPassword from '../FormFields/FormPassword';
+import { useState } from "react";
+import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthProvider";
+import { useShowAlert } from "../../context/AlertProvider";
+import SubmitButton from "./SubmitButton";
+import config from "../../config/Config";
+import FormEmail from "../FormFields/FormEmail";
+import FormPassword from "../FormFields/FormPassword";
 
 export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
+  const { showAlert } = useShowAlert();
+  const { loginUser } = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { loginUser } = useAuth();
 
   let [payload, setPayload] = useState<{ email: string; password: string }>({
     email: "",
@@ -30,7 +32,11 @@ export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPa
     await Promise.all([success, new Promise((res) => setTimeout(res, config.loadingSpinnerMinDuration))]);
 
     if (!success) {
-      alert("Inloggning misslyckades, kontrollera dina uppgifter och försök igen."); // alert....
+      await showAlert({
+        title: "Varning",
+        message: "Inloggning misslyckades, kontrollera dina uppgifter och försök igen.",
+        variant: "warning"
+      })
       setIsLoading(false);
       return;
     }

@@ -1,7 +1,7 @@
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import routes from "../routes";
-import Divider from './Divider';
+import Divider from "./Divider";
 import config from "../config/Config";
 
 export default function Footer() {

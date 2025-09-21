@@ -18,7 +18,10 @@ app.cs ej debug
 remove bootstrap breakpoints when done
 
 
-
 info:
 responsive ner till ca 310px
+admin sida = vilket inlogg
+
+innan klar:
+config.ts
 
