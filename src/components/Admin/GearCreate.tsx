@@ -1,16 +1,21 @@
 import { Col, Form, Row } from "react-bootstrap";
-import FormText from "../FormFields/FormText";
 import { useApi } from "../../hooks/useApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { error } from "../../utils/Utilities";
+import type Gear from "../../interfaces/Gear";
+import FormText from "../FormFields/FormText";
 
-export default function GearCreate({ revalidator, onSuccess }: {
+interface GearCreateProps {
   revalidator: { revalidate: () => void };
   onSuccess?: () => void;
-}) {
-  const { postFetch } = useApi();
+  editItem?: Gear; // = edit mode
+}
 
-  let [createGear, setCreateGear] = useState({
+export default function GearCreate({ revalidator, onSuccess, editItem }: GearCreateProps) {
+  const { postFetch, putFetch } = useApi();
+  const isEditMode = !!editItem;
+
+  let [gearData, setGearData] = useState({
     name: "",
     brand: "",
     model: "",
@@ -20,14 +25,33 @@ export default function GearCreate({ revalidator, onSuccess }: {
     desc: ""
   });
 
+  // Prefill if edit mode
+  useEffect(() => {
+    if (isEditMode) {
+      setGearData({
+        name: editItem.name || "",
+        brand: editItem.brand || "",
+        model: editItem.model || "",
+        dailyPrice: editItem.dailyPrice?.toString() || "",
+        condition: editItem.condition || "Sliten",
+        available: editItem.available ? "1" : "0",
+        desc: editItem.desc || ""
+      });
+    }
+  }, [editItem]);
+
   function setFormProp(event: React.ChangeEvent) {
     let { name, value }: { name: string, value: string | null } = event.target as HTMLInputElement;
-    setCreateGear({ ...createGear, [name]: value.trim() });
+    setGearData({ ...gearData, [name]: value.trim() });
   }
 
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
-    const success = await postFetch("/api/products", createGear);
+
+    const success = isEditMode
+      ? await putFetch(`/api/products/${editItem.id}`, gearData)
+      : await postFetch("/api/products", gearData);
+
     const responseData = await success?.json();
 
     if (success == null || !success.ok) {
@@ -50,13 +74,15 @@ export default function GearCreate({ revalidator, onSuccess }: {
             setFormProp={setFormProp}
             label="Namn"
             placeholder="Utrustningens namn"
-            typeName="name" />
+            typeName="name"
+            value={gearData.name} />
 
           <FormText
             setFormProp={setFormProp}
             label="Modell"
             placeholder="Modell"
-            typeName="model" />
+            typeName="model"
+            value={gearData.model} />
 
           <Form.Group className="mb-3">
             <Form.Label className="d-block">
@@ -66,7 +92,7 @@ export default function GearCreate({ revalidator, onSuccess }: {
                 onChange={setFormProp}
                 required
                 className="modal-select-options"
-                value={createGear.condition}>
+                value={gearData.condition}>
                 <option value="Sliten">Sliten</option>
                 <option value="Bra">Bra</option>
                 <option value="Mycket bra">Mycket bra</option>
@@ -81,13 +107,15 @@ export default function GearCreate({ revalidator, onSuccess }: {
             setFormProp={setFormProp}
             label="Märke"
             placeholder="Märke"
-            typeName="brand" />
+            typeName="brand"
+            value={gearData.brand} />
 
           <FormText
             setFormProp={setFormProp}
             label="Pris"
             placeholder="Pris per dag i kronor"
-            typeName="dailyPrice" />
+            typeName="dailyPrice"
+            value={gearData.dailyPrice} />
 
           <Form.Group className="mb-3">
             <Form.Label className="d-block">
@@ -97,7 +125,7 @@ export default function GearCreate({ revalidator, onSuccess }: {
                 onChange={setFormProp}
                 required
                 className="modal-select-options"
-                value={createGear.available}>
+                value={gearData.available}>
                 <option value="1">Tillgänglig</option>
                 <option value="0">Uthyrd</option>
               </Form.Select>
@@ -109,7 +137,8 @@ export default function GearCreate({ revalidator, onSuccess }: {
           setFormProp={setFormProp}
           label="Beskrivning"
           placeholder="Beskrivning"
-          typeName="desc" />
+          typeName="desc"
+          value={gearData.desc} />
       </Row>
     </Form>
   </>

@@ -3,12 +3,13 @@ import { useState } from "react";
 import { useApi } from '../../hooks/useApi';
 import Logo from "../logo";
 import type Gear from "../../interfaces/Gear";
-import type Users from "../../interfaces/Users";
+import type User from "../../interfaces/User";
+import type Order from "../../interfaces/Order";
 
 interface DeleteModalProps {
   show: boolean;
   onHide: () => void;
-  item: Gear | Users | null; // todo orders
+  item: Gear | User | Order | null;
   type: string;
   revalidator: { revalidate: () => void };
 }
@@ -34,7 +35,7 @@ export default function DeleteModal({ show, onHide, item, type, revalidator }: D
   const handleDelete = async () => {
     if (!item) return;
     setIsDeleting(true);
-    const typeName = type == "gear" ? "products" : `${type}s`; //...
+    const typeName = type == "gear" ? "products" : `${type}s`;
 
     try {
       await deleteFetch(`/api/${typeName}/${item.id}`);

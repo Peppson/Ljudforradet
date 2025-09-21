@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap";
 import type FormProps from "../../interfaces/FormProps";
 
-export default function FormEmail({ setFormProp, label, placeholder }: FormProps) {
+export default function FormEmail({ setFormProp, label, placeholder, value = "" }: FormProps) {
   return <>
     <Form.Group className="mb-3">
       <Form.Label className="d-block">
@@ -17,6 +17,7 @@ export default function FormEmail({ setFormProp, label, placeholder }: FormProps
           required
           inputMode="email"
           pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+          defaultValue={value}
         />
       </Form.Label>
     </Form.Group>

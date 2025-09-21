@@ -1,8 +1,8 @@
 import { Button, Modal, Row, Tab, Tabs } from "react-bootstrap";
-import { Link, useLoaderData, useNavigate, useRevalidator } from "react-router-dom";
+import { Link, useLoaderData, useRevalidator } from "react-router-dom";
 import { useState } from "react";
 import type Gear from "../interfaces/Gear";
-import type User from "../interfaces/Users";
+import type User from "../interfaces/User";
 import Logo from "../components/logo";
 import GearTable from "../components/Admin/GearTable";
 import SharedPagination from "../components/Admin/SharedPagination";
@@ -11,13 +11,19 @@ import config from "../config/Config";
 import UserCreate from "../components/Admin/UserCreate";
 import GearCreate from "../components/Admin/GearCreate";
 import DeleteModal from "../components/Admin/DeleteModal";
+import type Order from "../interfaces/Order";
 
 export default function AdminPage() {
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [createModal, setCreateModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState({
     show: false,
     type: "",
-    item: null as Gear | User | null // todo orders
+    item: null as Gear | User | Order | null
+  });
+  const [editModal, setEditModal] = useState({
+    show: false,
+    type: "",
+    item: null as Gear | User | Order | null
   });
 
   const revalidator = useRevalidator();
@@ -33,31 +39,31 @@ export default function AdminPage() {
 
 
   const handleEditGear = (item: Gear) => {
-    console.log("GEAR EDIT");
+    setEditModal({ show: true, type: 'gear', item: item });
   };
 
   const handleDeleteGear = (item: Gear) => {
-    setDeleteModal({
-      show: true,
-      type: 'gear',
-      item: item
-    });
+    setDeleteModal({ show: true, type: 'gear', item: item });
   };
 
   const handleEditUser = (item: User) => {
-    console.log("User EDIT");
+    setEditModal({ show: true, type: 'user', item: item });
   };
 
   const handleDeleteUser = (item: User) => {
-    setDeleteModal({
-      show: true,
-      type: 'user',
-      item: item
-    });
+    setDeleteModal({ show: true, type: 'user', item: item });
   };
 
   const closeDeleteModal = () => {
     setDeleteModal({
+      show: false,
+      type: "",
+      item: null
+    });
+  };
+
+  const closeEditModal = () => {
+    setEditModal({
       show: false,
       type: "",
       item: null
@@ -126,7 +132,7 @@ export default function AdminPage() {
           <div className="d-flex justify-content-start">
             <Link to="#">
               <button
-                onClick={() => setShowCreateModal(true)}
+                onClick={() => setCreateModal(true)}
                 className="btn btn-primary">Skapa ny {getCurrentTabName()}</button>
             </Link>
           </div>
@@ -163,10 +169,10 @@ export default function AdminPage() {
 
 
 
-
+      {/* Create Modal */}
       <Modal
-        show={showCreateModal}
-        onHide={() => setShowCreateModal(false)}
+        show={createModal}
+        onHide={() => setCreateModal(false)}
         centered
         size="lg"
         dialogClassName="custom-modal-border">
@@ -179,16 +185,47 @@ export default function AdminPage() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal-background p-4">
-          {activeTab === "1" && <GearCreate revalidator={revalidator} onSuccess={() => setShowCreateModal(false)} />}
-          {activeTab === "2" && <UserCreate revalidator={revalidator} onSuccess={() => setShowCreateModal(false)} />}
+          {activeTab === "1" && <GearCreate revalidator={revalidator} onSuccess={() => setCreateModal(false)} />}
+          {activeTab === "2" && <UserCreate revalidator={revalidator} onSuccess={() => setCreateModal(false)} />}
           {activeTab === "3" && <h1>Order</h1>}
         </Modal.Body>
         <Modal.Footer className="border-secondary modal-background">
-          <Button variant="secondary" onClick={() => setShowCreateModal(false)}>
+          <Button variant="secondary" onClick={() => setCreateModal(false)}>
             Avbryt
           </Button>
           <Button type="submit" form="registerForm" variant="primary">
             Skapa
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+      {/* Edit Modal */}
+      <Modal
+        show={editModal.show}
+        onHide={closeEditModal}
+        centered
+        size="lg"
+        dialogClassName="custom-modal-border">
+        <Modal.Header
+          closeButton
+          className="modal-background border-secondary"
+          closeVariant="white">
+          <Modal.Title>
+            <Logo /> Redigera {editModal.type === 'gear' ? 'utrustning' : editModal.type === 'user' ? 'användare' : 'objekt'}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modal-background p-4">
+          {editModal.type === 'gear' && <GearCreate revalidator={revalidator} onSuccess={closeEditModal} editItem={editModal.item as Gear} />}
+          {editModal.type === 'user' && <UserCreate revalidator={revalidator} onSuccess={closeEditModal} editItem={editModal.item as User} />}
+        </Modal.Body>
+        <Modal.Footer className="border-secondary modal-background">
+          <Button variant="secondary" onClick={closeEditModal}>
+            Avbryt
+          </Button>
+          <Button type="submit" form="registerForm" variant="primary">
+            Uppdatera
           </Button>
         </Modal.Footer>
       </Modal>

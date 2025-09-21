@@ -5,9 +5,10 @@ interface TextFormProps {
   label: string;
   placeholder: string;
   typeName?: string;
+  value?: string;
 }
 
-export default function FormText({ setFormProp, label, placeholder, typeName = "name" }: TextFormProps) {
+export default function FormText({ setFormProp, label, placeholder, typeName = "name", value = "" }: TextFormProps) {
   return <>
     <Form.Group className="mb-3">
       <Form.Label className="d-block">
@@ -20,6 +21,7 @@ export default function FormText({ setFormProp, label, placeholder, typeName = "
           maxLength={200}
           minLength={2}
           required
+          defaultValue={value}
         />
       </Form.Label>
     </Form.Group>

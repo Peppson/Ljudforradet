@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import SubmitButton from './SubmitButton';
-import config from '../config/Config';
-import { useApi } from '../hooks/useApi';
-import { error } from '../utils/Utilities';
-import FormText from './FormFields/FormText';
-import FormEmail from './FormFields/FormEmail';
-import FormPassword from './FormFields/FormPassword';
+import config from '../../config/Config';
+import { useApi } from '../../hooks/useApi';
+import { error } from '../../utils/Utilities';
+import FormText from '../FormFields/FormText';
+import FormEmail from '../FormFields/FormEmail';
+import FormPassword from '../FormFields/FormPassword';
 
 export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
   const [isLoading, setIsLoading] = useState(false);

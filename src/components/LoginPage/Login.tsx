@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import SubmitButton from './SubmitButton';
-import { useAuth } from '../context/AuthProvider';
-import config from '../config/Config';
-import FormEmail from './FormFields/FormEmail';
-import FormPassword from './FormFields/FormPassword';
+import { useAuth } from '../../context/AuthProvider';
+import config from '../../config/Config';
+import FormEmail from '../FormFields/FormEmail';
+import FormPassword from '../FormFields/FormPassword';
 
 export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
   const navigate = useNavigate();
