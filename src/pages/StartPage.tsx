@@ -89,13 +89,11 @@ export default function StartPage() {
             title={"Expertis"}
             description={"Vårt team har lång erfarenhet inom musikuthyrning och kan ge dig vägledning och stöd."}
             padding="ps-3" />
-
           <FeatureCard
             imgSrc={"/svg/quality.svg"}
             title={"Kvalitet"}
             description={"All vår utrustning är pålitlig, väl underhållen och alltid redo för användning."}
             padding="ps-3" />
-
           <FeatureCard
             imgSrc={"/svg/chat.svg"}
             title={"Enkelhet"}

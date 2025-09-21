@@ -6,7 +6,7 @@ export default function AdminRouteWrapper() {
   const { user } = useAuth();
 
   // Dumb fix for redirect...
-  // ACL wont accept pats as input, Api wont work but the view will oterwise render
+  // ACL wont accept paths as inputs... Api wont work but the view will render if we dont do this
   if (!user || user.role !== "admin") {
     return <Navigate to="/not-found" replace />;
   }

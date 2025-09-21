@@ -76,7 +76,7 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
           <p className="small mt-4">
             Har du redan ett konto?{" "}
             <a
-              className="text-light cursor-pointer"
+              className="text-danger cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 setIsLoginPage(true);

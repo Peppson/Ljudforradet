@@ -35,7 +35,6 @@ export default function AdminPage() {
     // todo orders
   };
 
-
   // Modal views
   const handleEditGear = (item: Gear) => { setEditModal({ show: true, type: "gear", item: item }); };
   const handleDeleteGear = (item: Gear) => { setDeleteModal({ show: true, type: "gear", item: item }); };

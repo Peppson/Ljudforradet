@@ -40,6 +40,7 @@ export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPa
       setIsLoading(false);
       return;
     }
+
     // Login successful
     navigate("/");
   }
@@ -69,7 +70,7 @@ export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPa
           <p className="small mt-4">
             Har du inget konto?{" "}
             <a
-              className="text-light cursor-pointer"
+              className="text-danger cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 setIsLoginPage(false);
