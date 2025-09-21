@@ -15,14 +15,16 @@ export default function ProductCreate({ revalidator, onSuccess }: {
     brand: "",
     model: "",
     dailyPrice: "",
-    condition: "",
-    available: "",
+    condition: "Sliten",
+    available: "1",
     desc: ""
   });
 
   function setFormProp(event: React.ChangeEvent) {
     let { name, value }: { name: string, value: string | null } = event.target as HTMLInputElement;
     setCreateProduct({ ...createProduct, [name]: value.trim() });
+
+    console.log(createProduct);
   }
 
   async function sendForm(event: React.FormEvent) {

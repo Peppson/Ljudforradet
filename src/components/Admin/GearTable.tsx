@@ -1,7 +1,14 @@
 import { Table } from "react-bootstrap";
-import type Gear from "../interfaces/Gear";
+import type Gear from "../../interfaces/Gear";
+import DropdownMenu from "./DropdownMenu";
 
-export default function TableGear({ gear }: { gear: Gear[] }) {
+interface GearTableProps {
+  gear: Gear[];
+  onEditGear: (item: Gear) => void;
+  onDeleteGear: (item: Gear) => void;
+}
+
+export default function GearTable({ gear, onEditGear, onDeleteGear }: GearTableProps) {
   return <>
     <Table striped bordered hover variant="dark" responsive className="admin-tabs">
       <thead>
@@ -29,13 +36,14 @@ export default function TableGear({ gear }: { gear: Gear[] }) {
             <td className={item.available ? "text-success" : "text-danger"}>
               {item.available ? 'Ja' : 'Nej'}
             </td>
-            <td>{item.desc}</td>
             <td>
-              <button
-                onClick={() => alert(`Ändra utrustning: ${item.name}`)}
-                className="btn hover-grow w-100 text-primary border-0">
-                Ändra
-              </button>
+              {item.desc}
+            </td>
+            <td className="text-center">
+              <DropdownMenu
+                item={item}
+                onEdit={onEditGear}
+                onDelete={onDeleteGear} />
             </td>
           </tr>
         ))}

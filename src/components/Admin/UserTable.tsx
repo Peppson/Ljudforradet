@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
-import type Users from "../interfaces/Users";
+import type Users from "../../interfaces/Users";
 
-export default function TableUsers({ user }: { user: Users[] }) {
+export default function UserTable({ user }: { user: Users[] }) {
   return <>
     <Table striped bordered hover variant="dark" responsive className="admin-tabs">
       <thead>

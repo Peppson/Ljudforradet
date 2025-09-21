@@ -6,17 +6,18 @@ background-color = #1A1A1E
 
 
 todo:
+ACL /admin
 react key på alla foreach
-primereact table maker for admin page
 loader?
 
 vyer!
+ACL
+console.log ta bort
 when done:
 app.cs ej debug 
 remove bootstrap breakpoints when done
 
 
-kolla jockes repo efter "const revalidator = useRevalidator();"
 
 info:
 responsive ner till ca 310px

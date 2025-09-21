@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import type FeatureCardProps from "../interfaces/FeatureCardProps";
+import type FeatureCardProps from "../../interfaces/FeatureCardProps";
 
 export default function FeatureCard({ imgSrc, title, description, padding }: FeatureCardProps) {
   return (

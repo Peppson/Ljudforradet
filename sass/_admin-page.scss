@@ -11,6 +11,18 @@
   min-height: 500px;
 }
 
+.modal-background {
+  background-color: #1A1A1E;
+}
+
+.modal-select-options option {
+  color: black;
+}
+
+.dropdown-toggle:after {
+  display: none !important;
+}
+
 .pagination-dark {
   color: #FFFFFF;
 
@@ -33,12 +45,4 @@
   .page-item.disabled .page-link {
     background-color: #323539;
   }
-}
-
-.modal-background {
-  background-color: #1A1A1E;
-}
-
-.modal-select-options option {
-  color: black;
 }

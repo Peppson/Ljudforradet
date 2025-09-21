@@ -4,24 +4,68 @@ import { useState } from "react";
 import type Gear from "../interfaces/Gear";
 import type Users from "../interfaces/Users";
 import Logo from "../components/logo";
-import TableGear from "../components/TableGear";
-import SharedPagination from "../components/SharedPagination";
-import TableUsers from "../components/TableUsers";
+import GearTable from "../components/Admin/GearTable";
+import SharedPagination from "../components/Admin/SharedPagination";
+import UserTable from "../components/Admin/UserTable";
 import config from "../config/Config";
 import UserCreate from "../components/Admin/UserCreate";
 import ProductCreate from "../components/Admin/ProductCreate";
+import DeleteModal from "../components/Admin/DeleteModal";
 
 export default function AdminPage() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [activeTab, setActiveTab] = useState("1");
-  const [showModal, setShowModal] = useState(false);
-  const itemsPerPage = config.AdminPagePaginationSize;
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState({
+    show: false,
+    type: "",
+    item: null as Gear | Users | null // todo add orders
+  });
+
   const revalidator = useRevalidator();
 
   const { gear, users } = useLoaderData() as {
     gear: Gear[];
     users: Users[];
+    // todo add orders
   };
+
+
+
+
+
+
+
+
+  const handleEditGear = (item: Gear) => {
+    console.log("GEAR EDIT");
+    // TODO: edit
+  };
+
+  const handleDeleteGear = (item: Gear) => {
+    setDeleteModal({
+      show: true,
+      type: 'gear',
+      item: item
+    });
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModal({
+      show: false,
+      type: "",
+      item: null
+    });
+  };
+
+
+
+
+
+
+
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [activeTab, setActiveTab] = useState("1");
+  const itemsPerPage = config.AdminPagePaginationSize;
 
   const getCurrentData = () => {
     switch (activeTab) {
@@ -55,7 +99,7 @@ export default function AdminPage() {
   };
 
   return <>
-    <section className="background-color-overlay">
+    <section className="background-color-overlay pb-5">
       <div className="mx-5">
         <Row>
           <div className="py-4">
@@ -74,7 +118,7 @@ export default function AdminPage() {
           <div className="d-flex justify-content-start">
             <Link to="#">
               <button
-                onClick={() => setShowModal(true)}
+                onClick={() => setShowCreateModal(true)}
                 className="btn btn-primary">Skapa ny {getCurrentTabName()}</button>
             </Link>
           </div>
@@ -83,11 +127,16 @@ export default function AdminPage() {
         <div className="pt-3 table-set-height">
           <Tabs defaultActiveKey="1" onSelect={handleTabChange}>
             <Tab eventKey="1" title="Utrustning">
-              <TableGear gear={paginatedData as Gear[]} />
+              <GearTable
+                gear={paginatedData as Gear[]}
+                onEditGear={handleEditGear}
+                onDeleteGear={handleDeleteGear} />
             </Tab>
+
             <Tab eventKey="2" title="Användare">
-              <TableUsers user={paginatedData as Users[]} />
+              <UserTable user={paginatedData as Users[]} />
             </Tab>
+
             <Tab eventKey="3" title="Ordrar">
               <h1>Sad :(</h1> {/* todo */}
             </Tab>
@@ -101,31 +150,44 @@ export default function AdminPage() {
         </SharedPagination>
       </div >
 
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered size="lg">
+
+
+
+      <Modal show={showCreateModal} onHide={() => setShowCreateModal(false)} centered size="lg">
         <Modal.Header
           closeButton
           className="modal-background border-secondary"
           closeVariant="white">
           <Modal.Title>
-            Skapa ny {getCurrentTabName()}
+            <Logo /> Skapa ny {getCurrentTabName()}
           </Modal.Title>
         </Modal.Header>
-
         <Modal.Body className="modal-background p-4">
-          {activeTab === "1" && <ProductCreate revalidator={revalidator} onSuccess={() => setShowModal(false)} />}
-          {activeTab === "2" && <UserCreate revalidator={revalidator} onSuccess={() => setShowModal(false)} />}
+          {activeTab === "1" && <ProductCreate revalidator={revalidator} onSuccess={() => setShowCreateModal(false)} />}
+          {activeTab === "2" && <UserCreate revalidator={revalidator} onSuccess={() => setShowCreateModal(false)} />}
           {activeTab === "3" && <h1>Order</h1>}
         </Modal.Body>
-
         <Modal.Footer className="border-secondary modal-background">
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Stäng
+          <Button variant="secondary" onClick={() => setShowCreateModal(false)}>
+            Avbryt
           </Button>
           <Button type="submit" form="registerForm" variant="primary">
             Skapa
           </Button>
         </Modal.Footer>
       </Modal>
+
+
+
+      <DeleteModal
+        show={deleteModal.show}
+        onHide={closeDeleteModal}
+        item={deleteModal.item}
+        type={deleteModal.type}
+        revalidator={revalidator} />
+
+
+
     </section >
   </>;
 }

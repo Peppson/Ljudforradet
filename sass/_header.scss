@@ -18,13 +18,3 @@ header {
     text-decoration-line: underline;
     text-decoration-color: #DC3545;
 }
-
-.dropdown-menu-item {
-
-    &:hover,
-    &:focus {
-        background-color: transparent !important;
-        text-decoration: underline;
-        text-underline-offset: 3px;
-    }
-}

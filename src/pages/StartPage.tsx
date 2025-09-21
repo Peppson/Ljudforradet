@@ -1,6 +1,6 @@
-import InstrumentCard from "../components/InstrumentCard";
+import InstrumentCard from "../components/StartPage/InstrumentCard";
 import Divider from "../components/Divider";
-import FeatureCard from "../components/FeatureCard";
+import FeatureCard from "../components/StartPage/FeatureCard";
 import config from "../config/Config";
 import { useAuth } from "../context/AuthProvider";
 import { getTrimmedName } from "../utils/Utilities";

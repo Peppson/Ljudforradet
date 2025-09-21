@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import type InstrumentCardProps from "../interfaces/InstrumentCardProps";
+import type InstrumentCardProps from "../../interfaces/InstrumentCardProps";
 
 export default function InstrumentCard({ imgSrc, title, description }: InstrumentCardProps) {
   return (
