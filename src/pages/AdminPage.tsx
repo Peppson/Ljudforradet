@@ -1,15 +1,15 @@
 import { Button, Modal, Row, Tab, Tabs } from "react-bootstrap";
-import { Link, useLoaderData, useRevalidator } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useRevalidator } from "react-router-dom";
 import { useState } from "react";
 import type Gear from "../interfaces/Gear";
-import type Users from "../interfaces/Users";
+import type User from "../interfaces/Users";
 import Logo from "../components/logo";
 import GearTable from "../components/Admin/GearTable";
 import SharedPagination from "../components/Admin/SharedPagination";
 import UserTable from "../components/Admin/UserTable";
 import config from "../config/Config";
 import UserCreate from "../components/Admin/UserCreate";
-import ProductCreate from "../components/Admin/ProductCreate";
+import GearCreate from "../components/Admin/GearCreate";
 import DeleteModal from "../components/Admin/DeleteModal";
 
 export default function AdminPage() {
@@ -17,19 +17,16 @@ export default function AdminPage() {
   const [deleteModal, setDeleteModal] = useState({
     show: false,
     type: "",
-    item: null as Gear | Users | null // todo add orders
+    item: null as Gear | User | null // todo orders
   });
 
   const revalidator = useRevalidator();
 
   const { gear, users } = useLoaderData() as {
     gear: Gear[];
-    users: Users[];
-    // todo add orders
+    users: User[];
+    // todo orders
   };
-
-
-
 
 
 
@@ -37,13 +34,24 @@ export default function AdminPage() {
 
   const handleEditGear = (item: Gear) => {
     console.log("GEAR EDIT");
-    // TODO: edit
   };
 
   const handleDeleteGear = (item: Gear) => {
     setDeleteModal({
       show: true,
       type: 'gear',
+      item: item
+    });
+  };
+
+  const handleEditUser = (item: User) => {
+    console.log("User EDIT");
+  };
+
+  const handleDeleteUser = (item: User) => {
+    setDeleteModal({
+      show: true,
+      type: 'user',
       item: item
     });
   };
@@ -71,7 +79,7 @@ export default function AdminPage() {
     switch (activeTab) {
       case "1": return gear;
       case "2": return users;
-      case "3": return []; // todo
+      case "3": return []; // todo orders
       default: return [];
     }
   };
@@ -114,7 +122,7 @@ export default function AdminPage() {
           </div>
         </Row>
 
-        <Row className="my-4">
+        <Row className="my-3">
           <div className="d-flex justify-content-start">
             <Link to="#">
               <button
@@ -126,19 +134,22 @@ export default function AdminPage() {
 
         <div className="pt-3 table-set-height">
           <Tabs defaultActiveKey="1" onSelect={handleTabChange}>
-            <Tab eventKey="1" title="Utrustning">
+            <Tab eventKey="1" title={`Utrustning (${gear.length})`}>
               <GearTable
                 gear={paginatedData as Gear[]}
                 onEditGear={handleEditGear}
                 onDeleteGear={handleDeleteGear} />
             </Tab>
 
-            <Tab eventKey="2" title="Användare">
-              <UserTable user={paginatedData as Users[]} />
+            <Tab eventKey="2" title={`Användare (${users.length})`}>
+              <UserTable
+                user={paginatedData as User[]}
+                onEditUser={handleEditUser}
+                onDeleteUser={handleDeleteUser} />
             </Tab>
 
-            <Tab eventKey="3" title="Ordrar">
-              <h1>Sad :(</h1> {/* todo */}
+            <Tab eventKey="3" title="Ordrar (0)">
+              <h1>Sad :(</h1> {/* todo orders */}
             </Tab>
           </Tabs>
         </div>
@@ -153,7 +164,12 @@ export default function AdminPage() {
 
 
 
-      <Modal show={showCreateModal} onHide={() => setShowCreateModal(false)} centered size="lg">
+      <Modal
+        show={showCreateModal}
+        onHide={() => setShowCreateModal(false)}
+        centered
+        size="lg"
+        dialogClassName="custom-modal-border">
         <Modal.Header
           closeButton
           className="modal-background border-secondary"
@@ -163,7 +179,7 @@ export default function AdminPage() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal-background p-4">
-          {activeTab === "1" && <ProductCreate revalidator={revalidator} onSuccess={() => setShowCreateModal(false)} />}
+          {activeTab === "1" && <GearCreate revalidator={revalidator} onSuccess={() => setShowCreateModal(false)} />}
           {activeTab === "2" && <UserCreate revalidator={revalidator} onSuccess={() => setShowCreateModal(false)} />}
           {activeTab === "3" && <h1>Order</h1>}
         </Modal.Body>
@@ -185,9 +201,6 @@ export default function AdminPage() {
         item={deleteModal.item}
         type={deleteModal.type}
         revalidator={revalidator} />
-
-
-
     </section >
   </>;
 }

@@ -8,7 +8,7 @@ import type Users from "../../interfaces/Users";
 interface DeleteModalProps {
   show: boolean;
   onHide: () => void;
-  item: Gear | Users | null; // todo add orders
+  item: Gear | Users | null; // todo orders
   type: string;
   revalidator: { revalidate: () => void };
 }
@@ -38,7 +38,6 @@ export default function DeleteModal({ show, onHide, item, type, revalidator }: D
 
     try {
       await deleteFetch(`/api/${typeName}/${item.id}`);
-      alert(`${getItemName()} har tagits bort!`);
       revalidator.revalidate();
       onHide();
     } catch (error) {
@@ -49,7 +48,11 @@ export default function DeleteModal({ show, onHide, item, type, revalidator }: D
   };
 
   return <>
-    <Modal show={show} onHide={onHide} centered>
+    <Modal
+      show={show}
+      onHide={onHide}
+      centered
+      dialogClassName="custom-modal-border">
       <Modal.Header
         closeButton
         className="modal-background border-secondary"
@@ -64,7 +67,7 @@ export default function DeleteModal({ show, onHide, item, type, revalidator }: D
           Är du säker på att du vill ta bort "{getItemName()}"?
         </p>
         <p className="text-light small">
-          Denna åtgärd kan inte ångras.
+          Åtgärden kan inte ångras.
         </p>
       </Modal.Body>
 

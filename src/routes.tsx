@@ -4,8 +4,8 @@ import AboutPage from './pages/AboutPage';
 import LoginPage from './pages/LoginPage';
 import ProductsPage from './pages/ProductsPage';
 import NotFoundPage from './pages/NotFoundPage';
-import AdminPage from './pages/AdminPage';
 import { useApi } from "./hooks/useApi";
+import AdminRouteWrapper from './components/Admin/AdminRouteWrapper';
 
 interface Route {
   element: JSX.Element;
@@ -24,10 +24,13 @@ const routes: Route[] = [
   { element: <NotFoundPage />, path: '*' },
 
   {
-    element: <AdminPage />, path: '/admin', menuLabel: 'Admin',
+    element: <AdminRouteWrapper />,
+    path: '/admin',
+    menuLabel: 'Admin',
     loader: async () => {
       const gear = await (await getFetch("api/products"))!.json();
       const users = await (await getFetch("api/users"))!.json();
+      // todo orders
 
       return { gear, users };
     }

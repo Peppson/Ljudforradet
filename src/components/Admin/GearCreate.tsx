@@ -4,13 +4,13 @@ import { useApi } from "../../hooks/useApi";
 import { useState } from "react";
 import { error } from "../../utils/Utilities";
 
-export default function ProductCreate({ revalidator, onSuccess }: {
+export default function GearCreate({ revalidator, onSuccess }: {
   revalidator: { revalidate: () => void };
   onSuccess?: () => void;
 }) {
   const { postFetch } = useApi();
 
-  let [createProduct, setCreateProduct] = useState({
+  let [createGear, setCreateGear] = useState({
     name: "",
     brand: "",
     model: "",
@@ -22,14 +22,12 @@ export default function ProductCreate({ revalidator, onSuccess }: {
 
   function setFormProp(event: React.ChangeEvent) {
     let { name, value }: { name: string, value: string | null } = event.target as HTMLInputElement;
-    setCreateProduct({ ...createProduct, [name]: value.trim() });
-
-    console.log(createProduct);
+    setCreateGear({ ...createGear, [name]: value.trim() });
   }
 
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
-    const success = await postFetch("/api/products", createProduct);
+    const success = await postFetch("/api/products", createGear);
     const responseData = await success?.json();
 
     if (success == null || !success.ok) {
@@ -38,7 +36,6 @@ export default function ProductCreate({ revalidator, onSuccess }: {
     }
 
     revalidator.revalidate();
-    alert(`Utrustning: ${createProduct.name} skapad!`);
 
     if (onSuccess) {
       onSuccess();
@@ -69,7 +66,7 @@ export default function ProductCreate({ revalidator, onSuccess }: {
                 onChange={setFormProp}
                 required
                 className="modal-select-options"
-                value={createProduct.condition}>
+                value={createGear.condition}>
                 <option value="Sliten">Sliten</option>
                 <option value="Bra">Bra</option>
                 <option value="Mycket bra">Mycket bra</option>
@@ -100,7 +97,7 @@ export default function ProductCreate({ revalidator, onSuccess }: {
                 onChange={setFormProp}
                 required
                 className="modal-select-options"
-                value={createProduct.available}>
+                value={createGear.available}>
                 <option value="1">Tillgänglig</option>
                 <option value="0">Uthyrd</option>
               </Form.Select>

@@ -35,7 +35,6 @@ export default function UserCreate({ revalidator, onSuccess }: {
     }
 
     revalidator.revalidate();
-    alert(`Användare: ${createUser.name} skapad!`);
 
     if (onSuccess) {
       onSuccess();

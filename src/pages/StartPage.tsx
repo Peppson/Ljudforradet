@@ -45,7 +45,7 @@ export default function StartPage() {
           <p>Vi erbjuder ett brett sortiment av produkter för både privatpersoner och företag.</p>
         </div>
         <div className="d-flex justify-content-center">
-          <button onClick={scrollToNextSection} className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
+          <button onClick={scrollToNextSection} className="btn btn-primary px-5 py-2 rounded-4 hover-grow">
             Kom igång!
           </button>
         </div>

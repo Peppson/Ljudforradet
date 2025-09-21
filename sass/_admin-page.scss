@@ -19,7 +19,7 @@
   color: black;
 }
 
-.dropdown-toggle:after {
+.admin-tabs .dropdown-toggle:after {
   display: none !important;
 }
 
@@ -44,5 +44,11 @@
 
   .page-item.disabled .page-link {
     background-color: #323539;
+  }
+}
+
+.custom-modal-border {
+  .modal-content {
+    border: 1px solid var(--bs-secondary);
   }
 }

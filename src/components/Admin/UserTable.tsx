@@ -1,7 +1,14 @@
 import { Table } from "react-bootstrap";
-import type Users from "../../interfaces/Users";
+import type User from "../../interfaces/Users";
+import DropdownMenu from "./DropdownMenu";
 
-export default function UserTable({ user }: { user: Users[] }) {
+interface UserTableProps {
+  user: User[];
+  onEditUser: (item: User) => void;
+  onDeleteUser: (item: User) => void;
+}
+
+export default function GearTable({ user, onEditUser, onDeleteUser }: UserTableProps) {
   return <>
     <Table striped bordered hover variant="dark" responsive className="admin-tabs">
       <thead>
@@ -24,12 +31,11 @@ export default function UserTable({ user }: { user: Users[] }) {
               {item.role === "user" ? "användare" : item.role}
             </td>
             <td>{item.created}</td>
-            <td>
-              <button
-                onClick={() => alert(`Ändra users: ${item.name}`)}
-                className="btn hover-grow w-100 text-primary border-0">
-                Ändra
-              </button>
+            <td className="text-center">
+              <DropdownMenu
+                item={item}
+                onEdit={onEditUser}
+                onDelete={onDeleteUser} />
             </td>
           </tr>
         ))}

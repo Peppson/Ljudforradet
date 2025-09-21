@@ -17,7 +17,7 @@ export default function DropdownMenu<T>({ item, onEdit, onDelete }: DropdownMenu
       </Dropdown.Toggle>
       <Dropdown.Menu
         align="start"
-        className="background-color-overlay border-1 border-white">
+        className="background-color-overlay border-1 border-secondary">
 
         <Dropdown.Item
           onClick={() => onEdit(item)}

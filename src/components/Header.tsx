@@ -1,11 +1,11 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Navbar, Container, Nav, ButtonGroup, Dropdown } from "react-bootstrap";
+import { getTrimmedName } from "../utils/Utilities";
+import { useAuth } from "../context/AuthProvider";
 import routes from "../routes";
 import Logo from "./logo";
 import config from "../config/Config";
-import { useAuth } from "../context/AuthProvider";
-import { getTrimmedName } from "../utils/Utilities";
 
 export default function Header() {
   const { user, logoutUser } = useAuth();

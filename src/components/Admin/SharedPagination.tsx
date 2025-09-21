@@ -12,8 +12,6 @@ export default function SharedPagination({
   onPageChange
 }: SharedPaginationProps) {
 
-  if (totalPages <= 1) return null;
-
   return (
     <div className="d-flex justify-content-center mt-3">
       <Pagination className="pagination-dark">

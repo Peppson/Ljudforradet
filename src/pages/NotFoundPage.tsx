@@ -15,7 +15,7 @@ export default function NotFoundPage() {
         </div>
 
         <div className="d-flex justify-content-center">
-          <button onClick={() => navigate("/")} className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
+          <button onClick={() => navigate("/")} className="btn btn-primary px-5 py-2 rounded-4 hover-grow">
             Till startsidan!
           </button>
         </div>
