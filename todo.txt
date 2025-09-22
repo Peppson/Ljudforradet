@@ -27,3 +27,50 @@ config.ts
 rm old databas backend
 ACL
 
+
+
+
+
+
+<Form.Group className="mb-3">
+        <Form.Label className="d-block">
+          <p className="mb-1 text-light">Välj utrustning</p>
+          <div className="position-relative" ref={dropdownRef}>
+
+            <button
+              type="button"
+              className="form-select modal-select-options text-start"
+              onClick={() => { setIsDropdownOpen(!isDropdownOpen); }}>
+
+              {OrderData.gearId ?
+                availableGear.find(item => item.id.toString() === OrderData.gearId)?.name || "Välj utrustning"
+                : "Välj utrustning"}
+            </button>
+
+            {isDropdownOpen && (
+              <div
+                className="position-absolute w-100 bg-white rounded"
+
+                style={{
+                  top: '100%',
+                  zIndex: 1050,
+                  maxHeight: '240px',
+                  overflowY: 'auto'
+                }}>
+
+                {availableGear.map((item) => (
+                  <div
+                    key={item.id}
+                    className="px-3 py-2 cursor-pointer hover:bg-gray-100 text-black"
+                    style={{ cursor: 'pointer' }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "gray"}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "white"}
+                    onClick={() => { handleGearSelect(item.id.toString()); }}>
+                    {item.name} - {item.brand} {item.model} ({item.dailyPrice} kr/dag)
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </Form.Label>
+      </Form.Group>

@@ -1,17 +1,22 @@
 import { Button, Modal } from "react-bootstrap";
 import { getCurrentTabName } from "../../../utils/Utilities";
+import type User from "../../../interfaces/User";
 import Logo from "../../logo";
 import GearCreate from "../Gear/GearCreate";
 import UserCreate from "../User/UserCreate";
+import OrderCreate from "../Order/OrderCreate";
+import type Gear from "../../../interfaces/Gear";
 
 interface ModalCreateProps {
   show: boolean;
   onHide: () => void;
   activeTab: string;
   revalidator: { revalidate: () => void };
+  users: User[];
+  gear: Gear[];
 }
 
-export default function ModalCreate({ show, onHide, activeTab, revalidator }: ModalCreateProps) {
+export default function ModalCreate({ show, onHide, activeTab, revalidator, users, gear }: ModalCreateProps) {
   return (
     <Modal
       show={show}
@@ -31,7 +36,7 @@ export default function ModalCreate({ show, onHide, activeTab, revalidator }: Mo
       <Modal.Body className="modal-background p-4">
         {activeTab === "1" && <GearCreate revalidator={revalidator} onSuccess={onHide} />}
         {activeTab === "2" && <UserCreate revalidator={revalidator} onSuccess={onHide} />}
-        {/* todo orders {activeTab === "3" && <OrderCreate revalidator={revalidator} onSuccess={onHide} />}  */}
+        {activeTab === "3" && <OrderCreate revalidator={revalidator} onSuccess={onHide} users={users} gear={gear} />}
       </Modal.Body>
       <Modal.Footer className="border-secondary modal-background">
         <Button variant="secondary" onClick={onHide}>

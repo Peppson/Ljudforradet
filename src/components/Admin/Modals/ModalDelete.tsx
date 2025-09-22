@@ -44,8 +44,8 @@ export default function ModalDelete({ show, onHide, item, type, revalidator, ord
 
     const response = await deleteFetch(`/api/${typeName}/${item.id}`);
 
-    if (!response) {
-      await showAlert({ title: "Error", message: "Något gick fel vid borttagning. Försök igen.", variant: "danger" })
+    if (!response || !response.ok) {
+      await showAlert({ title: "Error", message: "Något gick fel vid borttagning. Försök igen.", variant: "danger" });
       setIsDeleting(false);
       return;
     }

@@ -154,7 +154,9 @@ export default function AdminPage() {
         show={createModal}
         onHide={() => setCreateModal(false)}
         activeTab={activeTab}
-        revalidator={revalidator} />
+        revalidator={revalidator}
+        users={users}
+        gear={gear} />
 
       <ModalEdit
         show={editModal.show}

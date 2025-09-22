@@ -52,3 +52,9 @@
     border: 1px solid var(--bs-secondary);
   }
 }
+
+.admin-custom-dropdown {
+  max-height: 240px;
+  z-index: 1050;
+  overflow-y: auto;
+}

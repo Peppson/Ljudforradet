@@ -64,7 +64,7 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
 
             {/* Gear table for this order */}
             <tr key={`${item.id}-gear`}>
-              <td colSpan={5} className="p-0">
+              <td colSpan={5} className="p-0 pb-3">
                 <div className="ps-4 pe-2 py-2">
                   <Table variant="dark" size="sm" className="mb-0">
                     <thead>

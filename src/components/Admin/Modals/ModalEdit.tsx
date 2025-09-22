@@ -6,6 +6,7 @@ import type Order from "../../../interfaces/Order";
 import Logo from "../../logo";
 import UserCreate from "../User/UserCreate";
 import GearCreate from "../Gear/GearCreate";
+import OrderCreate from "../Order/OrderCreate";
 
 interface ModalEditProps {
   show: boolean;
@@ -35,7 +36,7 @@ export default function ModalEdit({ show, onHide, activeTab, item, revalidator }
       <Modal.Body className="modal-background p-4">
         {activeTab === "1" && <GearCreate revalidator={revalidator} onSuccess={onHide} editItem={item as Gear} />}
         {activeTab === "2" && <UserCreate revalidator={revalidator} onSuccess={onHide} editItem={item as User} />}
-        {/* todo order {activeTab === "3" && <OrderCreate revalidator={revalidator} onSuccess={onHide} editItem={item as Order} />}  */}
+        {activeTab === "3" && <OrderCreate revalidator={revalidator} onSuccess={onHide} editItem={item as Order} />}
       </Modal.Body>
       <Modal.Footer className="border-secondary modal-background">
         <Button variant="secondary" onClick={onHide}>
