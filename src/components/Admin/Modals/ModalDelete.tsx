@@ -1,11 +1,11 @@
 import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
-import { useApi } from "../../hooks/useApi";
-import { useShowAlert } from "../../context/AlertProvider";
-import type Gear from "../../interfaces/Gear";
-import type User from "../../interfaces/User";
-import type Order from "../../interfaces/Order";
-import Logo from "../logo";
+import { useApi } from "../../../hooks/useApi";
+import { useShowAlert } from "../../../context/AlertProvider";
+import type Gear from "../../../interfaces/Gear";
+import type User from "../../../interfaces/User";
+import type Order from "../../../interfaces/Order";
+import Logo from "../../logo";
 
 interface DeleteModalProps {
   show: boolean;
@@ -22,6 +22,7 @@ export default function ModalDelete({ show, onHide, item, type, revalidator }: D
 
   const getItemName = () => {
     if (!item) return "";
+    if (type === "order") return "Order";
     return (item as any).name || "";
   };
 

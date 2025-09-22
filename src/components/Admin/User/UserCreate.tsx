@@ -1,11 +1,11 @@
 import { Form } from "react-bootstrap";
-import { useApi } from "../../hooks/useApi";
+import { useApi } from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { useErrorHandler } from "../../hooks/useErrorMessage";
-import type User from "../../interfaces/User";
-import FormText from "../FormFields/FormText";
-import FormEmail from "../FormFields/FormEmail";
-import FormPassword from "../FormFields/FormPassword";
+import { useErrorHandler } from "../../../hooks/useErrorMessage";
+import type User from "../../../interfaces/User";
+import FormText from "../../FormFields/FormText";
+import FormEmail from "../../FormFields/FormEmail";
+import FormPassword from "../../FormFields/FormPassword";
 
 interface UserCreateProps {
   revalidator: { revalidate: () => void };

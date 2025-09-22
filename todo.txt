@@ -24,4 +24,6 @@ admin sida = vilket inlogg
 
 innan klar:
 config.ts
+rm old databas backend
+ACL
 

@@ -1,6 +1,6 @@
 import { Table } from "react-bootstrap";
-import type Gear from "../../interfaces/Gear";
-import DropdownMenu from "./DropdownMenu";
+import type Gear from "../../../interfaces/Gear";
+import DropdownMenu from "./../DropdownMenu";
 
 interface GearTableProps {
   gear: Gear[];

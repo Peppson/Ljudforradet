@@ -1,11 +1,11 @@
 import { Button, Modal } from "react-bootstrap";
-import { getCurrentTabName } from "../../utils/Utilities";
-import type Gear from "../../interfaces/Gear";
-import type User from "../../interfaces/User";
-import type Order from "../../interfaces/Order";
-import Logo from "../logo";
-import GearCreate from "./GearCreate";
-import UserCreate from "./UserCreate";
+import { getCurrentTabName } from "../../../utils/Utilities";
+import type Gear from "../../../interfaces/Gear";
+import type User from "../../../interfaces/User";
+import type Order from "../../../interfaces/Order";
+import Logo from "../../logo";
+import UserCreate from "../User/UserCreate";
+import GearCreate from "../Gear/GearCreate";
 
 interface ModalEditProps {
   show: boolean;

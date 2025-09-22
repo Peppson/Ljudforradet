@@ -11,7 +11,7 @@ export default function DropdownMenu<T>({ item, onEdit, onDelete }: DropdownMenu
     <Dropdown as={ButtonGroup}>
       <Dropdown.Toggle
         variant="dark"
-        className="hover-grow border-0 w-100 bg-transparent"
+        className="hover-grow border-0 w-100 bg-transparent text-danger"
         size="sm">
         Ändra
       </Dropdown.Toggle>

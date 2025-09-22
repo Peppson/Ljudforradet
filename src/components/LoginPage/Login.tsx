@@ -46,7 +46,7 @@ export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPa
   }
 
   return <>
-    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 py-5">
       <div className="divider d-flex align-items-center my-4">
         <p className="text-center fw-bold mx-3 mb-0">Logga in</p>
       </div>

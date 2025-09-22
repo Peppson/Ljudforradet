@@ -30,9 +30,9 @@ const routes: Route[] = [
     loader: async () => {
       const gear = await (await getFetch("api/products"))!.json();
       const users = await (await getFetch("api/users"))!.json();
-      // todo orders
-
-      return { gear, users };
+      const orders = await (await getFetch("api/orders"))!.json();
+      const orderItems = await (await getFetch("api/orderItems"))!.json();
+      return { gear, users, orders, orderItems };
     }
   }
 ];

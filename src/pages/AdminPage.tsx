@@ -5,14 +5,16 @@ import { getCurrentTabName } from "../utils/Utilities";
 import type Gear from "../interfaces/Gear";
 import type User from "../interfaces/User";
 import type Order from "../interfaces/Order";
-import GearTable from "../components/Admin/GearTable";
+import type OrderItem from "../interfaces/OrderItem";
+import GearTable from "../components/Admin/Gear/GearTable";
 import Logo from "../components/logo";
 import SharedPagination from "../components/Admin/SharedPagination";
-import UserTable from "../components/Admin/UserTable";
+import UserTable from "../components/Admin/User/UserTable";
 import config from "../config/Config";
-import ModalDelete from "../components/Admin/ModalDelete";
-import ModalCreate from "../components/Admin/ModalCreate";
-import ModalEdit from "../components/Admin/ModalEdit";
+import ModalDelete from "../components/Admin/Modals/ModalDelete";
+import ModalCreate from "../components/Admin/Modals/ModalCreate";
+import ModalEdit from "../components/Admin/Modals/ModalEdit";
+import OrderTable from "../components/Admin/Order/OrderTable";
 
 export default function AdminPage() {
   const [createModal, setCreateModal] = useState(false);
@@ -29,10 +31,11 @@ export default function AdminPage() {
 
   const revalidator = useRevalidator();
 
-  const { gear, users } = useLoaderData() as {
+  const { gear, users, orders, orderItems } = useLoaderData() as {
     gear: Gear[];
     users: User[];
-    // todo orders
+    orders: Order[];
+    orderItems: OrderItem[];
   };
 
   // Modal views
@@ -68,7 +71,7 @@ export default function AdminPage() {
     switch (activeTab) {
       case "1": return gear;
       case "2": return users;
-      case "3": return []; // todo orders
+      case "3": return orders;
       default: return [];
     }
   };
@@ -128,12 +131,14 @@ export default function AdminPage() {
                 onDeleteUser={handleDeleteUser} />
             </Tab>
 
-            <Tab eventKey="3" title="Ordrar (0)">
-              <h1>Sad :(</h1> {/* todo orders */}
-              {/* <OrderTable
+            <Tab eventKey="3" title={`Ordrar (${orders.length})`}>
+              <OrderTable
                 order={paginatedData as Order[]}
+                orderItem={orderItems}
+                users={users}
+                gear={gear}
                 onEditOrder={handleEditOrder}
-                onDeleteOrder={handleDeleteOrder} /> */}
+                onDeleteOrder={handleDeleteOrder} />
             </Tab>
           </Tabs>
         </div>

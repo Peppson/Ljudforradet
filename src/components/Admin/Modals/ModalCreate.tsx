@@ -1,8 +1,8 @@
 import { Button, Modal } from "react-bootstrap";
-import { getCurrentTabName } from "../../utils/Utilities";
-import Logo from "../logo";
-import GearCreate from "./GearCreate";
-import UserCreate from "./UserCreate";
+import { getCurrentTabName } from "../../../utils/Utilities";
+import Logo from "../../logo";
+import GearCreate from "../Gear/GearCreate";
+import UserCreate from "../User/UserCreate";
 
 interface ModalCreateProps {
   show: boolean;

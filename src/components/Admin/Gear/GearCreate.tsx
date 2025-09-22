@@ -1,9 +1,9 @@
 import { Col, Form, Row } from "react-bootstrap";
-import { useApi } from "../../hooks/useApi";
+import { useApi } from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { useErrorHandler } from "../../hooks/useErrorMessage";
-import type Gear from "../../interfaces/Gear";
-import FormText from "../FormFields/FormText";
+import { useErrorHandler } from "../../../hooks/useErrorMessage";
+import type Gear from "../../../interfaces/Gear";
+import FormText from "../../FormFields/FormText";
 
 interface GearCreateProps {
   revalidator: { revalidate: () => void };
