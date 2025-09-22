@@ -58,7 +58,8 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
                 <DropdownMenu
                   item={item}
                   onEdit={onEditOrder}
-                  onDelete={onDeleteOrder} />
+                  onDelete={onDeleteOrder}
+                  hideEdit={true} />
               </td>
             </tr>
 

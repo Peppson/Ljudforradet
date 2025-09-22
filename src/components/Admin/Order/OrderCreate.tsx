@@ -2,7 +2,6 @@ import { Form } from "react-bootstrap";
 import { useApi } from "../../../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
 import { useShowAlert } from "../../../context/AlertProvider";
-import type Order from "../../../interfaces/Order";
 import type User from "../../../interfaces/User";
 import type Gear from "../../../interfaces/Gear";
 
@@ -11,32 +10,18 @@ interface OrderCreateProps {
   onSuccess?: () => void;
   users: User[];
   gear: Gear[];
-  editItem?: Order; // = edit mode
 }
 
-export default function OrderCreate({ revalidator, onSuccess, users, gear, editItem }: OrderCreateProps) {
+export default function OrderCreate({ revalidator, onSuccess, users, gear }: OrderCreateProps) {
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { showAlert } = useShowAlert();
   const { postFetch, putFetch } = useApi();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const isEditMode = !!editItem;
-
 
   let [OrderData, setOrderData] = useState({
     userId: "",
     gearId: [] as string[],
   });
-
-  // Prefill if edit mode
-  /* useEffect(() => {
-    if (isEditMode) {
-      setOrderData({
-        name: editItem.name || "",
-        email: editItem.email || "",
-        password: "" // never prefill password
-      });
-    }
-  }, [editItem]); */
 
   function setFormProp(event: React.ChangeEvent) {
     let { name, value }: { name: string, value: string | null } = event.target as HTMLSelectElement;
@@ -49,7 +34,6 @@ export default function OrderCreate({ revalidator, onSuccess, users, gear, editI
       await showAlert({ title: "Error", message: "Något gick fel. Försök igen.", variant: "danger" })
       return { isValid: false, data: null };
     }
-
     const responseData = await success.json();
     return { isValid: true, data: responseData };
   }

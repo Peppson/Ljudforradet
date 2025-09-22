@@ -6,8 +6,8 @@ import type Gear from "../interfaces/Gear";
 import type User from "../interfaces/User";
 import type Order from "../interfaces/Order";
 import type OrderItem from "../interfaces/OrderItem";
-import GearTable from "../components/Admin/Gear/GearTable";
 import Logo from "../components/logo";
+import GearTable from "../components/Admin/Gear/GearTable";
 import SharedPagination from "../components/Admin/SharedPagination";
 import UserTable from "../components/Admin/User/UserTable";
 import config from "../config/Config";
@@ -163,7 +163,9 @@ export default function AdminPage() {
         onHide={closeEditModal}
         activeTab={activeTab}
         item={editModal.item}
-        revalidator={revalidator} />
+        revalidator={revalidator}
+        users={users}
+        gear={gear} />
 
       <ModalDelete
         show={deleteModal.show}

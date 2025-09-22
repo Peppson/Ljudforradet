@@ -4,9 +4,10 @@ interface DropdownMenuProps<T> {
   item: T;
   onEdit: (item: T) => void;
   onDelete: (item: T) => void;
+  hideEdit?: boolean;
 }
 
-export default function DropdownMenu<T>({ item, onEdit, onDelete }: DropdownMenuProps<T>) {
+export default function DropdownMenu<T>({ item, onEdit, onDelete, hideEdit = false }: DropdownMenuProps<T>) {
   return <>
     <Dropdown as={ButtonGroup}>
       <Dropdown.Toggle
@@ -19,11 +20,13 @@ export default function DropdownMenu<T>({ item, onEdit, onDelete }: DropdownMenu
         align="start"
         className="background-color-overlay border-1 border-secondary">
 
-        <Dropdown.Item
-          onClick={() => onEdit(item)}
-          className="text-white dropdown-menu-item">
-          Redigera
-        </Dropdown.Item>
+        {!hideEdit && (
+          <Dropdown.Item
+            onClick={() => onEdit(item)}
+            className="text-white dropdown-menu-item">
+            Redigera
+          </Dropdown.Item>
+        )}
 
         <Dropdown.Item
           onClick={() => onDelete(item)}

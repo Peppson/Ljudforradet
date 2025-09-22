@@ -14,9 +14,11 @@ interface ModalEditProps {
   activeTab: string;
   item: Gear | User | Order | null;
   revalidator: { revalidate: () => void };
+  users: User[];
+  gear: Gear[];
 }
 
-export default function ModalEdit({ show, onHide, activeTab, item, revalidator }: ModalEditProps) {
+export default function ModalEdit({ show, onHide, activeTab, item, revalidator, users, gear }: ModalEditProps) {
   return (
     <Modal
       show={show}
@@ -34,9 +36,22 @@ export default function ModalEdit({ show, onHide, activeTab, item, revalidator }
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal-background p-4">
-        {activeTab === "1" && <GearCreate revalidator={revalidator} onSuccess={onHide} editItem={item as Gear} />}
-        {activeTab === "2" && <UserCreate revalidator={revalidator} onSuccess={onHide} editItem={item as User} />}
-        {activeTab === "3" && <OrderCreate revalidator={revalidator} onSuccess={onHide} editItem={item as Order} />}
+        {activeTab === "1" &&
+          <GearCreate
+            revalidator={revalidator}
+            onSuccess={onHide}
+            editItem={item as Gear} />}
+        {activeTab === "2" &&
+          <UserCreate
+            revalidator={revalidator}
+            onSuccess={onHide}
+            editItem={item as User} />}
+        {activeTab === "3" &&
+          <OrderCreate
+            revalidator={revalidator}
+            onSuccess={onHide}
+            users={users}
+            gear={gear} />}
       </Modal.Body>
       <Modal.Footer className="border-secondary modal-background">
         <Button variant="secondary" onClick={onHide}>
