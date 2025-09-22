@@ -168,7 +168,8 @@ export default function AdminPage() {
         onHide={closeDeleteModal}
         item={deleteModal.item}
         type={deleteModal.type}
-        revalidator={revalidator} />
+        revalidator={revalidator}
+        orderItems={orderItems} />
     </section >
   </>;
 }

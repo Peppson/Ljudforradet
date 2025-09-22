@@ -5,6 +5,7 @@ import { useShowAlert } from "../../../context/AlertProvider";
 import type Gear from "../../../interfaces/Gear";
 import type User from "../../../interfaces/User";
 import type Order from "../../../interfaces/Order";
+import type OrderItem from "../../../interfaces/OrderItem";
 import Logo from "../../logo";
 
 interface DeleteModalProps {
@@ -13,12 +14,13 @@ interface DeleteModalProps {
   item: Gear | User | Order | null;
   type: string;
   revalidator: { revalidate: () => void };
+  orderItems?: OrderItem[];
 }
 
-export default function ModalDelete({ show, onHide, item, type, revalidator }: DeleteModalProps) {
+export default function ModalDelete({ show, onHide, item, type, revalidator, orderItems }: DeleteModalProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const { showAlert } = useShowAlert();
-  const { deleteFetch } = useApi();
+  const { deleteFetch, putFetch } = useApi();
 
   const getItemName = () => {
     if (!item) return "";
@@ -48,9 +50,33 @@ export default function ModalDelete({ show, onHide, item, type, revalidator }: D
       return;
     }
 
+    if (type == "order")
+      ResetProductsAvailability();
+
     setIsDeleting(false);
     revalidator.revalidate();
     onHide();
+  };
+
+  const ResetProductsAvailability = async () => {
+    if (!item || type !== "order" || !orderItems) return;
+
+    const order = item as Order;
+    const orderItemsForThisOrder = orderItems.filter(x => x.orderId === order.id);
+
+    try {
+      await Promise.all(
+        orderItemsForThisOrder.map(orderItem =>
+          putFetch(`/api/products/${orderItem.ProductId}`, {
+            available: 1
+          })
+        )
+      );
+
+      revalidator.revalidate();
+    } catch (error) {
+      await showAlert({ title: "Error", message: `Något gick fel vid borttagning. ${error}`, variant: "danger" })
+    }
   };
 
   return <>

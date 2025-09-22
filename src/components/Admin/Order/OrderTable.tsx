@@ -4,6 +4,7 @@ import type OrderItem from "../../../interfaces/OrderItem";
 import type User from "../../../interfaces/User";
 import type Gear from "../../../interfaces/Gear";
 import DropdownMenu from "../DropdownMenu";
+import React from "react";
 
 interface OrderTableProps {
   order: Order[];
@@ -23,11 +24,6 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
   const getNumOfGear = (orderId: number): string => {
     const itemsInOrder = orderItem.filter(item => item.orderId === orderId);
     return itemsInOrder.length.toString();
-  };
-
-  const getGearName = (productId: number): string => {
-    const product = gear.find(g => g.id === productId);
-    return product ? product.name : `Product ID: ${productId}`;
   };
 
   const getGearDetails = (productId: number): Gear | null => {
@@ -51,9 +47,10 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
 
       <tbody>
         {order.map((item) => (
-          <>
+          <React.Fragment key={item.id}>
+
             {/* Main order row */}
-            <tr key={item.id}>
+            <tr>
               <td><strong>{getUserName(item.userId)}</strong></td>
               <td><strong>{getNumOfGear(item.id)}</strong></td>
               <td><strong>{item.created}</strong></td>
@@ -66,7 +63,7 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
             </tr>
 
             {/* Gear table for this order */}
-            <tr key={`${item.id}-products`}>
+            <tr key={`${item.id}-gear`}>
               <td colSpan={5} className="p-0">
                 <div className="ps-4 pe-2 py-2">
                   <Table variant="dark" size="sm" className="mb-0">
@@ -82,26 +79,28 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
                       </tr>
                     </thead>
                     <tbody>
-                      {getOrderItems(item.id).map((orderItem, index) => {
-                        const product = getGearDetails(orderItem.ProductId);
-                        return (
-                          <tr key={`${item.id}-${orderItem.ProductId}-${index}`}>
-                            <td>{product?.id || ""}</td>
-                            <td>{product?.name || ""}</td>
-                            <td>{product?.brand || ""}</td>
-                            <td>{product?.model || ""}</td>
-                            <td>{product?.dailyPrice + " kr" || ""}</td>
-                            <td>{product?.condition || ""}</td>
-                            <td>{product?.desc || '-'}</td>
-                          </tr>
-                        );
-                      })}
+                      {getOrderItems(item.id)
+                        .sort((a, b) => a.ProductId - b.ProductId)
+                        .map((orderItem, index) => {
+                          const product = getGearDetails(orderItem.ProductId);
+                          return (
+                            <tr key={`${item.id}-${orderItem.ProductId}-${index}`}>
+                              <td>{product?.id || ""}</td>
+                              <td>{product?.name || ""}</td>
+                              <td>{product?.brand || ""}</td>
+                              <td>{product?.model || ""}</td>
+                              <td>{product?.dailyPrice + " kr" || ""}</td>
+                              <td>{product?.condition || ""}</td>
+                              <td>{product?.desc || '-'}</td>
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </Table>
                 </div>
               </td>
             </tr>
-          </>
+          </React.Fragment>
         ))}
       </tbody>
     </Table>
