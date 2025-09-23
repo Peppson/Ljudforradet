@@ -1,0 +1,15 @@
+.decorative-line {
+    position: relative;
+    display: inline-block;
+}
+
+.decorative-line::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 3px;
+    background-color: var(--bs-danger);
+    margin-top: -1rem;
+}

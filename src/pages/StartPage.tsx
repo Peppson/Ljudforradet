@@ -2,11 +2,11 @@ import { useOutletContext } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useAuth } from "../context/AuthProvider";
 import { getTrimmedName } from "../utils/Utilities";
+import { Button, Container, Row } from "react-bootstrap";
 import InstrumentCard from "../components/StartPage/InstrumentCard";
 import Divider from "../components/Divider";
 import FeatureCard from "../components/StartPage/FeatureCard";
 import config from "../config/Config";
-import { Container, Row } from "react-bootstrap";
 
 export default function StartPage() {
   const { user } = useAuth();
@@ -68,9 +68,9 @@ export default function StartPage() {
         </div>
 
         <div className="d-flex justify-content-center">
-          <button onClick={scrollToNextSection} className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
+          <Button onClick={scrollToNextSection} className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
             Kom igång!
-          </button>
+          </Button>
         </div>
       </Container>
     </section>
@@ -91,18 +91,15 @@ export default function StartPage() {
           <InstrumentCard
             imgSrc="/images/guitar.png"
             title="Elgitarr"
-            description="Från klassiker till nya favoriter. Prova olika stilar och tekniker på våra noga utvalda gitarrer."
-          />
+            description="Från klassiker till nya favoriter. Prova olika stilar och tekniker på våra noga utvalda gitarrer." />
           <InstrumentCard
             imgSrc="/images/synth.png"
             title="Klaviatur"
-            description="Utforska nya sound och rytmer med våra keyboards och synthar, från enkla melodier till avancerade beats."
-          />
+            description="Utforska nya sound och rytmer med våra keyboards och synthar, från enkla melodier till avancerade beats." />
           <InstrumentCard
             imgSrc="/images/amp.png"
             title="Förstärkare & PA"
-            description="Perfekt för övning, livespelningar eller studio."
-          />
+            description="Perfekt för övning, livespelningar eller studio." />
         </Row>
       </Container >
     </section>
@@ -130,8 +127,7 @@ export default function StartPage() {
             padding="ps-0"
           />
         </Row>
-      </Container >
+      </Container>
     </section >
-
   </>;
 }

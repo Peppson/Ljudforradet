@@ -23,11 +23,15 @@ export default function ProductsPage() {
   };
 
 
+
   return <>
-    <section className="page-section-products background-container-img">
+    <section
+      className="page-section-products background-container-img"
+      style={{ "--bg-image": "url('/images/video-still-1.png')" } as React.CSSProperties}>
+
       <Container className="mb-5 pb-3">
         <Row className="align-items-center py-5">
-          <Col md={8}>
+          <Col>
             <h2 className="pb-1 display-4">
               Utrustning
             </h2>

@@ -51,7 +51,7 @@ $success: green;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/images/video-still-1.png');
+  background-image: var(--bg-image, url("/images/video-still-1.png"));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

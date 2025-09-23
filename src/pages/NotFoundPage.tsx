@@ -6,7 +6,10 @@ export default function NotFoundPage() {
   const location = useLocation();
 
   return <>
-    <section className="page-section background-container-img">
+    <section
+      className="page-section background-container-img"
+      style={{ "--bg-image": "url('/images/video-still-1.png')" } as React.CSSProperties}>
+
       <Container className="space-top-header">
         <div className="text-center mb-4">
           <h2 className="pb-2 display-4"><span className="text-danger">404:</span> Sidan kunde inte hittas</h2>
