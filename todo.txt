@@ -5,6 +5,13 @@ graytext = #9797A2
 background-color = #1A1A1E
 
 
+
+component for down arrow V
+new icons for about us page 
+login page?
+
+
+
 todo:
 vy/vyer
 ACL /admin

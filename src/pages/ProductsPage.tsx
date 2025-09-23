@@ -3,26 +3,12 @@ import { useLoaderData } from "react-router-dom";
 import type Gear from "../interfaces/Gear";
 import ProductCard from "../components/ProductsPage/ProductCard";
 import Divider from "../components/Divider";
+import { scrollToElement } from "../utils/Utilities";
 
 export default function ProductsPage() {
   const allGear = useLoaderData() as {
     gear: Gear[];
   };
-
-  const scrollUpToSection = () => {
-    const targetElement = document.getElementById("products-section");
-    if (targetElement) {
-      const headerHeight = 99; // Header h + 1px
-      const targetPosition = targetElement.offsetTop - headerHeight;
-
-      window.scrollTo({
-        top: targetPosition,
-        behavior: "smooth"
-      });
-    }
-  };
-
-
 
   return <>
     <section
@@ -92,7 +78,7 @@ export default function ProductsPage() {
         <div className="divider-products d-flex align-items-center mt-4 pt-3 pb-1">
           <p className="text-center mx-3 mb-0">Visar <span className="text-danger">{allGear.gear.length}</span> produkter</p>
         </div>
-      </Container >
+      </Container>
 
       {/* Products */}
       <Container>
@@ -106,7 +92,9 @@ export default function ProductsPage() {
         </Row>
       </Container>
 
-      <Button onClick={scrollUpToSection} className="btn btn-primary px-5 py-2 rounded-5 hover-grow d-flex mx-auto mb-3">
+      <Button
+        onClick={() => { scrollToElement("products-section") }}
+        className="btn btn-primary px-5 py-2 rounded-5 hover-grow d-flex mx-auto mb-3">
         Till toppen!
       </Button>
     </section>

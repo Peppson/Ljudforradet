@@ -1,12 +1,13 @@
 import { useOutletContext } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useAuth } from "../context/AuthProvider";
-import { getTrimmedName } from "../utils/Utilities";
+import { getTrimmedName, scrollToElement } from "../utils/Utilities";
 import { Button, Container, Row } from "react-bootstrap";
 import InstrumentCard from "../components/StartPage/InstrumentCard";
 import Divider from "../components/Divider";
 import FeatureCard from "../components/StartPage/FeatureCard";
 import config from "../config/Config";
+import DownArrow from "../components/DownArrow";
 
 export default function StartPage() {
   const { user } = useAuth();
@@ -24,19 +25,6 @@ export default function StartPage() {
       }
     }
   }, [isVideoPlaying]);
-
-  const scrollToNextSection = () => {
-    const targetElement = document.getElementById("discover-section");
-    if (targetElement) {
-      const headerHeight = 99; // Header h + 1px
-      const targetPosition = targetElement.offsetTop - headerHeight;
-
-      window.scrollTo({
-        top: targetPosition,
-        behavior: "smooth"
-      });
-    }
-  };
 
   function getWelcomeMessage(user: any, config: any) {
     if (!user)
@@ -68,10 +56,14 @@ export default function StartPage() {
         </div>
 
         <div className="d-flex justify-content-center">
-          <Button onClick={scrollToNextSection} className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
+          <Button
+            onClick={() => scrollToElement("discover-section")}
+            className="btn btn-primary px-5 py-2 rounded-5 hover-grow">
             Kom igång!
           </Button>
         </div>
+
+        <DownArrow onClick={() => scrollToElement("discover-section")} />
       </Container>
     </section>
 

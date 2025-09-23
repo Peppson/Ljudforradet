@@ -1,5 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
+import { scrollToElement } from "../utils/Utilities";
 import Divider from "../components/Divider";
+import DownArrow from "../components/DownArrow";
 
 export default function AboutPage() {
   return <>
@@ -23,12 +25,14 @@ export default function AboutPage() {
             </p>
           </Col>
         </Row>
+
+        <DownArrow onClick={() => scrollToElement("section-2")} />
       </Container>
     </section >
 
     <Divider />
 
-    <section className="background-color-overlay-darker">
+    <section id="section-2" className="background-color-overlay-darker">
       <Container className="py-4">
         <div className="py-5 text-center text-sm-start">
           <div className="d-flex align-items-center justify-content-center justify-content-sm-start">

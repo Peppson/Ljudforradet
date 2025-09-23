@@ -1,3 +1,15 @@
+export const scrollToElement = (elementId: string, headerOffset: number = 99) => {
+  const targetElement = document.getElementById(elementId);
+  if (targetElement) {
+    const targetPosition = targetElement.offsetTop - headerOffset;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "smooth"
+    });
+  }
+};
+
 export function capitalizeFirstLetter(str: string): string {
   if (!str) return str;
   return str.charAt(0).toUpperCase() + str.slice(1);
