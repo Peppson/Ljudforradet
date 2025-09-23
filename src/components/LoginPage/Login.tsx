@@ -33,9 +33,9 @@ export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPa
 
     if (!success) {
       await showAlert({
-        title: "Varning",
+        title: "Error",
         message: "Inloggning misslyckades, kontrollera dina uppgifter och försök igen.",
-        variant: "warning"
+        variant: "danger"
       })
       setIsLoading(false);
       return;
@@ -46,7 +46,7 @@ export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPa
   }
 
   return <>
-    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 py-5">
+    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 section-exact-height">
       <div className="divider d-flex align-items-center my-4">
         <p className="text-center fw-bold mx-3 mb-0">Logga in</p>
       </div>
@@ -74,8 +74,7 @@ export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPa
               onClick={(e) => {
                 e.preventDefault();
                 setIsLoginPage(false);
-              }}
-            >
+              }}>
               Registrera dig
             </a>
           </p>

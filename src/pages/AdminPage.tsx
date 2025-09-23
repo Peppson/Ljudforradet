@@ -65,7 +65,7 @@ export default function AdminPage() {
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("1");
-  const itemsPerPage = config.AdminPagePaginationSize;
+  const itemsPerPage = config.adminPagePaginationSize;
 
   const getCurrentData = () => {
     switch (activeTab) {

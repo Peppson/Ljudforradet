@@ -11,16 +11,14 @@
   min-height: 500px;
 }
 
-.modal-background {
-  background-color: #1A1A1E;
-}
-
-.modal-select-options option {
-  color: black;
-}
-
 .admin-tabs .dropdown-toggle:after {
   display: none !important;
+}
+
+.admin-custom-dropdown {
+  max-height: 240px;
+  z-index: 1050;
+  overflow-y: auto;
 }
 
 .pagination-dark {
@@ -45,16 +43,4 @@
   .page-item.disabled .page-link {
     background-color: #323539;
   }
-}
-
-.custom-modal-border {
-  .modal-content {
-    border: 1px solid var(--bs-secondary);
-  }
-}
-
-.admin-custom-dropdown {
-  max-height: 240px;
-  z-index: 1050;
-  overflow-y: auto;
 }

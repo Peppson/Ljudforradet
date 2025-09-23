@@ -41,6 +41,16 @@ export default function OrderCreate({ revalidator, onSuccess, users, gear }: Ord
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
 
+    // Validate at least one item is selected from custom input (no required)
+    if (OrderData.gearId.length === 0) {
+      await showAlert({
+        title: "Error",
+        message: "Du måste välja minst en utrustning.",
+        variant: "danger"
+      });
+      return;
+    }
+
     // Order
     const response = await postFetch("/api/orders", { userId: OrderData.userId });
     const validation = await validateResponse(response);
@@ -82,7 +92,7 @@ export default function OrderCreate({ revalidator, onSuccess, users, gear }: Ord
 
   // Custom dropdown menu control
   const getItemDesc = (item: Gear, isAvailable: boolean) => {
-    return `${item.name} - ${item.brand} ${item.model} (${item.dailyPrice} kr/dag)${!isAvailable ? " (Ej tillgänglig)" : ""}`;
+    return `${item.name} - ${item.brand} ${item.model} (${item.dailyPrice} kr/dag)${!isAvailable ? " (Uthyrd)" : ""}`;
   };
 
   useEffect(() => {
@@ -110,7 +120,7 @@ export default function OrderCreate({ revalidator, onSuccess, users, gear }: Ord
     <Form id="registerForm" onSubmit={sendForm}>
       <Form.Group className="mb-3">
         <Form.Label className="d-block">
-          <p className="mb-1 text-light">Vilken användare?</p>
+          <p className="mb-1 text-light">Välj en användare</p>
           <Form.Select
             name="userId"
             onChange={setFormProp}
@@ -138,6 +148,7 @@ export default function OrderCreate({ revalidator, onSuccess, users, gear }: Ord
               className="form-select modal-select-options text-start"
               style={{ cursor: "default" }}
               onClick={() => { setIsDropdownOpen(!isDropdownOpen); }}>
+
 
               {OrderData.gearId.length > 0
                 ? OrderData.gearId.map(id =>

@@ -51,9 +51,9 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
 
             {/* Main order row */}
             <tr>
-              <td><strong>{getUserName(item.userId)}</strong></td>
-              <td><strong>{getNumOfGear(item.id)}</strong></td>
-              <td><strong>{item.created}</strong></td>
+              <td className="text-success">{getUserName(item.userId)}</td>
+              <td>{getNumOfGear(item.id)}</td>
+              <td>{item.created}</td>
               <td className="text-center">
                 <DropdownMenu
                   item={item}

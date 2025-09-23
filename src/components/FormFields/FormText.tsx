@@ -21,8 +21,7 @@ export default function FormText({ setFormProp, label, placeholder, typeName = "
           maxLength={200}
           minLength={2}
           required
-          defaultValue={value}
-        />
+          defaultValue={value} />
       </Form.Label>
     </Form.Group>
   </>

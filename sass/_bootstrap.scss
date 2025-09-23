@@ -1,4 +1,4 @@
-// Global overrides
+// Overrides
 $font-family-sans-serif: 'consolas, Noto Sans';
 $font-size-base: 1.1rem;
 $line-height-base: 1.4;
@@ -6,7 +6,6 @@ $navbar-dark-color: rgba(white, .8) !default;
 $navbar-dark-hover-color: rgba(white, .9) !default;
 $enable-negative-margins: true;
 
-// Color overrides
 $primary: rgb(255, 255, 255);
 $light: #9797A2;
 $tertiary: #DC3545;
@@ -14,11 +13,9 @@ $danger: #DC3545;
 $warning: #FF9966;
 $success: green;
 
-
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
-
-// Css overrides
+// Global 
 * {
   box-sizing: border-box;
   margin: 0;
@@ -87,12 +84,8 @@ $success: green;
   background-color: #1A1A1E;
 }
 
-.img-hover-zoom {
-  transition: transform 0.2s ease-in-out;
-}
-
-.img-hover-zoom:hover {
-  transform: scale(1.05);
+.background-color-overlay-TODO {
+  background-color: gray;
 }
 
 .space-top-header {
@@ -101,6 +94,10 @@ $success: green;
 
 .button-exact-width {
   width: 200px;
+}
+
+.section-exact-height {
+  height: 440px !important;
 }
 
 .cursor-pointer {
@@ -115,4 +112,21 @@ $success: green;
     text-decoration: underline;
     text-underline-offset: 3px;
   }
+}
+
+.img-hover-zoom {
+  transition: transform 0.2s ease-in-out;
+}
+
+.img-hover-zoom:hover {
+  transform: scale(1.04);
+  transform-origin: center;
+}
+
+.img-hover-glow {
+  transition: all 0.2s ease-in-out;
+}
+
+.img-hover-glow:hover {
+  filter: brightness(1.1);
 }

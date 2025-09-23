@@ -26,7 +26,10 @@ export default function Header() {
 
   return (
     <header className={isScrolled || isExpanded ? "header scrolled" : "header"}>
-      <Navbar expanded={isExpanded} expand="md" variant="dark">
+      <Navbar
+        expanded={isExpanded}
+        expand="md"
+        variant="dark">
         <Container className="d-flex justify-content-between align-items-center">
 
           <div className="p-3">

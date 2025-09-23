@@ -17,8 +17,7 @@ export default function FormEmail({ setFormProp, label, placeholder, value = "" 
           required
           inputMode="email"
           pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
-          defaultValue={value}
-        />
+          defaultValue={value} />
       </Form.Label>
     </Form.Group>
   </>

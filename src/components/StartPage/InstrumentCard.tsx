@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Card } from "react-bootstrap";
 
 interface InstrumentCardProps {
@@ -7,13 +8,15 @@ interface InstrumentCardProps {
 }
 
 export default function InstrumentCard({ imgSrc, title, description }: InstrumentCardProps) {
+  const navigate = useNavigate();
+
   return (
-    <Card className="card bg-transparent overflow-hidden rounded-4 border-0 col-md-4">
+    <Card className="card bg-transparent overflow-hidden border-0 col-md-4">
       <img
         src={imgSrc}
-        className="card-img-top img-hover-zoom"
+        className="rounded-3 cursor-pointer img-hover-zoom img-hover-glow"
         alt={title}
-      />
+        onClick={() => { navigate("/products"); }} />
       <Card.Text className="text-white pt-4">{title}</Card.Text>
       <Card.Text className="text-light">{description}</Card.Text>
     </Card>

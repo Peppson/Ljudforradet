@@ -34,7 +34,7 @@ export default function GearTable({ gear, onEditGear, onDeleteGear }: GearTableP
             <td>{item.dailyPrice} kr</td>
             <td>{item.condition}</td>
             <td className={item.available ? "text-success" : "text-danger"}>
-              {item.available ? "Ja" : "Nej"}
+              {item.available ? "Ja" : "Uthyrd"}
             </td>
             <td>
               {item.desc}

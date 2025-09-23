@@ -1,11 +1,13 @@
 const config = {
     // Debug
-    showBootstrapBreakpoints: true,
-
+    showBootstrapBreakpoints: true, // todo
+    showStartupModalOverride: false,
+    
     // Constans
     appName: "Ljudförrådet",
-    loadingSpinnerMinDuration: 800, //ms
-    AdminPagePaginationSize: 7, // Items per page
+    startupModalStorageKey: "hasShownStartup",
+    loadingSpinnerMinDuration: 800,
+    adminPagePaginationSize: 7,
 };
 
 export default config;

@@ -51,7 +51,7 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
   }
 
   return <>
-    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 py-1">
+    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1  section-exact-height">
       <div className="divider d-flex align-items-center my-4">
         <p className="text-center fw-bold mx-3 mb-0">Registrera</p>
       </div>
@@ -80,8 +80,7 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
               onClick={(e) => {
                 e.preventDefault();
                 setIsLoginPage(true);
-              }}
-            >
+              }}>
               Logga in
             </a>
           </p>

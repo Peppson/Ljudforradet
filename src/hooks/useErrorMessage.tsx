@@ -14,7 +14,7 @@ export function useErrorHandler() {
     } else if (responseData.error && responseData.error.includes("UNIQUE constraint failed: users.email")) {
       await showAlert({
         title: "Varning",
-        message: "En användare med denna e-postadress finns redan.",
+        message: "Denna e-postadress är redan upptagen.",
         variant: "warning"
       });
 

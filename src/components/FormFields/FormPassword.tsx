@@ -14,8 +14,7 @@ export default function FormPassword({ setFormProp, label, placeholder }: FormPr
           placeholder={placeholder}
           maxLength={100}
           minLength={6}
-          required
-        />
+          required />
       </Form.Label>
     </Form.Group>
   </>

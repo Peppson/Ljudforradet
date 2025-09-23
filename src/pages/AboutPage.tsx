@@ -4,7 +4,7 @@ export default function AboutPage() {
   return <>
     <section className="page-section px-2 background-container-img">
       <Container className="mb-0 mb-md-5 mb-5 mb-lg-0">
-        <Row className="background-color-overlay py-3 p-2 p-md-4">
+        <Row className="background-color-overlay py-3 p-2 p-md-4 rounded-2">
           <Col md={6}>
             <h6 className="pb-2">Om oss</h6>
             <div className="d-flex flex-column justify-content-center">
@@ -19,7 +19,7 @@ export default function AboutPage() {
             </div>
           </Col>
           <Col md={6} className="d-flex justify-content-center">
-            <img src="images/team.jpg" className="w-100 align-self-center" />
+            <img src="images/team.jpg" className="w-100 align-self-center rounded-1" />
           </Col>
         </Row>
       </Container >

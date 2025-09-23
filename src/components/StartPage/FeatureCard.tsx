@@ -16,8 +16,8 @@ export default function FeatureCard({ imgSrc, title, description, padding }: Fea
           alt={title}
           width={60}
           height={60}
-          style={{ objectFit: "contain" }}
-        />
+          className="img-hover-zoom img-hover-glow"
+          style={{ objectFit: "contain" }} />
       </div>
       <Card.Text className="text-white pt-3">{title}</Card.Text>
       <Card.Text className="text-light">{description}</Card.Text>
