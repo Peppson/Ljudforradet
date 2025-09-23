@@ -77,7 +77,9 @@ export default function StartPage() {
 
     <Divider />
 
-    <section id="discover-section" className="background-color-overlay w-100">
+    <section
+      id="discover-section"
+      className="background-color-overlay-darker w-100">
       <Container className="py-3">
         <div className="text-center py-5">
           <h2 className="display-4">Upptäck vårt utbud</h2>
@@ -85,7 +87,7 @@ export default function StartPage() {
         </div>
 
         {/* Static content on "/" in case of backend failure... */}
-        <Row className="g-4 pb-5">
+        <Row className="pb-5 g-4 ">
           <InstrumentCard
             imgSrc="/images/guitar.png"
             title="Elgitarr"
@@ -102,9 +104,14 @@ export default function StartPage() {
             description="Perfekt för övning, livespelningar eller studio."
           />
         </Row>
+      </Container >
+    </section>
 
-        <h2 className="text-center py-4 display-6">Varför {config.appName}?</h2>
+    <Divider />
 
+    <section className="background-color-overlay w-100">
+      <Container className="pt-3 pb-4">
+        <h2 className="text-center py-5 display-5">Varför {config.appName}?</h2>
         <Row className="pb-5 g-3">
           <FeatureCard
             imgSrc={"/svg/work.svg"}
@@ -123,7 +130,8 @@ export default function StartPage() {
             padding="ps-0"
           />
         </Row>
-      </Container>
-    </section>
+      </Container >
+    </section >
+
   </>;
 }

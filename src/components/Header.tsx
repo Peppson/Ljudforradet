@@ -35,10 +35,10 @@ export default function Header() {
           <div className="p-3">
             <Link to="/" className="text-decoration-none">
               <div className="d-flex">
-                <div className="pe-2">
+                <div className="pe-2 ">
                   <Logo />
                 </div>
-                <h2>{config.appName}</h2>
+                <h2 className="hidden-xs">{config.appName}</h2>
               </div>
             </Link>
           </div>
@@ -81,7 +81,7 @@ export default function Header() {
                       </Dropdown.Toggle>
                       <Dropdown.Menu
                         align="start"
-                        className="background-color-overlay border-1 border-white">
+                        className="background-color-overlay-darker border-1 border-white">
                         {user.role === "admin" && (
                           <Dropdown.Item as={NavLink} to="/admin" className="text-white dropdown-menu-item ">
                             Admin

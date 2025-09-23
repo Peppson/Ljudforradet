@@ -7,8 +7,7 @@ $navbar-dark-hover-color: rgba(white, .9) !default;
 $enable-negative-margins: true;
 
 $primary: rgb(255, 255, 255);
-$light: #9797A2;
-$tertiary: #DC3545;
+$light: gray;
 $danger: #DC3545;
 $warning: #FF9966;
 $success: green;
@@ -56,7 +55,7 @@ $success: green;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: grayscale(20%) brightness(40%);
+  filter: grayscale(20%) brightness(30%);
   z-index: -1;
 }
 
@@ -67,13 +66,13 @@ $success: green;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 99px;
+  padding-top: 99px; // header height
   width: 100%;
   min-height: 100vh;
 }
 
 .hover-grow {
-  transition: transform 0.1s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 
 .hover-grow:hover {
@@ -84,16 +83,24 @@ $success: green;
   background-color: #1A1A1E;
 }
 
-.background-color-overlay-TODO {
-  background-color: gray;
+.background-color-overlay-darker {
+  background-color: #101012;
 }
 
 .space-top-header {
   margin-top: -99px;
 }
 
+.space-top-header-double {
+  margin-top: -240px;
+}
+
 .button-exact-width {
   width: 200px;
+}
+
+.button-exact-width-small {
+  width: 82px;
 }
 
 .section-exact-height {

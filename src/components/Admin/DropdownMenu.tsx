@@ -18,7 +18,7 @@ export default function DropdownMenu<T>({ item, onEdit, onDelete, hideEdit = fal
       </Dropdown.Toggle>
       <Dropdown.Menu
         align="start"
-        className="background-color-overlay border-1 border-secondary">
+        className="background-color-overlay-darker border-1 border-light">
 
         {!hideEdit && (
           <Dropdown.Item

@@ -4,9 +4,9 @@ export default function AboutPage() {
   return <>
     <section className="page-section px-2 background-container-img">
       <Container className="mb-0 mb-md-5 mb-5 mb-lg-0">
-        <Row className="background-color-overlay py-3 p-2 p-md-4 rounded-2">
+        <Row className="background-color-overlay-darker py-3 p-2 p-md-4 rounded-2 border border-1 border-light">
           <Col md={6}>
-            <h6 className="pb-2">Om oss</h6>
+            <h6 className="pb-4">Om oss</h6>
             <div className="d-flex flex-column justify-content-center">
               <h3 className="pb-2" >Tusentals timmar ljud levererade!</h3>
               <p className="text-light">

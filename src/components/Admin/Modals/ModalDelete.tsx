@@ -88,7 +88,7 @@ export default function ModalDelete({ show, onHide, item, type, revalidator, ord
       dialogClassName="custom-modal-border">
       <Modal.Header
         closeButton
-        className="modal-background border-secondary"
+        className="modal-background border-light"
         closeVariant="white">
         <Modal.Title>
           <Logo /> Ta bort {getItemTypeName()}
@@ -104,7 +104,7 @@ export default function ModalDelete({ show, onHide, item, type, revalidator, ord
         </p>
       </Modal.Body>
 
-      <Modal.Footer className="border-secondary modal-background">
+      <Modal.Footer className="border-light modal-background">
         <Button
           variant="secondary"
           onClick={onHide}

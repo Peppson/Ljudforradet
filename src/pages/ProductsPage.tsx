@@ -1,96 +1,110 @@
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useLoaderData } from "react-router-dom";
+import type Gear from "../interfaces/Gear";
+import ProductCard from "../components/ProductsPage/ProductCard";
 import Divider from "../components/Divider";
 
-
-
 export default function ProductsPage() {
+  const allGear = useLoaderData() as {
+    gear: Gear[];
+  };
+
+  const scrollUpToSection = () => {
+    const targetElement = document.getElementById("products-section");
+    if (targetElement) {
+      const headerHeight = 99; // Header h + 1px
+      const targetPosition = targetElement.offsetTop - headerHeight;
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
+
   return <>
-    <section className="page-section background-color-overlay">
-      <Container className="space-top-header mb-5">
-
-        {/* <div className="mb-4">
-          <h2 className="pb-2 display-4">
-            Utrustning
-          </h2>
-          <p className="m-1">sdhjk hjksfdkjh  hfhdjfh dfjshf jd jgfkdj gkfdjg todo</p>
-          <p className="m-1">Vi erbjufjdskh hjkfsdhjk hjksfdkjh  hfhdjfh dfjshf jdsf hj df</p>
-        </div> */}
-
-        <Row className="align-items-center">
+    <section className="page-section-products background-container-img">
+      <Container className="mb-5 pb-3">
+        <Row className="align-items-center py-5">
           <Col md={8}>
-            <div className="">
-              <h2 className="pb-2 display-4">
-                Utrustning
-              </h2>
-              <p className="m-1">sdhjk hjksfdkjh  hfhdjfh dfjshf jd jgfkdj gkfdjg todo</p>
-              <p className="m-1">Vi erbjufjdskh hjkfsdhjk hjksfdkjh  hfhdjfh dfjshf jdsf hj df</p>
-            </div>
+            <h2 className="pb-1 display-4">
+              Utrustning
+            </h2>
+            <p className="m-1"> Vi erbjuder ett brett sortiment av högkvalitativ utrustning för både hobbyister och professionella.</p>
+            <p className="m-1"> Bläddra bland våra produkter nedan och hitta exakt det du behöver.</p>
           </Col>
-
-          {/* <Col md={4} className="text-center">
-            <img
-              src="/images/guitar.png"
-              alt="Ljudutrustning"
-              className="img-fluid rounded-3 img-hover-zoom" />
-          </Col> */}
-
         </Row>
       </Container>
+    </section>
 
+    <Divider />
 
-      <Divider />
+    <section id="products-section" className="background-color-overlay pt-2 pb-4">
 
-
-
-      <Container>
-
-        {/* Search and Sort Header */}
-        <Row className="bg-black p-3 rounded-2">
-          <Col md={8}>
+      {/* Search and Sort Header */}
+      <Container className="pt-4 pb-2">
+        <Row>
+          <Col md={5} className="pb-3 pb-md-0">
             <Form.Group>
-              <Form.Label className=" mb-2">Sök utrustning</Form.Label>
+              <Form.Label>Sök utrustning</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Sök efter utrustning..."
-                value="test"
+                maxLength={40}
+                className="border-light rounded-2"
+                placeholder="Sök efter utrustning"
                 onChange={() => { }}
-                className="bg-dark text-white border-secondary"
               />
             </Form.Group>
           </Col>
 
-          <Col md={4}>
+          <Col md={4} className="pb-3 pb-md-0">
             <Form.Group>
-              <Form.Label className=" mb-2">Sortera efter</Form.Label>
+              <Form.Label>Sortera efter</Form.Label>
               <Form.Select
-                value="test"
                 /* onChange={(e) => setSortBy(e.target.value)} */
-                className="bg-dark text-white border-secondary">
-                <option value="name">Namn</option>
-                <option value="category">Kategori</option>
-                <option value="price">Pris</option>
-                <option value="availability">Tillgänglighet</option>
+                className="border-light modal-select-options ">
+                <option value="nameAsc">Namn A–Ö</option>
+                <option value="nameDsc">Namn Ö–A</option>
+                <option value="priceAsc">Billigast först</option>
+                <option value="priceDsc">Dyrast först</option>
+              </Form.Select>
+            </Form.Group>
+          </Col>
+
+          <Col md={3}>
+            <Form.Group>
+              <Form.Label>Visa uthyrda</Form.Label>
+              <Form.Select
+                /* onChange={(e) => setSortBy(e.target.value)} */
+                className="border-light modal-select-options">
+                <option value="nameAsc">Ja</option>
+                <option value="nameDsc">Nej</option>
               </Form.Select>
             </Form.Group>
           </Col>
         </Row>
 
+        <div className="divider-products d-flex align-items-center mt-4 pt-3 pb-1">
+          <p className="text-center mx-3 mb-0">Visar <span className="text-danger">{allGear.gear.length}</span> produkter</p>
+        </div>
+      </Container >
 
+      {/* Products */}
+      <Container>
+        <Row className="mt-1 pb-5 g-4 ">
 
+          {allGear.gear.map((item) => (
+            <Col key={item.id} lg={6} md={12}>
+              <ProductCard {...item} />
+            </Col>
+          ))}
+        </Row>
       </Container>
 
-
-      {/* Load More Button */}
-      {/* <Row className="mt-5">
-          <Col className="text-center">
-            <button className="btn btn-outline-primary px-4 py-2">
-              Ladda fler produkter
-            </button>
-          </Col>
-        </Row> */}
-
-
-
+      <Button onClick={scrollUpToSection} className="btn btn-primary px-5 py-2 rounded-5 hover-grow d-flex mx-auto mb-3">
+        Till toppen!
+      </Button>
     </section>
   </>;
 }

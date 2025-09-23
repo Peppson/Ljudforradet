@@ -8,7 +8,7 @@ export default function Footer() {
   const allowedPaths = ["/", "/about-us", "/products"];
 
   return (
-    <footer className="background-color-overlay">
+    <footer className="background-color-overlay-darker">
       <Divider />
       <div className="pt-5">
         <Container>

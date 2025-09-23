@@ -69,7 +69,7 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
                 <div className="ps-4 pe-2 py-2">
                   <Table variant="dark" size="sm" className="mb-0">
                     <thead>
-                      <tr className="bg-secondary">
+                      <tr className="bg-light">
                         <th>Id</th>
                         <th>Namn</th>
                         <th>Märke</th>

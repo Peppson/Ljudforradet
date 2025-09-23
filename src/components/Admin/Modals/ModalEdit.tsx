@@ -29,7 +29,7 @@ export default function ModalEdit({ show, onHide, activeTab, item, revalidator, 
       dialogClassName="custom-modal-border">
       <Modal.Header
         closeButton
-        className="modal-background border-secondary"
+        className="modal-background border-light"
         closeVariant="white">
         <Modal.Title>
           <Logo /> Redigera {getCurrentTabName(activeTab)}
@@ -53,7 +53,7 @@ export default function ModalEdit({ show, onHide, activeTab, item, revalidator, 
             users={users}
             gear={gear} />}
       </Modal.Body>
-      <Modal.Footer className="border-secondary modal-background">
+      <Modal.Footer className="border-light modal-background">
         <Button variant="secondary" onClick={onHide}>
           Avbryt
         </Button>

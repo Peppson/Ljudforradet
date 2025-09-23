@@ -27,7 +27,7 @@ export default function StartupModal({ onClose }: StartupModalProps) {
       backdropClassName="modal-backdrop">
       <Modal.Header
         closeButton
-        className="modal-background border-secondary"
+        className="modal-background border-light"
         closeVariant="white">
         <Modal.Title>
           <Logo /> Information
@@ -49,7 +49,7 @@ export default function StartupModal({ onClose }: StartupModalProps) {
         </div>
       </Modal.Body>
 
-      <Modal.Footer className="border-secondary modal-background">
+      <Modal.Footer className="border-light modal-background">
         <div className="d-flex flex-column flex-sm-row align-items-center w-100 gap-2">
           <p className="text-light px-2 m-0 flex-grow-1">
             Detta fönster visas endast första gången sidan laddas.

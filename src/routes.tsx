@@ -17,12 +17,30 @@ interface Route {
 const { getFetch } = useApi();
 
 const routes: Route[] = [
-  { element: <StartPage />, path: "/", menuLabel: "Start" },
-  { element: <ProductsPage />, path: "/products", menuLabel: "Utrustning", loader: async () => await getFetch("api/products") },
-  { element: <AboutPage />, path: "/about-us", menuLabel: "Om oss" },
-  { element: <LoginPage />, path: "/login", menuLabel: "Logga in" },
-  { element: <NotFoundPage />, path: "*" },
-
+  {
+    element: <StartPage />,
+    path: "/",
+    menuLabel: "Start"
+  },
+  {
+    element: <ProductsPage />,
+    path: "/products",
+    menuLabel: "Utrustning",
+    loader: async () => {
+      const gear = await (await getFetch("api/products"))!.json();
+      return { gear: gear };
+    }
+  },
+  {
+    element: <AboutPage />,
+    path: "/about-us",
+    menuLabel: "Om oss"
+  },
+  {
+    element: <LoginPage />,
+    path: "/login",
+    menuLabel: "Logga in"
+  },
   {
     element: <AdminRouteWrapper />,
     path: "/admin",
@@ -34,6 +52,10 @@ const routes: Route[] = [
       const orderItems = await (await getFetch("api/orderItems"))!.json();
       return { gear, users, orders, orderItems };
     }
+  },
+  {
+    element: <NotFoundPage />,
+    path: "*"
   }
 ];
 

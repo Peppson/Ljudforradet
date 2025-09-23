@@ -27,7 +27,7 @@ export default function ModalCreate({ show, onHide, activeTab, revalidator, user
       dialogClassName="custom-modal-border">
       <Modal.Header
         closeButton
-        className="modal-background border-secondary"
+        className="modal-background border-light"
         closeVariant="white">
         <Modal.Title>
           <Logo /> Skapa ny {getCurrentTabName(activeTab)}
@@ -38,7 +38,7 @@ export default function ModalCreate({ show, onHide, activeTab, revalidator, user
         {activeTab === "2" && <UserCreate revalidator={revalidator} onSuccess={onHide} />}
         {activeTab === "3" && <OrderCreate revalidator={revalidator} onSuccess={onHide} users={users} gear={gear} />}
       </Modal.Body>
-      <Modal.Footer className="border-secondary modal-background">
+      <Modal.Footer className="border-light modal-background">
         <Button variant="secondary" onClick={onHide}>
           Avbryt
         </Button>

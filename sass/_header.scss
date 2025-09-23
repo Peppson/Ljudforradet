@@ -18,3 +18,9 @@ header {
     text-decoration-line: underline;
     text-decoration-color: #DC3545;
 }
+
+@media (max-width: 310px) {
+    .hidden-xs {
+        display: none !important;
+    }
+}
