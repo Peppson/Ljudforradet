@@ -10,7 +10,7 @@ export default function SubmitButton({ isLoading, children }: SubmitButtonProps)
   return (
     <Button
       type="submit"
-      className="btn btn-primary px-5 py-2 rounded-5 hover-grow button-exact-width"
+      className="btn btn-primary py-2 rounded-3 hover-grow"
       disabled={isLoading}>
       {isLoading ? (
         <>

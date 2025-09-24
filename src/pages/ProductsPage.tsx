@@ -17,8 +17,7 @@ export default function ProductsPage() {
 
       <Container className="mb-5 pb-3">
         <Row className="align-items-center py-5">
-          <Col>
-            <h5 className="m-1">Se vår</h5>
+          <Col className="text-center text-md-start">
             <h3 className="pb-2 display-4">
               Utrustning
             </h3>
@@ -65,7 +64,7 @@ export default function ProductsPage() {
 
           <Col md={3}>
             <Form.Group>
-              <Form.Label>Visa uthyrda</Form.Label>
+              <Form.Label>Visa även uthyrda</Form.Label>
               <Form.Select
                 /* onChange={(e) => setSortBy(e.target.value)} */
                 className="border-light modal-select-options">
@@ -86,7 +85,7 @@ export default function ProductsPage() {
         <Row className="mt-1 pb-5 g-4 ">
 
           {allGear.gear.map((item) => (
-            <Col key={item.id} lg={6} md={12}>
+            <Col key={item.id} lg={4} md={12}>
               <ProductCard {...item} />
             </Col>
           ))}

@@ -23,6 +23,11 @@ const routes: Route[] = [
     menuLabel: "Start"
   },
   {
+    element: <AboutPage />,
+    path: "/about-us",
+    menuLabel: "Om oss"
+  },
+  {
     element: <ProductsPage />,
     path: "/products",
     menuLabel: "Utrustning",
@@ -30,11 +35,6 @@ const routes: Route[] = [
       const gear = await (await getFetch("api/products"))!.json();
       return { gear: gear };
     }
-  },
-  {
-    element: <AboutPage />,
-    path: "/about-us",
-    menuLabel: "Om oss"
   },
   {
     element: <LoginPage />,

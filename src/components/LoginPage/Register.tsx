@@ -51,41 +51,41 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
   }
 
   return <>
-    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1  section-exact-height">
-      <div className="divider d-flex align-items-center my-4">
-        <p className="text-center fw-bold mx-3 mb-0">Registrera</p>
-      </div>
-      <Form onSubmit={sendForm}>
-        <FormText
-          setFormProp={setFormProp}
-          label="Namn"
-          placeholder="Ange ditt namn" />
-        <FormEmail
-          setFormProp={setFormProp}
-          label="E-postadress"
-          placeholder="Ange din e-postadress" />
-        <FormPassword
-          setFormProp={setFormProp}
-          label="Lösenord"
-          placeholder="Ange ditt lösenord" />
+    <Form onSubmit={sendForm} className="py-2 pt-3">
+      <h5 className="text-center fw-bold">Registrera</h5>
 
-        <div className="text-lg-start pt-2 align-items-center d-flex flex-column">
+      <FormText
+        setFormProp={setFormProp}
+        label="Namn"
+        placeholder="Ange ditt namn" />
+      <FormEmail
+        setFormProp={setFormProp}
+        label="E-postadress"
+        placeholder="Ange din e-postadress" />
+      <FormPassword
+        setFormProp={setFormProp}
+        label="Lösenord"
+        placeholder="Ange ditt lösenord" />
+
+      <div className="pt-3 d-flex flex-column">
+        <div className="d-grid gap-2">
           <SubmitButton isLoading={isLoading}>
             Registrera
           </SubmitButton>
-          <p className="small mt-4">
-            Har du redan ett konto?{" "}
-            <a
-              className="text-danger cursor-pointer"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsLoginPage(true);
-              }}>
-              Logga in
-            </a>
-          </p>
         </div>
-      </Form>
-    </div>
+
+        <p className="small mt-4 text-center text-light">
+          Har du redan ett konto?{" "}
+          <a
+            className="text-danger cursor-pointer text-decoration-none"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsLoginPage(true);
+            }}>
+            Logga in
+          </a>
+        </p>
+      </div>
+    </Form>
   </>;
 }

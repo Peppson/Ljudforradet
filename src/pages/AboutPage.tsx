@@ -11,7 +11,7 @@ export default function AboutPage() {
 
       <Container className="space-top-header">
         <Row className="align-items-center py-5">
-          <Col>
+          <Col className="text-center text-md-start">
             <h5 className="m-1">Om oss</h5>
             <h3 className="pb-2 display-4">
               <span className="text-underline">Tusentals</span> timmar ljud levererade!

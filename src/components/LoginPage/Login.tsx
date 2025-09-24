@@ -11,8 +11,8 @@ import FormPassword from "../FormFields/FormPassword";
 export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
   const { showAlert } = useShowAlert();
   const { loginUser } = useAuth();
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   let [payload, setPayload] = useState<{ email: string; password: string }>({
     email: "",
@@ -46,40 +46,37 @@ export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPa
   }
 
   return <>
-    <div className="col-lg-6 col-xl-4 offset-xl-1 section-exact-height">
-      <div className="divider d-flex align-items-center my-4">
-        <p className="text-center fw-bold mx-3 mb-0">Logga in</p>
-      </div>
+    <Form onSubmit={sendForm} className="py-2 pt-3">
+      <h5 className="text-center fw-bold">Logga in</h5>
 
-      <Form onSubmit={sendForm}>
-        <FormEmail
-          setFormProp={setFormProp}
-          label="E-postadress"
-          placeholder="Ange din e-postadress" />
-        <FormPassword
-          setFormProp={setFormProp}
-          label="Lösenord"
-          placeholder="Ange ditt lösenord" />
+      <FormEmail
+        setFormProp={setFormProp}
+        label="E-postadress"
+        placeholder="Ange din e-postadress" />
+      <FormPassword
+        setFormProp={setFormProp}
+        label="Lösenord"
+        placeholder="Ange ditt lösenord" />
 
-        <div className="text-lg-start pt-2 align-items-center d-flex flex-column">
-
+      <div className="pt-3 d-flex flex-column">
+        <div className="d-grid gap-2">
           <SubmitButton isLoading={isLoading}>
             Logga in
           </SubmitButton>
-
-          <p className="small mt-4">
-            Har du inget konto?{" "}
-            <a
-              className="text-danger cursor-pointer"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsLoginPage(false);
-              }}>
-              Registrera dig
-            </a>
-          </p>
         </div>
-      </Form>
-    </div>
+
+        <p className="small mt-4 text-center text-light">
+          Inget konto?{" "}
+          <a
+            className="text-danger cursor-pointer text-decoration-none"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsLoginPage(false);
+            }}>
+            Registrera dig
+          </a>
+        </p>
+      </div>
+    </Form>
   </>
 }

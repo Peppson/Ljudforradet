@@ -6,20 +6,16 @@ background-color = #1A1A1E
 
 
 
-new icons for about us page + some text
-login page?
-
-
 
 todo:
 vy/vyer
 ACL /admin
 react key på alla foreach
-
+vertical slice ba
 
 
 info/readme:
-responsive ner well below 300px
+responsive ner well below 300px ca220px lol
 admin sida = vilket inlogg
 
 
@@ -31,4 +27,7 @@ sesson table empty!
 console.log ta bort
 app.cs ej debug 
 remove bootstrap breakpoints when done
+
+
+
 

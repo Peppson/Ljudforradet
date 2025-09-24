@@ -1,10 +1,26 @@
 import { Row, Col, Container } from "react-bootstrap";
 import { useState } from "react";
+import { scrollToElement } from "../utils/Utilities";
 import Register from "../components/LoginPage/Register";
 import Login from "../components/LoginPage/Login";
+import DownArrow from "../components/DownArrow";
+import Info from "../components/LoginPage/Info";
+import Divider from "../components/Divider";
 
 export default function LoginPage() {
   const [isLoginPage, setIsLoginPage] = useState(true);
+
+  const getLoginMessage = () => {
+    if (isLoginPage) {
+      return <>
+        <span className="text-underline">Logga</span> in
+      </>;
+    } else {
+      return <>
+        <span className="text-underline">Registrera</span>
+      </>;
+    }
+  };
 
   return <>
     <section
@@ -13,56 +29,35 @@ export default function LoginPage() {
 
       <Container className="space-top-header">
         <Row className="align-items-center py-5">
-          <Col>
+          <Col md={6} className="text-center text-md-start">
             <h5 className="m-1">Hej!</h5>
             <h3 className="pb-2 display-4">
-              <span className="text-underline">Logga</span> in!
+              {getLoginMessage()} för att börja!
             </h3>
-            <p className="m-1">
-              Våra kollegor arbetar tätt tillsammans.
+            <p className="m-1 d-none d-md-block">
+              Få tillgång till ditt konto och hantera dina bokningar enkelt.
             </p>
-            <p className="m-1">
-              Med ett engagerat team som brinner för ljud.
+            <p className="m-1 d-none d-md-block">
+              Har du funderingar? Vårt team svarar gärna.
             </p>
           </Col>
 
-          <Col>
-            <Login setIsLoginPage={setIsLoginPage} />
+          <Col md={6}>
+            <div className="background-color-overlay-darker p-4 rounded-2 border border-light">
+              {isLoginPage
+                ? <Login setIsLoginPage={setIsLoginPage} />
+                : <Register setIsLoginPage={setIsLoginPage} />}
+            </div>
           </Col>
-
         </Row>
-
+        <DownArrow onClick={() => { scrollToElement("info-section") }} />
       </Container>
-    </section >
+    </section>
 
+    <Divider />
 
-
-
-
-
-    {/* <section className="page-section px-2 background-container-img">
-      <Container className="h-custom background-color-overlay-darker mb-0 mb-md-5 mb-5 mb-lg-0 rounded-2 border border-1 border-light">
-        <Row className="d-flex justify-content-center align-items-center h-100 py-3 p-2 p-md-4 ">
-          <Col md={9} lg={6}>
-            <img
-              src="images/drums.jpg"
-              className="img-fluid rounded-1"
-              alt="login image" />
-          </Col>
-
-          {isLoginPage
-            ? <Login setIsLoginPage={setIsLoginPage} />
-            : <Register setIsLoginPage={setIsLoginPage} />}
-
-        </Row>
-      </Container>
-    </section > */}
-
-
-
-
-
-
-
+    <section id="info-section" className="background-color-overlay">
+      <Info />
+    </section>
   </>;
 }
