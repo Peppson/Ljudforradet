@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useApi } from "../../hooks/useApi";
-import { useErrorHandler } from "../../hooks/useErrorMessage";
+import { useErrorMessage } from "../../hooks/useErrorMessage";
 import { useShowAlert } from "../../context/AlertProvider";
 import SubmitButton from "./SubmitButton";
 import config from "../../config/Config";
@@ -10,7 +10,7 @@ import FormEmail from "../FormFields/FormEmail";
 import FormPassword from "../FormFields/FormPassword";
 
 export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
-  const { showErrorMsg } = useErrorHandler();
+  const { showErrorMsg } = useErrorMessage();
   const { showAlert } = useShowAlert();
   const { postFetch } = useApi();
   const [isLoading, setIsLoading] = useState(false);

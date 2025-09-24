@@ -34,7 +34,7 @@ export function AlertProvider({ children }: { children: ReactNode }) {
         resolvePromise();
         setResolvePromise(null);
       }
-    }, 150); // Let animation finish
+    }, 150); // Let fadeout animation finish
   };
 
   const getVariantClass = () => {

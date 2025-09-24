@@ -18,9 +18,10 @@ export default function ProductsPage() {
       <Container className="mb-5 pb-3">
         <Row className="align-items-center py-5">
           <Col>
-            <h2 className="pb-1 display-4">
+            <h5 className="m-1">Se vår</h5>
+            <h3 className="pb-2 display-4">
               Utrustning
-            </h2>
+            </h3>
             <p className="m-1"> Vi erbjuder ett brett sortiment av högkvalitativ utrustning för både hobbyister och professionella.</p>
             <p className="m-1"> Bläddra bland våra produkter nedan och hitta exakt det du behöver.</p>
           </Col>

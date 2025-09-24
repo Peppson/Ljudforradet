@@ -1,11 +1,11 @@
 import { Button, Modal } from "react-bootstrap";
 import { getCurrentTabName } from "../../../utils/Utilities";
 import type User from "../../../interfaces/User";
-import Logo from "../../logo";
+import type Gear from "../../../interfaces/Gear";
 import GearCreate from "../Gear/GearCreate";
 import UserCreate from "../User/UserCreate";
 import OrderCreate from "../Order/OrderCreate";
-import type Gear from "../../../interfaces/Gear";
+import Logo from "../../logo";
 
 interface ModalCreateProps {
   show: boolean;

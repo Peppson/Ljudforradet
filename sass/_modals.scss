@@ -1,17 +1,17 @@
 .modal-backdrop {
-    background-color: rgba(0, 0, 0, 1) !important;
+  background-color: rgba(0, 0, 0, 1) !important;
 }
 
 .modal-background {
-    background-color: #1A1A1E;
+  background-color: #1A1A1E;
 }
 
 .modal-select-options option {
-    color: black;
+  color: black;
 }
 
 .custom-modal-border {
-    .modal-content {
-        border: 1px solid var(--bs-light);
-    }
+  .modal-content {
+    border: 1px solid var(--bs-light);
+  }
 }

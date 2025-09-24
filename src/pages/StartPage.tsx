@@ -6,8 +6,8 @@ import { Button, Container, Row } from "react-bootstrap";
 import InstrumentCard from "../components/StartPage/InstrumentCard";
 import Divider from "../components/Divider";
 import FeatureCard from "../components/StartPage/FeatureCard";
-import config from "../config/Config";
 import DownArrow from "../components/DownArrow";
+import config from "../config/Config";
 
 export default function StartPage() {
   const { user } = useAuth();
@@ -26,7 +26,7 @@ export default function StartPage() {
     }
   }, [isVideoPlaying]);
 
-  function getWelcomeMessage(user: any, config: any) {
+  function getWelcomeMessage(user: any, config: { appName: string }) {
     if (!user)
       return `Välkommen till ${config.appName}`;
     return `Välkommen ${getTrimmedName(user.name)}!`;
@@ -100,7 +100,7 @@ export default function StartPage() {
 
     <section className="background-color-overlay w-100">
       <Container className="pt-3 pb-4">
-        <h2 className="text-center py-5 display-5">Varför {config.appName}?</h2>
+        <h2 className="text-center pt-5 pb-4 display-5">Varför {config.appName}?</h2>
         <Row className="pb-5 g-3">
           <FeatureCard
             imgSrc={"/svg/work.svg"}

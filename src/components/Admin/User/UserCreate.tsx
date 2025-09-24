@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap";
 import { useApi } from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { useErrorHandler } from "../../../hooks/useErrorMessage";
+import { useErrorMessage } from "../../../hooks/useErrorMessage";
 import type User from "../../../interfaces/User";
 import FormText from "../../FormFields/FormText";
 import FormEmail from "../../FormFields/FormEmail";
@@ -14,7 +14,7 @@ interface UserCreateProps {
 }
 
 export default function UserCreate({ revalidator, onSuccess, editItem }: UserCreateProps) {
-  const { showErrorMsg } = useErrorHandler();
+  const { showErrorMsg } = useErrorMessage();
   const { postFetch, putFetch } = useApi();
   const isEditMode = !!editItem;
 

@@ -1,4 +1,4 @@
-export const scrollToElement = (elementId: string, headerOffset: number = 99) => {
+export const scrollToElement = (elementId: string, headerOffset: number = 100) => {
   const targetElement = document.getElementById(elementId);
   if (targetElement) {
     const targetPosition = targetElement.offsetTop - headerOffset;

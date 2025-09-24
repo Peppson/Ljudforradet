@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider";
 import { AlertProvider } from "./context/AlertProvider";
-import BootstrapBreakpoints from "./utils/BootstrapBreakpoints";
+import DebugBreakpoints from "./utils/DebugBreakpoints";
 import StartupModal from "./components/StartupModal";
 import Header from "./components/Header";
 import Main from "./components/Main";
@@ -12,8 +12,6 @@ import config from "./config/Config";
 export default function App() {
   const [isStartup, setIsStartup] = useState(false);
   const isAdminRoute = location.pathname.startsWith("/admin");
-
-  const startupModalClose = () => { setIsStartup(false); };
 
   // Should we show StartupModal?
   useEffect(() => {
@@ -29,8 +27,8 @@ export default function App() {
     <AuthProvider>
       <AlertProvider>
 
-        {isStartup && <StartupModal onClose={startupModalClose} />}
-        {config.showBootstrapBreakpoints && <BootstrapBreakpoints />}
+        {isStartup && <StartupModal onClose={() => { setIsStartup(false); }} />}
+        {config.showBootstrapBreakpoints && <DebugBreakpoints />}
 
         {!isAdminRoute && <Header />}
         <Main isVideoPlaying={!isStartup} />

@@ -1,6 +1,6 @@
 import config from "../config/Config";
 
-export default function ShowBootstrapBreakPoints() {
+export default function DebugBreakpoints() {
   const points = ["xs", "sm", "md", "lg", "xl", "xxl"];
 
   const resetStartupModal = () => {

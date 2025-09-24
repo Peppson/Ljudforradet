@@ -3,10 +3,10 @@ import { getCurrentTabName } from "../../../utils/Utilities";
 import type Gear from "../../../interfaces/Gear";
 import type User from "../../../interfaces/User";
 import type Order from "../../../interfaces/Order";
-import Logo from "../../logo";
 import UserCreate from "../User/UserCreate";
 import GearCreate from "../Gear/GearCreate";
 import OrderCreate from "../Order/OrderCreate";
+import Logo from "../../logo";
 
 interface ModalEditProps {
   show: boolean;

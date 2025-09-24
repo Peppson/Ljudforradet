@@ -16,6 +16,7 @@ export default function Header() {
   const pathName = useLocation().pathname;
   const isActive = (path: string) => pathName === path;
 
+  // Set header background on scroll from top
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -79,6 +80,7 @@ export default function Header() {
                         className="nav-link text-white ps-3 fs-5">
                         {getTrimmedName(user.name)}
                       </Dropdown.Toggle>
+
                       <Dropdown.Menu
                         align="start"
                         className="background-color-overlay-darker border-1 border-white">
@@ -87,6 +89,7 @@ export default function Header() {
                             Admin
                           </Dropdown.Item>
                         )}
+
                         <Dropdown.Item onClick={logoutUser} className="text-white dropdown-menu-item">
                           Logga ut
                         </Dropdown.Item>
@@ -105,6 +108,7 @@ export default function Header() {
                         Admin
                       </Nav.Link>
                     )}
+
                     <Nav.Link
                       className="text-white ps-3 fs-5"
                       onClick={() => {
@@ -116,6 +120,7 @@ export default function Header() {
                   </div>
                 </>
               ) : null}
+
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,26 +1,26 @@
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    transition: background-color 0.2s ease-in-out;
-    background-color: transparent;
-    min-height: 99px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  transition: background-color 0.2s ease-in-out;
+  background-color: transparent;
+  min-height: 99px;
 }
 
 .header.scrolled {
-    background-color: #101012;
+  background-color: #101012;
 }
 
 .navLinkActive {
-    text-underline-offset: 7px;
-    text-decoration-line: underline;
-    text-decoration-color: #DC3545;
+  text-underline-offset: 7px;
+  text-decoration-line: underline;
+  text-decoration-color: #DC3545;
 }
 
 @media (max-width: 310px) {
-    .hidden-xs {
-        display: none !important;
-    }
+  .hidden-xs {
+    display: none !important;
+  }
 }

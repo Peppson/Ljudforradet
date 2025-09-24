@@ -1,6 +1,6 @@
 import { useShowAlert } from "../context/AlertProvider";
 
-export function useErrorHandler() {
+export function useErrorMessage() {
   const { showAlert } = useShowAlert();
 
   const showErrorMsg = async (responseData: any) => {

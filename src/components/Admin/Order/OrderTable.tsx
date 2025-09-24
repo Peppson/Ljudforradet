@@ -1,10 +1,10 @@
+import React from "react";
 import { Table } from "react-bootstrap";
 import type Order from "../../../interfaces/Order";
 import type OrderItem from "../../../interfaces/OrderItem";
 import type User from "../../../interfaces/User";
 import type Gear from "../../../interfaces/Gear";
 import DropdownMenu from "../DropdownMenu";
-import React from "react";
 
 interface OrderTableProps {
   order: Order[];

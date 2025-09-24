@@ -6,8 +6,7 @@ background-color = #1A1A1E
 
 
 
-component for down arrow V
-new icons for about us page 
+new icons for about us page + some text
 login page?
 
 

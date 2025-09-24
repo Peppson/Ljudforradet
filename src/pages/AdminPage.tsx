@@ -17,6 +17,8 @@ import ModalEdit from "../components/Admin/Modals/ModalEdit";
 import OrderTable from "../components/Admin/Order/OrderTable";
 
 export default function AdminPage() {
+  const revalidator = useRevalidator();
+
   const [createModal, setCreateModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState({
     show: false,
@@ -28,8 +30,6 @@ export default function AdminPage() {
     type: "",
     item: null as Gear | User | Order | null
   });
-
-  const revalidator = useRevalidator();
 
   const { gear, users, orders, orderItems } = useLoaderData() as {
     gear: Gear[];

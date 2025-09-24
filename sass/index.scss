@@ -1,11 +1,11 @@
 @use "bootstrap";
 @use "header";
-@use "sticky-footer";
+@use "footer";
+@use "modals";
 @use "login-page";
 @use "admin-page";
 @use "products-page";
-@use "modals";
-@use "about-us-page";
+@use "background-img-video";
 
 // Import fonts from Google Fonts
 @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
