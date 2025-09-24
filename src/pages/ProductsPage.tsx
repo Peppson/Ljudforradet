@@ -1,13 +1,48 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
+import { scrollToElement } from "../utils/Utilities";
+import { useAuth } from "../context/AuthProvider";
+import { useShowAlert } from "../context/AlertProvider";
 import type Gear from "../interfaces/Gear";
 import ProductCard from "../components/ProductsPage/ProductCard";
 import Divider from "../components/Divider";
-import { scrollToElement } from "../utils/Utilities";
+import ProductModal from "../components/ProductsPage/ProductModal";
+import LoginPromptModal from "../components/ProductsPage/LoginPromptModal";
 
 export default function ProductsPage() {
+  const { showAlert } = useShowAlert();
+  const { user } = useAuth();
+
   const allGear = useLoaderData() as {
     gear: Gear[];
+  };
+
+  const [loginPromtModal, setLoginPromtModal] = useState(false);
+  const [productModal, setProductModal] = useState({
+    show: false,
+    gear: null as Gear | null
+  });
+
+  const openProductModal = async (gear: Gear) => {
+    // If not logged in promt login
+    const isLoggedIn = await isUserLoggedIn();
+    if (!isLoggedIn) {
+      setLoginPromtModal(true);
+      return;
+    }
+    setProductModal({ show: true, gear: gear });
+  };
+
+  const closeProductModal = () => {
+    setProductModal({ show: false, gear: null });
+  };
+
+  const isUserLoggedIn = async () => {
+    if (!user || user.role === "visitor") {
+      return false;
+    }
+    return true;
   };
 
   return <>
@@ -31,46 +66,51 @@ export default function ProductsPage() {
     <Divider />
 
     <section id="products-section" className="background-color-overlay pt-2 pb-4">
-
       {/* Search and Sort Header */}
       <Container className="pt-4 pb-2">
         <Row>
           <Col md={5} className="pb-3 pb-md-0">
             <Form.Group>
-              <Form.Label>Sök utrustning</Form.Label>
-              <Form.Control
-                type="text"
-                maxLength={40}
-                className="border-light rounded-2"
-                placeholder="Sök efter utrustning"
-                onChange={() => { }}
-              />
+              <Form.Label className="w-100">Sök utrustning
+                <Form.Control
+                  name="search"
+                  type="text"
+                  autoComplete="off"
+                  maxLength={40}
+                  className="border-light rounded-2 mt-2"
+                  placeholder="Sök efter utrustning"
+                  onChange={() => { }} />
+              </Form.Label>
             </Form.Group>
           </Col>
 
           <Col md={4} className="pb-3 pb-md-0">
             <Form.Group>
-              <Form.Label>Sortera efter</Form.Label>
-              <Form.Select
-                /* onChange={(e) => setSortBy(e.target.value)} */
-                className="border-light modal-select-options ">
-                <option value="nameAsc">Namn A–Ö</option>
-                <option value="nameDsc">Namn Ö–A</option>
-                <option value="priceAsc">Billigast först</option>
-                <option value="priceDsc">Dyrast först</option>
-              </Form.Select>
+              <Form.Label className="w-100">Sortera efter
+                <Form.Select
+                  name="sort"
+                  className="border-light modal-select-options mt-2"
+                  onChange={() => { }} >
+                  <option value="nameAsc">Namn A–Ö</option>
+                  <option value="nameDsc">Namn Ö–A</option>
+                  <option value="priceAsc">Billigast först</option>
+                  <option value="priceDsc">Dyrast först</option>
+                </Form.Select>
+              </Form.Label>
             </Form.Group>
           </Col>
 
           <Col md={3}>
             <Form.Group>
-              <Form.Label>Visa även uthyrda</Form.Label>
-              <Form.Select
-                /* onChange={(e) => setSortBy(e.target.value)} */
-                className="border-light modal-select-options">
-                <option value="nameAsc">Ja</option>
-                <option value="nameDsc">Nej</option>
-              </Form.Select>
+              <Form.Label className="w-100">Visa även uthyrda
+                <Form.Select
+                  className="border-light modal-select-options mt-2"
+                  name="available"
+                  onChange={() => { }} >
+                  <option value="nameAsc">Ja</option>
+                  <option value="nameDsc">Nej</option>
+                </Form.Select>
+              </Form.Label>
             </Form.Group>
           </Col>
         </Row>
@@ -85,8 +125,11 @@ export default function ProductsPage() {
         <Row className="mt-1 pb-5 g-4 ">
 
           {allGear.gear.map((item) => (
-            <Col key={item.id} lg={4} md={12}>
-              <ProductCard {...item} />
+            <Col key={item.id} lg={6} md={12}>
+              <ProductCard
+                item={item}
+                onBookClick={openProductModal}
+              />
             </Col>
           ))}
         </Row>
@@ -98,5 +141,14 @@ export default function ProductsPage() {
         Till toppen!
       </Button>
     </section>
+
+    <ProductModal
+      item={productModal.gear}
+      show={productModal.show}
+      onHide={closeProductModal} />
+
+    <LoginPromptModal
+      show={loginPromtModal}
+      onHide={() => { setLoginPromtModal(false) }} />
   </>;
 }

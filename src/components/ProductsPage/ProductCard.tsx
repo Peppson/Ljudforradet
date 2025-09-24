@@ -1,18 +1,19 @@
 import { Badge, Button, Card, Col, Row } from "react-bootstrap";
 import type Gear from "../../interfaces/Gear";
 
-export default function ProductCard(gear: Gear) {
+interface ProductCardProps {
+  item: Gear;
+  onBookClick: (item: Gear) => void;
+}
 
-
-
-
+export default function ProductCard({ item, onBookClick }: ProductCardProps) {
   return (
     <Card className="h-100 background-color-overlay-darker border border-1 border-light product-card-shadow">
       <Card.Header className="text-white border-light py-3">
-        <Card.Title className="h5 mb-0">{gear.name}</Card.Title>
+        <Card.Title className="h5 mb-0">{item.name}</Card.Title>
 
         <div className="position-absolute top-0 end-0 m-3">
-          {gear.available ? (
+          {item.available ? (
             <Badge bg="success p-2 button-exact-width-small">Tillgänglig</Badge>
           ) : (
             <Badge bg="danger p-2 button-exact-width-small">Uthyrd</Badge>
@@ -25,21 +26,30 @@ export default function ProductCard(gear: Gear) {
           <Col xs={12} className="mb-1">
             <span className="me-2">Märke:</span>
             <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
-              {gear.brand}
+              {item.brand}
             </Badge>
           </Col>
 
           <Col xs={12} className="mb-1">
             Modell:{" "}
             <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
-              {gear.model}
+              {item.model}
             </Badge>
           </Col>
 
           <Col xs={12} className="mb-1 d-flex align-items-center">
             <span className="me-3">Skick:</span>
             <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
-              {gear.condition}
+              {item.condition}
+            </Badge>
+          </Col>
+
+          <Col xs={12} className="mb-1 d-flex align-items-center">
+            <span className="me-4">Pris:</span>
+            <Badge
+              bg="transparent"
+              className="pb-1 fs-6 border border-light fw-normal">
+              {item.dailyPrice} kr
             </Badge>
           </Col>
         </Row>
@@ -49,24 +59,16 @@ export default function ProductCard(gear: Gear) {
         </Card.Text>
 
         <Card.Text className="text-light pt-2">
-          {gear.desc}
+          {item.desc}
         </Card.Text>
       </Card.Body>
 
-      <Card.Footer className="text-white border-light d-flex justify-content-between align-items-center py-2">
-        <div>
-          <span className="me-2">Pris per dag:</span>
-          <Badge
-            bg="transparent"
-            className="pb-1 fs-6 border border-light fw-normal">
-            {gear.dailyPrice} kr
-          </Badge>
-        </div>
-
+      <Card.Footer className="text-white border-light d-flex justify-content-end align-items-center py-2">
         <Button
-          className={`btn btn-sm ${gear.available ? "btn-primary" : "btn-outline-light"} hover-grow button-exact-width-small`}
-          disabled={!gear.available}>
-          {gear.available ? "Boka" : "Uthyrd"}
+          onClick={() => onBookClick(item)}
+          className={`btn btn-sm ${item.available ? "btn-primary" : "btn-outline-light"} hover-grow button-exact-width-small`}
+          disabled={!item.available}>
+          {item.available ? "Mer info" : "Uthyrd"}
         </Button>
       </Card.Footer>
     </Card>
