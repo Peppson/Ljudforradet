@@ -13,11 +13,11 @@ export default function LoginPage() {
   const getLoginMessage = () => {
     if (isLoginPage) {
       return <>
-        <span className="text-underline">Logga</span> in
+        <span className="text-danger">Logga in </span>
       </>;
     } else {
       return <>
-        <span className="text-underline">Registrera</span>
+        <span className="text-danger">Registrera</span>
       </>;
     }
   };

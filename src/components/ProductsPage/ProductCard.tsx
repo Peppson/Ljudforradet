@@ -8,7 +8,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ item, onBookClick }: ProductCardProps) {
   return (
-    <Card className="h-100 background-color-overlay-darker border border-1 border-light">
+    <Card className="h-100 background-color-overlay-darker border border-0 border-light">
       <Card.Header className="text-white border-light py-3">
         <Card.Title className="h5 mb-0">{item.name}</Card.Title>
 
@@ -23,7 +23,7 @@ export default function ProductCard({ item, onBookClick }: ProductCardProps) {
 
       <Card.Body className="d-flex flex-column">
         <Row className="mb-1">
-          <Col xs={12} className="mb-1">
+          {/* <Col xs={12} className="mb-1">
             <span className="me-2">Märke:</span>
             <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
               {item.brand}
@@ -31,11 +31,11 @@ export default function ProductCard({ item, onBookClick }: ProductCardProps) {
           </Col>
 
           <Col xs={12} className="mb-1">
-            Modell:{" "}
             <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
+              Modell:{" "}
               {item.model}
             </Badge>
-          </Col>
+          </Col>*/}
 
           <Col xs={12} className="mb-1 d-flex align-items-center">
             <span className="me-3">Skick:</span>

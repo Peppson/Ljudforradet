@@ -10,12 +10,13 @@ import ProductCard from "../components/ProductsPage/ProductCard";
 import Divider from "../components/Divider";
 import ProductModal from "../components/ProductsPage/ProductModal";
 import LoginPromptModal from "../components/ProductsPage/LoginPromptModal";
+import InstrumentCard from "../components/StartPage/InstrumentCard";
 
 export default function ProductsPage() {
   const { user } = useAuth();
+  const [sortedGear, setSortedGear] = useState<Gear[]>([]);
   const [currentFilter, setCurrentFilter] = useState("show");
   const [currentSearch, setCurrentSearch] = useState("");
-
   const [loginPromtModal, setLoginPromtModal] = useState(false);
   const [productModal, setProductModal] = useState({
     show: false,
@@ -25,14 +26,16 @@ export default function ProductsPage() {
   const allGear = useLoaderData() as {
     gear: Gear[];
   };
-  const [sortedGear, setSortedGear] = useState(allGear.gear);
+
+  React.useEffect(() => {
+    sortAllGear("nameAsc");
+  }, []);
 
   const sortAllGear = (sortOption: string) => {
     const newGear = [...allGear.gear];
-
     switch (sortOption) {
       case "nameAsc":
-        newGear.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+        newGear.sort((a, b) => (a.name || "").localeCompare(b.name || "")); // todo int???? include ints in sort 
         break;
       case "nameDsc":
         newGear.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
@@ -64,7 +67,7 @@ export default function ProductsPage() {
     );
   }
 
-  const results = searchedGear();
+  const processedGear = searchedGear();
 
 
   const openProductModal = async (gear: Gear) => {
@@ -76,14 +79,6 @@ export default function ProductsPage() {
     }
     setProductModal({ show: true, gear: gear });
   };
-
-
-
-
-
-
-
-
 
   return <>
     <section
@@ -157,19 +152,23 @@ export default function ProductsPage() {
         </Row>
 
         <div className="divider-products d-flex align-items-center mt-4 pt-3 pb-1">
-          <p className="text-center mx-3 mb-0">Visar <span className="text-danger">{results.length}</span> produkter</p>
+          <p className="text-center mx-3 mb-0">Visar <span className="text-danger">{processedGear.length}</span> produkter</p>
         </div>
       </Container>
 
       {/* Products grid */}
       <Container>
         <Row className="mt-1 pb-5 g-4 ">
-          {results
+          {processedGear
             .map((item) => (
               <Col key={item.id} lg={4} md={6} sm={12} >
                 <ProductCard
                   item={item}
                   onBookClick={openProductModal} />
+                {/* <InstrumentCard
+                  imgSrc="/images/guitar.png"
+                  title="Elgitarr"
+                  description="Från klassiker till nya favoriter. Prova olika stilar och tekniker på våra noga utvalda gitarrer." /> */}
               </Col>
             ))}
         </Row>

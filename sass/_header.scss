@@ -16,7 +16,7 @@ header {
 .navLinkActive {
   text-underline-offset: 7px;
   text-decoration-line: underline;
-  text-decoration-color: #DC3545;
+  text-decoration-color: var(--bs-danger);
 }
 
 @media (max-width: 310px) {

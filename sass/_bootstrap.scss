@@ -8,7 +8,7 @@ $enable-negative-margins: true;
 
 $primary: rgb(255, 255, 255);
 $light: gray;
-$danger: #DC3545;
+$danger: #68c4d4; //#DC3545;
 $warning: #FB6944;
 $success: green;
 
@@ -24,17 +24,16 @@ $success: green;
   color: white;
 }
 
+.test {
+  background-color: #6C757D;
+}
+
 .hover-grow {
   transition: transform 0.2s ease-in-out;
 }
 
 .hover-grow:hover {
   transform: scale(1.05);
-}
-
-.text-underline {
-  border-bottom: 2px solid var(--bs-danger);
-  display: inline-block;
 }
 
 .background-color-overlay {

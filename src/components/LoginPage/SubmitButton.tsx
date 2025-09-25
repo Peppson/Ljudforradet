@@ -10,7 +10,7 @@ export default function SubmitButton({ isLoading, children }: SubmitButtonProps)
   return (
     <Button
       type="submit"
-      className="btn btn-primary py-2 rounded-3"
+      className="btn btn-secondary py-2 rounded-3"
       disabled={isLoading}>
       {isLoading ? (
         <>

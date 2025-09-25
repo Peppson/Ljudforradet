@@ -14,7 +14,7 @@ export default function AboutPage() {
           <Col className="text-center text-md-start">
             <h5 className="m-1">Om oss</h5>
             <h3 className="pb-2 display-4">
-              <span className="text-underline">Tusentals</span> timmar ljud levererade!
+              <span className="text-danger">Tusentals</span> timmar ljud levererade!
             </h3>
             <p className="m-1">
               Våra kollegor arbetar tätt tillsammans för att planera och genomföra varje projekt på ett tryggt och effektivt sätt.

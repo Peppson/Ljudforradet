@@ -27,9 +27,13 @@ export default function StartPage() {
   }, [isVideoPlaying]);
 
   function getWelcomeMessage(user: any, config: { appName: string }) {
-    if (!user)
+    if (!user) {
       return `Välkommen till ${config.appName}`;
-    return `Välkommen ${getTrimmedName(user.name)}!`;
+    } else {
+      return <>
+        Välkommen <span className="text-danger">{getTrimmedName(user.name)}!</span>
+      </>;
+    }
   }
 
   return <>
