@@ -1,9 +1,9 @@
+import React from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import { isUserLoggedIn, scrollToElement } from "../utils/Utilities";
 import { useAuth } from "../context/AuthProvider";
-import { useShowAlert } from "../context/AlertProvider";
 import type Gear from "../interfaces/Gear";
 import type User from "../interfaces/User";
 import ProductCard from "../components/ProductsPage/ProductCard";
@@ -13,26 +13,8 @@ import LoginPromptModal from "../components/ProductsPage/LoginPromptModal";
 
 export default function ProductsPage() {
   const { user } = useAuth();
-  const { showAlert } = useShowAlert();
-  const [curSort, setCurSort] = useState("nameAsc");
-  const [curFilter, setCurFilter] = useState("show");
-  const [curSearch, setCurSearch] = useState("");
-
-  const allGear = useLoaderData() as {
-    gear: Gear[];
-  };
-
-  // Sort by nameAsc as default
-  const [gearData, setGearData] = useState(() => {
-    let sortedGear = [...allGear.gear];
-
-    sortedGear.sort((a, b) => {
-      const nameA = (a.name || "").toString();
-      const nameB = (b.name || "").toString();
-      return nameA.localeCompare(nameB);
-    });
-    return sortedGear;
-  });
+  const [currentFilter, setCurrentFilter] = useState("show");
+  const [currentSearch, setCurrentSearch] = useState("");
 
   const [loginPromtModal, setLoginPromtModal] = useState(false);
   const [productModal, setProductModal] = useState({
@@ -40,8 +22,53 @@ export default function ProductsPage() {
     gear: null as Gear | null
   });
 
+  const allGear = useLoaderData() as {
+    gear: Gear[];
+  };
+  const [sortedGear, setSortedGear] = useState(allGear.gear);
+
+  const sortAllGear = (sortOption: string) => {
+    const newGear = [...allGear.gear];
+
+    switch (sortOption) {
+      case "nameAsc":
+        newGear.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+        break;
+      case "nameDsc":
+        newGear.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
+        break;
+      case "priceAsc":
+        newGear.sort((a, b) => a.dailyPrice - b.dailyPrice);
+        break;
+      case "priceDsc":
+        newGear.sort((a, b) => b.dailyPrice - a.dailyPrice);
+        break;
+    }
+
+    setSortedGear(newGear);
+  };
+
+  const filteredGear = sortedGear.filter(
+    x => currentFilter === "show" || x.available
+  );
+
+  const searchedGear = () => {
+    const searchTerm = currentSearch.trim();
+    if (searchTerm === "") {
+      return filteredGear;
+    }
+
+    return filteredGear.filter(
+      x => x.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x.brand.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  const results = searchedGear();
+
+
   const openProductModal = async (gear: Gear) => {
-    // If not logged in promt login modal
+    // If not logged in show login modal instead 
     const isLoggedIn = await isUserLoggedIn(user as User | null);
     if (!isLoggedIn) {
       setLoginPromtModal(true);
@@ -50,82 +77,13 @@ export default function ProductsPage() {
     setProductModal({ show: true, gear: gear });
   };
 
-  const closeProductModal = () => {
-    setProductModal({ show: false, gear: null });
-  };
 
 
 
 
 
-  const applyFiltersAndSort = (filter: string, search: string, sort: string) => {
-    let filteredGear = [...allGear.gear];
-
-    console.log("KÖÖÖÖRR");
-
-    // Filter
-    /* if (filter === "hide") {
-      filteredGear = filteredGear.filter((item) => item.available);
-    } */
-
-    // Search
-    if (search !== "") {
-      const searchLower = search.toLowerCase();
 
 
-      //console.log("First few items:", filteredGear.slice(0, 3));
-      //console.log("Items with null names:", filteredGear.filter(item => !item.name || item.name === null));
-
-
-      /* s */
-    }
-
-    // Sort
-    /* switch (sort) {
-      case "nameAsc":
-        filteredGear.sort((a, b) => {
-          const nameA = (a.name || "").toString();
-          const nameB = (b.name || "").toString();
-          return nameA.localeCompare(nameB);
-        });
-        break;
-      case "nameDsc":
-        filteredGear.sort((a, b) => {
-          const nameA = (a.name || "").toString();
-          const nameB = (b.name || "").toString();
-          return nameB.localeCompare(nameA);
-        });
-        break;
-      case "priceAsc":
-        filteredGear.sort((a, b) => a.dailyPrice - b.dailyPrice);
-        break;
-      case "priceDsc":
-        filteredGear.sort((a, b) => b.dailyPrice - a.dailyPrice);
-        break;
-      default:
-        break;
-    } */
-
-    setGearData(filteredGear);
-  };
-
-  const filterGear = (filter: string) => {
-    applyFiltersAndSort(filter, curSearch, curSort);
-    setCurFilter(filter);
-  };
-
-  const searchGear = (search: string) => {
-    const searchTrimmed = search.trim();
-
-    setCurSearch(searchTrimmed);
-
-    applyFiltersAndSort(curFilter, searchTrimmed, curSort);
-  };
-
-  const sortGear = (sortOption: string) => {
-    applyFiltersAndSort(curFilter, curSearch, sortOption);
-    setCurSort(sortOption);
-  };
 
   return <>
     <section
@@ -161,19 +119,7 @@ export default function ProductsPage() {
                   maxLength={40}
                   className="border-light rounded-2 mt-2"
                   placeholder="Sök efter utrustning"
-                  onChange={(e) => { searchGear(e.target.value) }
-
-
-                    /* onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      e.preventDefault();
-                      const searchValue = e.currentTarget.value.trim();
-                      setCurSearch(searchValue);
-                      searchGear(searchValue);
-                    }
-                  }}  */
-
-                  } />
+                  onChange={(e) => { setCurrentSearch(e.target.value) }} />
               </Form.Label>
             </Form.Group>
           </Col>
@@ -183,9 +129,8 @@ export default function ProductsPage() {
               <Form.Label className="w-100">Sortera efter
                 <Form.Select
                   name="sort"
-                  value={curSort}
                   className="border-light modal-select-options mt-2"
-                  onChange={(e) => { sortGear(e.target.value) }} >
+                  onChange={(e) => { sortAllGear(e.target.value); }}>
                   <option value="nameAsc">Namn a–ö</option>
                   <option value="nameDsc">Namn ö–a</option>
                   <option value="priceAsc">Billigast först</option>
@@ -201,8 +146,8 @@ export default function ProductsPage() {
                 <Form.Select
                   className="border-light modal-select-options mt-2"
                   name="available"
-                  value={curFilter}
-                  onChange={(e) => { filterGear(e.target.value) }} >
+                  value={currentFilter}
+                  onChange={(e) => { setCurrentFilter(e.target.value) }} >
                   <option value="show">Ja</option>
                   <option value="hide">Nej</option>
                 </Form.Select>
@@ -212,21 +157,21 @@ export default function ProductsPage() {
         </Row>
 
         <div className="divider-products d-flex align-items-center mt-4 pt-3 pb-1">
-          <p className="text-center mx-3 mb-0">Visar <span className="text-danger">{gearData.length}</span> produkter</p>
+          <p className="text-center mx-3 mb-0">Visar <span className="text-danger">{results.length}</span> produkter</p>
         </div>
       </Container>
 
       {/* Products grid */}
       <Container>
         <Row className="mt-1 pb-5 g-4 ">
-          {gearData.map((item, index) => (
-            <Col key={index} lg={4} md={6} sm={12}>
-              <ProductCard
-                item={item}
-                onBookClick={openProductModal}
-              />
-            </Col>
-          ))}
+          {results
+            .map((item) => (
+              <Col key={item.id} lg={4} md={6} sm={12} >
+                <ProductCard
+                  item={item}
+                  onBookClick={openProductModal} />
+              </Col>
+            ))}
         </Row>
       </Container>
 
@@ -235,12 +180,12 @@ export default function ProductsPage() {
         className="btn btn-primary px-5 py-2 rounded-5 hover-grow d-flex mx-auto mb-3">
         Till toppen!
       </Button>
-    </section>
+    </section >
 
     <ProductModal
       item={productModal.gear}
       show={productModal.show}
-      onHide={closeProductModal} />
+      onHide={() => { setProductModal({ show: false, gear: null }); }} />
 
     <LoginPromptModal
       show={loginPromtModal}

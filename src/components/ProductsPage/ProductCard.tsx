@@ -8,7 +8,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ item, onBookClick }: ProductCardProps) {
   return (
-    <Card className="h-100 background-color-overlay-darker border border-1 border-light product-card-shadow">
+    <Card className="h-100 background-color-overlay-darker border border-1 border-light">
       <Card.Header className="text-white border-light py-3">
         <Card.Title className="h5 mb-0">{item.name}</Card.Title>
 
