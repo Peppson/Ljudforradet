@@ -139,6 +139,7 @@ export default function GearCreate({ revalidator, onSuccess, editItem }: GearCre
           label="Beskrivning"
           placeholder="Beskrivning"
           typeName="desc"
+          textArea={true}
           value={gearData.desc} />
       </Row>
     </Form>

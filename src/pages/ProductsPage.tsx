@@ -69,7 +69,7 @@ export default function ProductsPage() {
       {/* Search and Sort Header */}
       <Container className="pt-4 pb-2">
         <Row>
-          <Col md={5} className="pb-3 pb-md-0">
+          <Col md={6} className="pb-3 pb-md-0">
             <Form.Group>
               <Form.Label className="w-100">Sök utrustning
                 <Form.Control
@@ -84,7 +84,7 @@ export default function ProductsPage() {
             </Form.Group>
           </Col>
 
-          <Col md={4} className="pb-3 pb-md-0">
+          <Col md={3} className="pb-3 pb-md-0">
             <Form.Group>
               <Form.Label className="w-100">Sortera efter
                 <Form.Select
@@ -125,7 +125,7 @@ export default function ProductsPage() {
         <Row className="mt-1 pb-5 g-4 ">
 
           {allGear.gear.map((item) => (
-            <Col key={item.id} lg={6} md={12}>
+            <Col key={item.id} lg={4} md={6} sm={12}>
               <ProductCard
                 item={item}
                 onBookClick={openProductModal}

@@ -5,6 +5,7 @@ import type OrderItem from "../../../interfaces/OrderItem";
 import type User from "../../../interfaces/User";
 import type Gear from "../../../interfaces/Gear";
 import DropdownMenu from "../DropdownMenu";
+import { getTrimmedDesc } from "../../../utils/Utilities";
 
 interface OrderTableProps {
   order: Order[];
@@ -92,7 +93,9 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
                               <td>{product?.model || ""}</td>
                               <td>{product?.dailyPrice + " kr" || ""}</td>
                               <td>{product?.condition || ""}</td>
-                              <td>{product?.desc || '-'}</td>
+                              <td>
+                                {getTrimmedDesc(product?.desc || '', 40)}
+                              </td>
                             </tr>
                           );
                         })}

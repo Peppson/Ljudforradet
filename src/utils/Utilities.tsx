@@ -1,3 +1,5 @@
+import config from "../config/Config";
+
 export const scrollToElement = (elementId: string, headerOffset: number = 100) => {
   const targetElement = document.getElementById(elementId);
   if (targetElement) {
@@ -9,6 +11,14 @@ export const scrollToElement = (elementId: string, headerOffset: number = 100) =
     });
   }
 };
+
+export function getTrimmedDesc(str: string, maxLength: number = config.descriptionMaxLength): string {
+  if (!str) return "";
+
+  return str.length > maxLength
+    ? str.substring(0, maxLength) + "..."
+    : str;
+}
 
 export function capitalizeFirstLetter(str: string): string {
   if (!str) return str;

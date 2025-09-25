@@ -9,7 +9,7 @@ export default function DownArrow({ onClick, size = 48 }: DownArrowProps) {
       className={"d-flex justify-content-center"}
       style={{
         position: "absolute",
-        bottom: "20px",
+        bottom: "0px",
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 999

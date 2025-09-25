@@ -8,6 +8,7 @@ const config = {
   startupModalStorageKey: "hasShownStartup",
   loadingSpinnerMinDuration: 800,
   adminPagePaginationSize: 7,
+  descriptionMaxLength: 70,
 };
 
 export default config;

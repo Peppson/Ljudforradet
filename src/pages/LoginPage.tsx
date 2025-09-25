@@ -27,7 +27,7 @@ export default function LoginPage() {
       className="page-section px-2 background-container-img"
       style={{ "--bg-image": "url('/images/video-still-1.png')" } as React.CSSProperties}>
 
-      <Container className="space-top-header">
+      <Container className="space-top-header pt-5">
         <Row className="align-items-center py-5">
           <Col md={6} className="text-center text-md-start">
             <h5 className="m-1">Hej!</h5>

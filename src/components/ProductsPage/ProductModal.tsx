@@ -61,11 +61,11 @@ export default function ProductModal({ item, show, onHide }: ProductModalProps) 
           </Col>
         </Row>
 
-        <div className="fw-normal m-0 mt-2">
+        <div className="fw-normal m-0 mt-2 ">
           Beskrivning:
         </div>
 
-        <div className="text-light pt-2">
+        <div className="text-light pt-2 text-break">
           {item.desc}
         </div>
 

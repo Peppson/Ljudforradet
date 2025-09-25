@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 
 interface ModalData {
   title: string;
@@ -71,7 +71,11 @@ export function AlertProvider({ children }: { children: ReactNode }) {
             <p>{modal.message}</p>
           </Modal.Body>
 
-          <Modal.Footer className="border-0 modal-background" />
+          <Modal.Footer className="border-0 modal-background">
+            <Button onClick={hideModal} variant="primary">
+              Ok
+            </Button>
+          </Modal.Footer>
         </Modal>
       )}
     </GlobalModalContext.Provider>

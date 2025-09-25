@@ -6,9 +6,10 @@ interface TextFormProps {
   placeholder: string;
   typeName?: string;
   value?: string;
+  textArea?: boolean;
 }
 
-export default function FormText({ setFormProp, label, placeholder, typeName = "name", value = "" }: TextFormProps) {
+export default function FormText({ setFormProp, label, placeholder, typeName = "name", value = "", textArea = false }: TextFormProps) {
   return <>
     <Form.Group className="mb-3">
       <Form.Label className="d-block">
@@ -18,8 +19,9 @@ export default function FormText({ setFormProp, label, placeholder, typeName = "
           onChange={setFormProp}
           autoComplete="off"
           placeholder={placeholder}
-          maxLength={200}
+          maxLength={300}
           minLength={2}
+          as={textArea ? "textarea" : "input"}
           required
           defaultValue={value} />
       </Form.Label>

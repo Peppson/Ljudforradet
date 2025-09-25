@@ -1,6 +1,7 @@
 import { Table } from "react-bootstrap";
 import type Gear from "../../../interfaces/Gear";
 import DropdownMenu from "./../DropdownMenu";
+import { getTrimmedDesc } from "../../../utils/Utilities";
 
 interface GearTableProps {
   gear: Gear[];
@@ -37,7 +38,7 @@ export default function GearTable({ gear, onEditGear, onDeleteGear }: GearTableP
               {item.available ? "Ja" : "Uthyrd"}
             </td>
             <td>
-              {item.desc}
+              {getTrimmedDesc(item.desc)}
             </td>
             <td className="text-center">
               <DropdownMenu
