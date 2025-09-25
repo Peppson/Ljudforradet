@@ -1,4 +1,5 @@
 import config from "../config/Config";
+import type User from "../interfaces/User";
 
 export const scrollToElement = (elementId: string, headerOffset: number = 100) => {
   const targetElement = document.getElementById(elementId);
@@ -10,6 +11,13 @@ export const scrollToElement = (elementId: string, headerOffset: number = 100) =
       behavior: "smooth"
     });
   }
+};
+
+export const isUserLoggedIn = async (user: User | null) => {
+  if (!user || user.role === "visitor") {
+    return false;
+  }
+  return true;
 };
 
 export function getTrimmedDesc(str: string, maxLength: number = config.descriptionMaxLength): string {
