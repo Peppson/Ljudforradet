@@ -1,5 +1,4 @@
 export const GearTypes = [
-  "Övrigt",
   "Gitarr",
   "Bas",
   "Slagverk",
@@ -7,7 +6,8 @@ export const GearTypes = [
   "Sträng",
   "Stråk",
   "Blås",
-  "Förstärkare"
+  "Förstärkare",
+  "Övrigt"
 ] as const;
 
 export type GearType = typeof GearTypes[number];

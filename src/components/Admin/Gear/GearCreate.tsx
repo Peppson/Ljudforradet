@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useErrorMessage } from "../../../hooks/useErrorMessage";
 import type Gear from "../../../interfaces/Gear";
 import FormText from "../../FormFields/FormText";
+import { GearTypes } from "../../../interfaces/GearType";
+import FormNumber from "../../FormFields/FormNumber";
 
 interface GearCreateProps {
   revalidator: { revalidate: () => void };
@@ -20,10 +22,11 @@ export default function GearCreate({ revalidator, onSuccess, editItem }: GearCre
     name: "",
     brand: "",
     model: "",
-    dailyPrice: "",
+    dailyPrice: 0,
     condition: "Sliten",
     available: "1",
-    desc: ""
+    desc: "",
+    type: "Övrigt"
   });
 
   // Prefill if edit mode
@@ -33,10 +36,11 @@ export default function GearCreate({ revalidator, onSuccess, editItem }: GearCre
         name: editItem.name || "",
         brand: editItem.brand || "",
         model: editItem.model || "",
-        dailyPrice: editItem.dailyPrice?.toString() || "",
+        dailyPrice: editItem.dailyPrice || 0,
         condition: editItem.condition || "Sliten",
         available: editItem.available ? "1" : "0",
-        desc: editItem.desc || ""
+        desc: editItem.desc || "",
+        type: editItem.type || "Övrigt"
       });
     }
   }, [editItem]);
@@ -77,14 +81,49 @@ export default function GearCreate({ revalidator, onSuccess, editItem }: GearCre
             placeholder="Utrustningens namn"
             typeName="name"
             value={gearData.name} />
-
           <FormText
             setFormProp={setFormProp}
             label="Modell"
             placeholder="Modell"
             typeName="model"
             value={gearData.model} />
+        </Col>
 
+        <Col md={6}>
+          <FormText
+            setFormProp={setFormProp}
+            label="Märke"
+            placeholder="Märke"
+            typeName="brand"
+            value={gearData.brand} />
+          <FormNumber
+            setFormProp={setFormProp}
+            label="Pris"
+            placeholder="Pris per dag i kronor"
+            typeName="dailyPrice"
+            value={gearData.dailyPrice} />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md={4}>
+          <Form.Group className="mb-3">
+            <Form.Label className="d-block">
+              <p className="mb-1 text-light">Tillgänglighet</p>
+              <Form.Select
+                name="available"
+                onChange={setFormProp}
+                required
+                className="modal-select-options"
+                value={gearData.available}>
+                <option value="1">Tillgänglig</option>
+                <option value="0">Uthyrd</option>
+              </Form.Select>
+            </Form.Label>
+          </Form.Group>
+        </Col>
+
+        <Col md={4}>
           <Form.Group className="mb-3">
             <Form.Label className="d-block">
               <p className="mb-1 text-light">Skick</p>
@@ -103,45 +142,34 @@ export default function GearCreate({ revalidator, onSuccess, editItem }: GearCre
           </Form.Group>
         </Col>
 
-        <Col md={6}>
-          <FormText
-            setFormProp={setFormProp}
-            label="Märke"
-            placeholder="Märke"
-            typeName="brand"
-            value={gearData.brand} />
-
-          <FormText
-            setFormProp={setFormProp}
-            label="Pris"
-            placeholder="Pris per dag i kronor"
-            typeName="dailyPrice"
-            value={gearData.dailyPrice} />
-
+        <Col md={4}>
           <Form.Group className="mb-3">
             <Form.Label className="d-block">
-              <p className="mb-1 text-light">Tillgänglighet</p>
+              <p className="mb-1 text-light">Typ</p>
               <Form.Select
-                name="available"
+                name="type"
                 onChange={setFormProp}
                 required
                 className="modal-select-options"
-                value={gearData.available}>
-                <option value="1">Tillgänglig</option>
-                <option value="0">Uthyrd</option>
+                value={gearData.type}>
+                {GearTypes.map(type => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
               </Form.Select>
             </Form.Label>
           </Form.Group>
         </Col>
-
-        <FormText
-          setFormProp={setFormProp}
-          label="Beskrivning"
-          placeholder="Beskrivning"
-          typeName="desc"
-          textArea={true}
-          value={gearData.desc} />
       </Row>
-    </Form>
+
+      <FormText
+        setFormProp={setFormProp}
+        label="Beskrivning"
+        placeholder="Beskrivning"
+        typeName="desc"
+        textArea={true}
+        value={gearData.desc} />
+    </Form >
   </>
 }

@@ -21,6 +21,7 @@ export default function GearTable({ gear, onEditGear, onDeleteGear }: GearTableP
           <th>Dagspris</th>
           <th>Skick</th>
           <th>Tillgänglig</th>
+          <th>Typ</th>
           <th>Beskrivning</th>
           <th>Redigera</th>
         </tr>
@@ -37,6 +38,7 @@ export default function GearTable({ gear, onEditGear, onDeleteGear }: GearTableP
             <td className={item.available ? "text-success" : "text-danger"}>
               {item.available ? "Ja" : "Uthyrd"}
             </td>
+            <td>{item.type}</td>
             <td>
               {getTrimmedDesc(item.desc)}
             </td>

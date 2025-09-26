@@ -1,4 +1,3 @@
-import { GearTypes } from "../interfaces/GearType";
 import config from "../config/Config";
 import type Gear from "../interfaces/Gear";
 import type User from "../interfaces/User";
@@ -30,7 +29,7 @@ export const forceCorrectType = (gear: Gear[] | null) => {
     condition: String(item.condition || ""),
     available: Boolean(item.available || false),
     desc: String(item.desc || ""),
-    type: String(item.type || GearTypes[0])
+    type: String(item.type || "Övrigt")
   }));
 };
 

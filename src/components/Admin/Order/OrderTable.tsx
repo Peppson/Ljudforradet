@@ -77,6 +77,7 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
                         <th>Modell</th>
                         <th>Dagspris</th>
                         <th>Skick</th>
+                        <th>Typ</th>
                         <th>Beskrivning</th>
                       </tr>
                     </thead>
@@ -93,6 +94,7 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
                               <td>{product?.model || ""}</td>
                               <td>{product?.dailyPrice + " kr" || ""}</td>
                               <td>{product?.condition || ""}</td>
+                              <td>{product?.type || ""}</td>
                               <td>
                                 {getTrimmedDesc(product?.desc || '', 40)}
                               </td>
