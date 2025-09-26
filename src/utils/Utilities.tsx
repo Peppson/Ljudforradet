@@ -1,4 +1,5 @@
 import config from "../config/Config";
+import type Gear from "../interfaces/Gear";
 import type User from "../interfaces/User";
 
 export const scrollToElement = (elementId: string, headerOffset: number = 100) => {
@@ -11,6 +12,25 @@ export const scrollToElement = (elementId: string, headerOffset: number = 100) =
       behavior: "smooth"
     });
   }
+};
+
+export const forceCorrectType = (gear: Gear[] | null) => {
+  if (!gear) return null;
+
+  console.log("typeforce");
+
+  // TS/JS who knows? what is a type anyway? >;-(
+  return gear.map((item: any) => ({
+    ...item,
+    id: Number(item.id || 0),
+    name: String(item.name || ""),
+    brand: String(item.brand || ""),
+    model: String(item.model || ""),
+    dailyPrice: Number(item.dailyPrice || 0),
+    condition: String(item.condition || ""),
+    available: Boolean(item.available || false),
+    desc: String(item.desc || "")
+  }));
 };
 
 export const isUserLoggedIn = async (user: User | null) => {

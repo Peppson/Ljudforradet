@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
@@ -27,28 +27,29 @@ export default function ProductsPage() {
     gear: Gear[];
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     sortAllGear("nameAsc");
   }, []);
 
   const sortAllGear = (sortOption: string) => {
-    const newGear = [...allGear.gear];
+    const tmpGear = [...allGear.gear];
+
     switch (sortOption) {
       case "nameAsc":
-        newGear.sort((a, b) => (a.name || "").localeCompare(b.name || "")); // todo int???? include ints in sort 
+        tmpGear.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
         break;
       case "nameDsc":
-        newGear.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
+        tmpGear.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
         break;
       case "priceAsc":
-        newGear.sort((a, b) => a.dailyPrice - b.dailyPrice);
+        tmpGear.sort((a, b) => a.dailyPrice - b.dailyPrice);
         break;
       case "priceDsc":
-        newGear.sort((a, b) => b.dailyPrice - a.dailyPrice);
+        tmpGear.sort((a, b) => b.dailyPrice - a.dailyPrice);
         break;
     }
 
-    setSortedGear(newGear);
+    setSortedGear(tmpGear);
   };
 
   const filteredGear = sortedGear.filter(

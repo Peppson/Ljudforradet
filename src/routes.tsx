@@ -1,5 +1,6 @@
 import type { JSX } from "react";
 import { useApi } from "./hooks/useApi";
+import { forceCorrectType } from "./utils/Utilities";
 import StartPage from "./pages/StartPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
@@ -33,7 +34,9 @@ const routes: Route[] = [
     menuLabel: "Utrustning",
     loader: async () => {
       const gear = await (await getFetch("api/products"))!.json();
-      return { gear: gear };
+      const typeSafeGear = forceCorrectType(gear);
+
+      return { gear: typeSafeGear };
     }
   },
   {
@@ -50,6 +53,7 @@ const routes: Route[] = [
       const users = await (await getFetch("api/users"))!.json();
       const orders = await (await getFetch("api/orders"))!.json();
       const orderItems = await (await getFetch("api/orderItems"))!.json();
+
       return { gear, users, orders, orderItems };
     }
   },
