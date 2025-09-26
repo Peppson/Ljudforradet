@@ -7,4 +7,5 @@ export default interface Gear {
   condition: string;
   available: boolean;
   desc: string;
+  type: string; // Enum?
 }

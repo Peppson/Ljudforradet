@@ -38,6 +38,13 @@ export default function ProductCard({ item, onBookClick }: ProductCardProps) {
           </Col>*/}
 
           <Col xs={12} className="mb-1 d-flex align-items-center">
+            <span className="me-3 fs-1">TYP BA:</span>
+            <Badge bg="danger" className="pb-1 fs-1  border border-light fw-normal">
+              {item.type}
+            </Badge>
+          </Col>
+
+          <Col xs={12} className="mb-1 d-flex align-items-center">
             <span className="me-3">Skick:</span>
             <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
               {item.condition}

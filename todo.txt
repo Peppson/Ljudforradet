@@ -7,6 +7,25 @@ background-color = #1A1A1E
 
 
 
+
+gitarr
+bas
+Slagverk
+klavitaur
+
+strängInstrument
+stråkinstrument
+blåsinstrument
+
+förstärkare
+
+
+
+
+
+
+
+
 todo:
 vy/vyer
 ACL /admin

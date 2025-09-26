@@ -1,3 +1,4 @@
+import { GearTypes } from "../interfaces/GearType";
 import config from "../config/Config";
 import type Gear from "../interfaces/Gear";
 import type User from "../interfaces/User";
@@ -17,9 +18,8 @@ export const scrollToElement = (elementId: string, headerOffset: number = 100) =
 export const forceCorrectType = (gear: Gear[] | null) => {
   if (!gear) return null;
 
-  console.log("typeforce");
-
-  // TS/JS who knows? what is a type anyway? >;-(
+  // TS/JS who knows? What is a type anyway? >;-(
+  // Force it!
   return gear.map((item: any) => ({
     ...item,
     id: Number(item.id || 0),
@@ -29,7 +29,8 @@ export const forceCorrectType = (gear: Gear[] | null) => {
     dailyPrice: Number(item.dailyPrice || 0),
     condition: String(item.condition || ""),
     available: Boolean(item.available || false),
-    desc: String(item.desc || "")
+    desc: String(item.desc || ""),
+    type: String(item.type || GearTypes[0])
   }));
 };
 
