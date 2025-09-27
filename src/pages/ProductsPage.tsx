@@ -6,11 +6,11 @@ import { isUserLoggedIn, scrollToElement } from "../utils/Utilities";
 import { useAuth } from "../context/AuthProvider";
 import type Gear from "../interfaces/Gear";
 import type User from "../interfaces/User";
-import ProductCard from "../components/ProductsPage/ProductCard";
 import Divider from "../components/Divider";
 import ProductModal from "../components/ProductsPage/ProductModal";
 import LoginPromptModal from "../components/ProductsPage/LoginPromptModal";
-import InstrumentCard from "../components/StartPage/InstrumentCard";
+import ProductCard from "../components/ProductsPage/ProductCard";
+import ProductCardOLD from "../components/ProductsPage/ProductCardOLD";
 
 export default function ProductsPage() {
   const { user } = useAuth();
@@ -163,9 +163,12 @@ export default function ProductsPage() {
           {processedGear
             .map((item) => (
               <Col key={item.id} lg={4} md={6} sm={12} >
+
+
                 <ProductCard
                   item={item}
                   onBookClick={openProductModal} />
+
                 {/* <InstrumentCard
                   imgSrc="/images/guitar.png"
                   title="Elgitarr"

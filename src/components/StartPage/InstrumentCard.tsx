@@ -14,7 +14,7 @@ export default function InstrumentCard({ imgSrc, title, description }: Instrumen
     <Card className="card bg-transparent overflow-hidden border-0 col-md-4">
       <img
         src={imgSrc}
-        className="rounded-3 cursor-pointer img-hover-zoom img-hover-glow"
+        className="rounded-2 cursor-pointer img-hover-zoom img-hover-glow"
         alt={title}
         onClick={() => { navigate("/products"); }} />
       <Card.Text className="text-white pt-4">{title}</Card.Text>

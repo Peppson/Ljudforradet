@@ -88,8 +88,11 @@ export default function ProductModal({ item, show, onHide }: ProductModalProps) 
           Avbryt
         </Button>
 
-        <Button variant="success">
-          Lägg till
+        <Button
+          onClick={() => { }}
+          className={`btn btn-sm ${item.available ? "btn-primary" : "btn-outline-light"} hover-grow button-exact-width-small`}
+          disabled={!item.available}>
+          {item.available ? "Mer info" : "Uthyrd"}
         </Button>
 
 
