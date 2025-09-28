@@ -1,6 +1,5 @@
 import { Badge, Button, Card, Col, Row } from "react-bootstrap";
 import type Gear from "../../interfaces/Gear";
-import Divider from "../Divider";
 
 interface ProductCardProps {
   item: Gear;
@@ -9,128 +8,50 @@ interface ProductCardProps {
 
 export default function ProductCard({ item, onBookClick }: ProductCardProps) {
   return (
-    <Card className="card bg-transparent col-md-4 w-100 h-100 border-0">
-      <Card.Body className="d-flex flex-column p-0">
-        <div className="position-absolute top-0 end-0 m-2 pe-none">
-          {item.available ? (
-            <Badge bg="success p-2 button-exact-width-small">Tillgänglig</Badge>
-          ) : (
-            <Badge bg="danger p-2 button-exact-width-small">Uthyrd</Badge>
-          )}
-        </div>
+    <Card className="card background-color-overlay col-md-4 w-100 h-100 border-0">
+      <img
+        src={`/images/products/${item.type}.png` || "/images/products/Övrigt.png"}
+        className="rounded-top-2 cursor-pointer img-overlay-dark"
+        alt={item.type}
+        onClick={() => onBookClick(item)} />
 
-        <img
-          src={`/images/products/${item.type}.png` || "/images/products/Övrigt.png"}
-          className="rounded-2 cursor-pointer"
-          alt={item.type}
-          onClick={() => onBookClick(item)} />
+      <div className="position-absolute top-0 start-0 m-0 pe-none">
+        {item.available ? (
+          <Badge bg="success p-2 button-exact-width-small btn btn-sm card-bottom-rounded">Tillgänglig</Badge>
+        ) : (
+          <Badge bg="danger p-2 button-exact-width-small btn btn-sm card-bottom-rounded">Uthyrd</Badge>
+        )}
+      </div>
 
-        <Card.Text className="text-white pt-3 fs-5 m-0">{item.name}</Card.Text>
-        <Card.Text className="text-light">{item.desc}</Card.Text>
-      </Card.Body>
-
-      <Card.Footer className="border-0 p-0">
-        <Row>
-          <Col md={4} className="mb-1 d-flex align-items-center">
-            <span className="me-2">Skick:</span>
-            <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
-              {item.condition}
-            </Badge>
+      <Card.Body className="d-flex flex-column p-2">
+        <Card.Text className="text-white mt-2 fs-5 mb-2">{item.name}</Card.Text>
+        <Row className="mb-2 gx-1">
+          <Col xs={4}>
+            <div className="d-flex flex-column text-start">
+              <small className="text-light">Modell</small>
+              <span className="text-white ">{item.model}</span>
+            </div>
           </Col>
-
-          <Col md={4} className="mb-1 d-flex align-items-center">
-            <span className="me-2">Pris:</span>
-            <Badge
-              bg="transparent"
-              className="pb-1 fs-6 border border-light fw-normal">
-              {item.dailyPrice} kr
-            </Badge>
+          <Col xs={4}>
+            <div className="d-flex flex-column text-center">
+              <small className="text-light">Skick</small>
+              <span className="text-white">{item.condition}</span>
+            </div>
           </Col>
-
-          <Col md={4} className="mb-1 d-flex align-items-center">
-            <Button
-              onClick={() => onBookClick(item)}
-              className="btn btn-sm btn-primary hover-grow button-exact-width-small">
-              Mer info
-            </Button>
+          <Col xs={4}>
+            <div className="d-flex flex-column text-end">
+              <small className="text-light">Pris/dag</small>
+              <span className="text-white">{item.dailyPrice} kr</span>
+            </div>
           </Col>
         </Row>
-      </Card.Footer>
-    </Card>
-  );
-
-
-
-
-  return (
-    <Card className="h-100 background-color-overlay-darker border border-0 border-light">
-      <Card.Header className="text-white border-light py-3">
-        <Card.Title className="h5 mb-0">{item.name}</Card.Title>
-
-        <div className="position-absolute top-0 end-0 m-3">
-          {item.available ? (
-            <Badge bg="success p-2 button-exact-width-small">Tillgänglig</Badge>
-          ) : (
-            <Badge bg="danger p-2 button-exact-width-small">Uthyrd</Badge>
-          )}
-        </div>
-      </Card.Header>
-
-      <Card.Body className="d-flex flex-column">
-        <Row className="mb-1">
-          {/* <Col xs={12} className="mb-1">
-            <span className="me-2">Märke:</span>
-            <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
-              {item.brand}
-            </Badge>
-          </Col>
-
-          <Col xs={12} className="mb-1">
-            <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
-              Modell:{" "}
-              {item.model}
-            </Badge>
-          </Col>*/}
-
-          <Col xs={12} className="mb-1 d-flex align-items-center">
-            <span className="me-3 fs-1">TYP BA:</span>
-            <Badge bg="danger" className="pb-1 fs-1  border border-light fw-normal">
-              {item.type}
-            </Badge>
-          </Col>
-
-          <Col xs={12} className="mb-1 d-flex align-items-center">
-            <span className="me-3">Skick:</span>
-            <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
-              {item.condition}
-            </Badge>
-          </Col>
-
-          <Col xs={12} className="mb-1 d-flex align-items-center">
-            <span className="me-4">Pris:</span>
-            <Badge
-              bg="transparent"
-              className="pb-1 fs-6 border border-light fw-normal">
-              {item.dailyPrice} kr
-            </Badge>
-          </Col>
-        </Row>
-
-        <Card.Text className="fw-normal m-0 mt-2">
-          Beskrivning:
-        </Card.Text>
-
-        <Card.Text className="text-light pt-2">
-          {item.desc}
-        </Card.Text>
       </Card.Body>
 
-      <Card.Footer className="text-white border-light d-flex justify-content-end align-items-center py-2">
+      <Card.Footer className="border-0 p-2 pt-0">
         <Button
           onClick={() => onBookClick(item)}
-          className={`btn btn-sm ${item.available ? "btn-primary" : "btn-outline-light"} hover-grow button-exact-width-small`}
-          disabled={!item.available}>
-          {item.available ? "Mer info" : "Uthyrd"}
+          className="btn btn-sm btn-primary hover-grow w-100">
+          Mer info
         </Button>
       </Card.Footer>
     </Card>

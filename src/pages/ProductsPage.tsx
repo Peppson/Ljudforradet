@@ -10,7 +10,6 @@ import Divider from "../components/Divider";
 import ProductModal from "../components/ProductsPage/ProductModal";
 import LoginPromptModal from "../components/ProductsPage/LoginPromptModal";
 import ProductCard from "../components/ProductsPage/ProductCard";
-import ProductCardOLD from "../components/ProductsPage/ProductCardOLD";
 
 export default function ProductsPage() {
   const { user } = useAuth();
@@ -101,7 +100,7 @@ export default function ProductsPage() {
 
     <Divider />
 
-    <section id="products-section" className="background-color-overlay pt-2 pb-4">
+    <section id="products-section" className="background-color-overlay-darker pt-2 pb-4">
       {/* Search and Sort Header */}
       <Container className="pt-4 pb-2">
         <Row>
@@ -162,17 +161,10 @@ export default function ProductsPage() {
         <Row className="mt-1 pb-5 g-4 ">
           {processedGear
             .map((item) => (
-              <Col key={item.id} lg={4} md={6} sm={12} >
-
-
+              <Col key={item.id} xxl={3} lg={4} md={6} xs={12} >
                 <ProductCard
                   item={item}
                   onBookClick={openProductModal} />
-
-                {/* <InstrumentCard
-                  imgSrc="/images/guitar.png"
-                  title="Elgitarr"
-                  description="Från klassiker till nya favoriter. Prova olika stilar och tekniker på våra noga utvalda gitarrer." /> */}
               </Col>
             ))}
         </Row>

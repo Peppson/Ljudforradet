@@ -85,6 +85,10 @@ $success: green;
   filter: brightness(1.1);
 }
 
+.img-overlay-dark {
+  filter: brightness(90%);
+}
+
 .dropdown-menu-item {
 
   &:hover,
