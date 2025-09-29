@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider";
 import { AlertProvider } from "./context/AlertProvider";
+import { CartProvider } from "./context/ShoppingCartProvider";
 import DebugBreakpoints from "./utils/DebugBreakpoints";
 import StartupModal from "./components/StartupModal";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import config from "./config/Config";
+import ShoppingCart from "./components/ShoppingCard";
 
 export default function App() {
   const [isStartup, setIsStartup] = useState(false);
@@ -26,14 +28,17 @@ export default function App() {
   return <>
     <AuthProvider>
       <AlertProvider>
+        <CartProvider>
+          {isStartup && <StartupModal onClose={() => { setIsStartup(false); }} />}
+          {config.showBootstrapBreakpoints && <DebugBreakpoints />}
 
-        {isStartup && <StartupModal onClose={() => { setIsStartup(false); }} />}
-        {config.showBootstrapBreakpoints && <DebugBreakpoints />}
+          {!isAdminRoute && <Header />}
+          <Main isVideoPlaying={!isStartup} />
+          <Footer />
 
-        {!isAdminRoute && <Header />}
-        <Main isVideoPlaying={!isStartup} />
-        <Footer />
+          <ShoppingCart />
 
+        </CartProvider>
       </AlertProvider>
     </AuthProvider >
   </>;

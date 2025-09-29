@@ -10,6 +10,7 @@ import Divider from "../components/Divider";
 import ProductModal from "../components/ProductsPage/ProductModal";
 import LoginPromptModal from "../components/ProductsPage/LoginPromptModal";
 import ProductCard from "../components/ProductsPage/ProductCard";
+import ShoppingCart from "../components/ShoppingCard";
 
 export default function ProductsPage() {
   const { user } = useAuth();

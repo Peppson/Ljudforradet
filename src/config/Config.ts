@@ -1,6 +1,6 @@
 const config = {
   // Debug
-  showBootstrapBreakpoints: true, // todo
+  showBootstrapBreakpoints: false,
   showStartupModalOverride: false,
   
   // Constans

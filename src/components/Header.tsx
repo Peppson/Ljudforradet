@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Navbar, Container, Nav, ButtonGroup, Dropdown } from "react-bootstrap";
 import { getTrimmedName } from "../utils/Utilities";
+import { useCart } from "../context/ShoppingCartProvider";
 import { useAuth } from "../context/AuthProvider";
 import routes from "../routes";
 import Logo from "./logo";
@@ -9,6 +10,7 @@ import config from "../config/Config";
 
 export default function Header() {
   const { user, logoutUser } = useAuth();
+  const { openCart } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -64,7 +66,7 @@ export default function Header() {
                       key={i}
                       to={path}
                       className={`${isActive(path) ? "navLinkActive" : ""} text-white ps-3 fs-5`}
-                      onClick={() => setTimeout(() => setIsExpanded(false), 100)}>
+                      onClick={() => setTimeout(() => setIsExpanded(false), 50)}>
                       {menuLabel}
                     </Nav.Link>
                 )}
@@ -85,10 +87,14 @@ export default function Header() {
                         align="start"
                         className="background-color-overlay-darker border-1 border-white">
                         {user.role === "admin" && (
-                          <Dropdown.Item as={NavLink} to="/admin" className="text-white dropdown-menu-item ">
+                          <Dropdown.Item as={NavLink} to="/admin" className="text-white dropdown-menu-item d-flex align-items-center">
                             Admin
                           </Dropdown.Item>
                         )}
+
+                        <Dropdown.Item onClick={() => openCart()} className="text-white dropdown-menu-item">
+                          Kundvagn
+                        </Dropdown.Item>
 
                         <Dropdown.Item onClick={logoutUser} className="text-white dropdown-menu-item">
                           Logga ut
@@ -99,12 +105,21 @@ export default function Header() {
 
                   {/* Mobile view */}
                   <div className="d-md-none">
+                    <Nav.Link
+                      className="text-white ps-3 fs-5"
+                      onClick={() => {
+                        openCart();
+                        setIsExpanded(false);
+                      }}>
+                      Visa kundvagn
+                    </Nav.Link>
+
                     {user.role === "admin" && (
                       <Nav.Link
                         as={Link}
                         to="/admin"
                         className="text-white ps-3 fs-5"
-                        onClick={() => setTimeout(() => setIsExpanded(false), 100)}>
+                        onClick={() => setTimeout(() => setIsExpanded(false), 50)}>
                         Admin
                       </Nav.Link>
                     )}
@@ -120,7 +135,6 @@ export default function Header() {
                   </div>
                 </>
               ) : null}
-
             </Nav>
           </Navbar.Collapse>
         </Container>
