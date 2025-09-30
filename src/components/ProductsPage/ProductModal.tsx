@@ -1,4 +1,4 @@
-import { Badge, Button, Col, Modal, Row } from "react-bootstrap";
+import { Button, Col, Modal, Row } from "react-bootstrap";
 import { useCart } from "../../context/ShoppingCartProvider";
 import type Gear from "../../interfaces/Gear";
 import InfoCard from "./InfoCard";

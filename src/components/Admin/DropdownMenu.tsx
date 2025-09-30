@@ -5,16 +5,17 @@ interface DropdownMenuProps<T> {
   onEdit: (item: T) => void;
   onDelete: (item: T) => void;
   hideEdit?: boolean;
+  label?: string;
 }
 
-export default function DropdownMenu<T>({ item, onEdit, onDelete, hideEdit = false }: DropdownMenuProps<T>) {
+export default function DropdownMenu<T>({ item, onEdit, onDelete, hideEdit = false, label = "Ändra" }: DropdownMenuProps<T>) {
   return <>
     <Dropdown as={ButtonGroup}>
       <Dropdown.Toggle
         variant="dark"
         className="hover-grow border-0 w-100 bg-transparent text-danger"
         size="sm">
-        Ändra
+        {label}
       </Dropdown.Toggle>
       <Dropdown.Menu
         align="start"

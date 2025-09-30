@@ -10,7 +10,7 @@ import config from "../config/Config";
 
 export default function Header() {
   const { user, logoutUser } = useAuth();
-  const { openCart } = useCart();
+  const { openCart, cartItems } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -93,7 +93,7 @@ export default function Header() {
                         )}
 
                         <Dropdown.Item onClick={() => openCart()} className="text-white dropdown-menu-item">
-                          Kundvagn
+                          Kundvagn ({cartItems.length})
                         </Dropdown.Item>
 
                         <Dropdown.Item onClick={logoutUser} className="text-white dropdown-menu-item">
@@ -111,7 +111,7 @@ export default function Header() {
                         openCart();
                         setIsExpanded(false);
                       }}>
-                      Visa kundvagn
+                      Visa kundvagn ({cartItems.length})
                     </Nav.Link>
 
                     {user.role === "admin" && (

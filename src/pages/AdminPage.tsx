@@ -15,6 +15,7 @@ import ModalDelete from "../components/Admin/Modals/ModalDelete";
 import ModalCreate from "../components/Admin/Modals/ModalCreate";
 import ModalEdit from "../components/Admin/Modals/ModalEdit";
 import OrderTable from "../components/Admin/Order/OrderTable";
+import ModalOrderReturn from "../components/Admin/Modals/ModalOrderReturn";
 
 export default function AdminPage() {
   const revalidator = useRevalidator();
@@ -30,6 +31,11 @@ export default function AdminPage() {
     type: "",
     item: null as Gear | User | Order | null
   });
+  const [returnModal, setReturnModal] = useState({
+    show: false,
+    type: "",
+    item: null as Order | null
+  });
 
   const { gear, users, orders, orderItems } = useLoaderData() as {
     gear: Gear[];
@@ -38,13 +44,12 @@ export default function AdminPage() {
     orderItems: OrderItem[];
   };
 
-  // Modal views
+  // Modal views (some dublicated code here...)
   const handleEditGear = (item: Gear) => { setEditModal({ show: true, type: "gear", item: item }); };
   const handleDeleteGear = (item: Gear) => { setDeleteModal({ show: true, type: "gear", item: item }); };
   const handleEditUser = (item: User) => { setEditModal({ show: true, type: "user", item: item }); };
   const handleDeleteUser = (item: User) => { setDeleteModal({ show: true, type: "user", item: item }); };
-  const handleEditOrder = (item: Order) => { setEditModal({ show: true, type: "order", item: item }); };
-  const handleDeleteOrder = (item: Order) => { setDeleteModal({ show: true, type: "order", item: item }); };
+  const handleReturnOrder = (item: Order) => { setReturnModal({ show: true, type: "order", item: item }); };
 
   const closeDeleteModal = () => {
     setDeleteModal({
@@ -56,6 +61,14 @@ export default function AdminPage() {
 
   const closeEditModal = () => {
     setEditModal({
+      show: false,
+      type: "",
+      item: null
+    });
+  };
+
+  const closeReturnModal = () => {
+    setReturnModal({
       show: false,
       type: "",
       item: null
@@ -137,8 +150,7 @@ export default function AdminPage() {
                 orderItem={orderItems}
                 users={users}
                 gear={gear}
-                onEditOrder={handleEditOrder}
-                onDeleteOrder={handleDeleteOrder} />
+                onReturnOrder={handleReturnOrder} />
             </Tab>
           </Tabs>
         </div>
@@ -172,8 +184,15 @@ export default function AdminPage() {
         onHide={closeDeleteModal}
         item={deleteModal.item}
         type={deleteModal.type}
-        revalidator={revalidator}
-        orderItems={orderItems} />
+        revalidator={revalidator} />
+
+      <ModalOrderReturn
+        show={returnModal.show}
+        onHide={closeReturnModal}
+        item={returnModal.item}
+        gear={gear}
+        orderItems={orderItems}
+        revalidator={revalidator} />
     </section >
   </>;
 }

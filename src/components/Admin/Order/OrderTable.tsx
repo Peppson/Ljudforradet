@@ -5,18 +5,16 @@ import type Order from "../../../interfaces/Order";
 import type OrderItem from "../../../interfaces/OrderItem";
 import type User from "../../../interfaces/User";
 import type Gear from "../../../interfaces/Gear";
-import DropdownMenu from "../DropdownMenu";
 
 interface OrderTableProps {
   order: Order[];
   orderItem: OrderItem[];
   users: User[];
   gear: Gear[];
-  onEditOrder: (item: Order) => void;
-  onDeleteOrder: (item: Order) => void;
+  onReturnOrder: (item: Order) => void;
 }
 
-export default function OrderTable({ order, orderItem, users, gear, onEditOrder, onDeleteOrder }: OrderTableProps) {
+export default function OrderTable({ order, orderItem, users, gear, onReturnOrder }: OrderTableProps) {
   const getUserName = (userId: number): string => {
     const user = users.find(u => u.id === userId);
     return user ? user.name : "Okänd";
@@ -42,7 +40,7 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
           <th>Användare</th>
           <th>Antal artiklar</th>
           <th>Skapad</th>
-          <th>Redigera</th>
+          <th>Avsluta</th>
         </tr>
       </thead>
 
@@ -56,11 +54,11 @@ export default function OrderTable({ order, orderItem, users, gear, onEditOrder,
               <td>{getNumOfGear(item.id)}</td>
               <td>{item.created}</td>
               <td className="text-center">
-                <DropdownMenu
-                  item={item}
-                  onEdit={onEditOrder}
-                  onDelete={onDeleteOrder}
-                  hideEdit={true} />
+                <div
+                  onClick={() => onReturnOrder(item)}
+                  className="text-danger dropdown-menu-item">
+                  Avsluta
+                </div>
               </td>
             </tr>
 
