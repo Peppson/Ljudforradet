@@ -10,7 +10,6 @@ import Divider from "../components/Divider";
 import ProductModal from "../components/ProductsPage/ProductModal";
 import LoginPromptModal from "../components/ProductsPage/LoginPromptModal";
 import ProductCard from "../components/ProductsPage/ProductCard";
-import ShoppingCart from "../components/ShoppingCard";
 
 export default function ProductsPage() {
   const { user } = useAuth();
@@ -61,7 +60,6 @@ export default function ProductsPage() {
     if (searchTerm === "") {
       return filteredGear;
     }
-
     return filteredGear.filter(
       x => x.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         x.brand.toLowerCase().includes(searchTerm.toLowerCase())
@@ -70,9 +68,8 @@ export default function ProductsPage() {
 
   const processedGear = searchedGear();
 
-
   const openProductModal = async (gear: Gear) => {
-    // If not logged in show login modal instead 
+    // If not logged in show login modal instead
     const isLoggedIn = await isUserLoggedIn(user as User | null);
     if (!isLoggedIn) {
       setLoginPromtModal(true);
@@ -176,7 +173,7 @@ export default function ProductsPage() {
         className="btn btn-primary px-5 py-2 rounded-5 hover-grow d-flex mx-auto mb-3">
         Till toppen!
       </Button>
-    </section >
+    </section>
 
     <ProductModal
       item={productModal.gear}

@@ -1,7 +1,7 @@
 import { Badge, Button, Col, Modal, Row } from "react-bootstrap";
+import { useCart } from "../../context/ShoppingCartProvider";
 import type Gear from "../../interfaces/Gear";
-import Logo from "../logo";
-
+import InfoCard from "./InfoCard";
 
 interface ProductModalProps {
   show: boolean;
@@ -10,8 +10,25 @@ interface ProductModalProps {
 }
 
 export default function ProductModal({ item, show, onHide }: ProductModalProps) {
+  const { addToCart, cartItems } = useCart();
+
   if (!item) return null;
 
+  const isItemInCart = cartItems.some(cartItem => cartItem.id === item.id);
+
+  const getButtonText = () => {
+    if (!item.available) return "Uthyrd";
+    if (isItemInCart) return "Tillagd";
+    return "Boka";
+  };
+
+  const getButtonClass = () => {
+    if (!item.available)
+      return "btn-danger";
+    if (isItemInCart)
+      return "btn-outline-success";
+    return "btn-success";
+  };
 
   return (
     <Modal
@@ -22,118 +39,59 @@ export default function ProductModal({ item, show, onHide }: ProductModalProps) 
       size="lg"
       dialogClassName="custom-modal-border">
 
+      <Modal.Body className="background-color-overlay-darker p-3 rounded-top-3">
+        <Row className="mb-3 text-light">
+          <h4 className="text-white mb-0">{item.name}</h4>
+        </Row>
 
-      <Modal.Header
-        closeButton
-        className="background-color-overlay-darker border-light text-white border-light py-3"
-        closeVariant="white">
-        <Modal.Title className="h5 mb-0"><Logo /> {item.name}</Modal.Title>
-      </Modal.Header>
-
-
-
-
-      <Modal.Body className="background-color-overlay-darker p-4 d-flex flex-column">
-
-
-
-
-        <Row className="mb-1">
-          <Col xs={12} className="mb-1">
-            <span className="me-2">Märke:</span>
-            <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
-              {item.brand}
-            </Badge>
-          </Col>
-
-          <Col xs={12} className="mb-1">
-            Modell:{" "}
-            <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
-              {item.model}
-            </Badge>
-          </Col>
-
-          <Col xs={12} className="mb-1 d-flex align-items-center">
-            <span className="me-3">Skick:</span>
-            <Badge bg="transparent" className="pb-1 fs-6 border border-light fw-normal">
-              {item.condition}
-            </Badge>
+        <Row className="mb-4">
+          <Col>
+            <div className="position-relative">
+              <img
+                src={`/images/products/${item.type}.png` || "/images/products/Övrigt.png"}
+                className="w-100 rounded img-overlay-dark"
+                alt={item.type}
+                style={{ height: "280px", objectFit: "cover" }} />
+            </div>
           </Col>
         </Row>
 
-        <div className="fw-normal m-0 mt-2 ">
-          Beskrivning:
-        </div>
+        <Row className="g-2 mb-2">
+          <InfoCard icon="bi-tag" label="Märke" value={item.brand} />
+          <InfoCard icon="bi-hash" label="Modell" value={item.model} />
+          <InfoCard icon="bi-star" label="Skick" value={item.condition} />
+          <InfoCard icon="bi-layers" label="Typ" value={item.type} />
+          <InfoCard icon="bi-cash" label="Pris/dag" value={`${item.dailyPrice} kr`} />
+        </Row>
 
-        <div className="text-light pt-2 text-break">
-          {item.desc}
-        </div>
-
-        <div>
-          <span className="me-2">Pris per dag:</span>
-          <Badge
-            bg="transparent"
-            className="pb-1 fs-6 border border-light fw-normal">
-            {item.dailyPrice} kr
-          </Badge>
-        </div>
-
+        <Row>
+          <Col>
+            <div className="card background-color-overlay border-light">
+              <div className="card-body">
+                <div className="d-flex align-items-center mb-2">
+                  <small className="text-light mb-0 fw-semibold">Beskrivning</small>
+                  <i className={`bi bi-info-circle text-light ms-1`}></i>
+                </div>
+                <p className="text-primary mb-0 small">
+                  {item.desc || "Ingen beskrivning tillgänglig för denna produkt."}
+                </p>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Modal.Body>
 
-
-
-      <Modal.Footer className="border-light background-color-overlay-darker">
-
-        <Button variant="secondary" onClick={onHide}>
-          Avbryt
+      <Modal.Footer className="border-light background-color-overlay-darker text-center">
+        <Button variant="secondary" onClick={onHide} className="px-3">
+          Stäng
         </Button>
-
         <Button
-          onClick={() => { }}
-          className={`btn btn-sm ${item.available ? "btn-primary" : "btn-outline-light"} hover-grow button-exact-width-small`}
-          disabled={!item.available}>
-          {item.available ? "Mer info" : "Uthyrd"}
+          onClick={() => { addToCart(item); onHide(); }}
+          className={`${getButtonClass()} hover-grow button-exact-width-small`}
+          disabled={!item.available || isItemInCart}>
+          {getButtonText()}
         </Button>
-
-
       </Modal.Footer>
     </Modal>
   );
 }
-
-
-
-/*
-<Modal
-      show={show}
-      onHide={onHide}
-      centered
-      backdrop="static"
-      size="lg"
-      dialogClassName="custom-modal-border">
-
-      <Modal.Header
-        closeButton
-        className="modal-background border-light"
-        closeVariant="white">
-        <Modal.Title>
-          <Logo /> {gear.name}
-        </Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body className="modal-background p-4">
-
-
-      </Modal.Body>
-
-      <Modal.Footer className="border-light modal-background">
-        <Button variant="secondary" onClick={onHide}>
-          Avbryt
-        </Button>
-        <Button variant="primary">
-          Skapa
-        </Button>
-      </Modal.Footer>
-    </Modal>
-
-*/

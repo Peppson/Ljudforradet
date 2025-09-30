@@ -32,6 +32,7 @@ export default function LoginPromptModal({ show, onHide }: ModalCreateProps) {
         <div className="text-white">
           <h6>Du behöver vara inloggad för se ytterligare information</h6>
           <ul>
+            <li className="text-light">Logga in för att se din kundvagn och hantera dina beställningar.</li>
             <li className="text-light">Om du inte har ett konto, vänligen registrera dig först.</li>
           </ul>
         </div>

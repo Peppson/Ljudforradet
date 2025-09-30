@@ -24,3 +24,10 @@
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0rem;
 }
+
+.card-bottom-rounded-reversed {
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0rem;
+  border-top-left-radius: 0rem;
+  border-top-right-radius: 0.4rem;
+}

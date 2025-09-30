@@ -1,22 +1,12 @@
 
-Colors:
-logo = #DC3545
-graytext = #9797A2
-background-color = #1A1A1E
-
-
-
 
 ReactBits ba kör
-vy/vyer
+vy/vyer admin order
 ACL /admin
 react key på alla foreach
 vertical slice ba
+lämna tillbaka ordrar istället för att tabort??
 
-
-info/readme:
-responsive ner well below 300px ca220px lol
-admin sida = vilket inlogg
 
 
 innan klar:
@@ -27,7 +17,3 @@ sesson table empty!
 console.log ta bort
 app.cs ej debug 
 remove bootstrap breakpoints when done
-
-
-
-

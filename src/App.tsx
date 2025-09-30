@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import config from "./config/Config";
-import ShoppingCart from "./components/ShoppingCard";
+import ShoppingCart from "./components/ShoppingCart";
 
 export default function App() {
   const [isStartup, setIsStartup] = useState(false);

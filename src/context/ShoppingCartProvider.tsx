@@ -2,7 +2,7 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 import type Gear from "../interfaces/Gear";
 
 interface CartContextType {
-  showShoppingCart: boolean;
+  showCart: boolean;
   cartItems: Gear[];
   totalPrice: number;
   openCart: () => void;
@@ -18,7 +18,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState<Gear[]>([]);
 
-  const totalPrice = 42; // todo
+  const totalPrice = cartItems.reduce((sum, item) => sum + item.dailyPrice, 0);
 
   const openCart = () => setShowCart(true);
   const closeCart = () => setShowCart(false);
@@ -28,16 +28,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const existingItem = prev.find(cartItem => cartItem.id === item.id);
 
       if (existingItem) {
-        return prev.map(cartItem =>
-          cartItem.id === item.id
-            ? {
-              ...cartItem
-            }
-            : cartItem
-        );
+        return prev;
       }
       return [...prev, { ...item, rowSum: item.dailyPrice }];
     });
+
+    openCart();
   };
 
   const removeFromCart = (productId: number) => {
@@ -50,7 +46,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider value={{
-      showShoppingCart: showCart,
+      showCart,
       cartItems,
       totalPrice,
       openCart: openCart,

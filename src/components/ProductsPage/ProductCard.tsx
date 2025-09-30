@@ -12,8 +12,7 @@ export default function ProductCard({ item, onBookClick }: ProductCardProps) {
       <img
         src={`/images/products/${item.type}.png` || "/images/products/Övrigt.png"}
         className="rounded-top-2 cursor-pointer img-overlay-dark"
-        alt={item.type}
-        onClick={() => onBookClick(item)} />
+        alt={item.type} />
 
       <div className="position-absolute top-0 start-0 m-0 pe-none">
         {item.available ? (
@@ -47,12 +46,16 @@ export default function ProductCard({ item, onBookClick }: ProductCardProps) {
         </Row>
       </Card.Body>
 
-      <Card.Footer className="border-0 p-2 pt-0">
-        <Button
-          onClick={() => onBookClick(item)}
-          className="btn btn-sm btn-primary hover-grow w-100">
-          Mer info
-        </Button>
+      <Card.Footer className="border-0 p-2 pt-0 w-100">
+        <Row>
+          <Col className="px-2">
+            <Button
+              onClick={() => onBookClick(item)}
+              className="btn btn-sm btn-primary hover-grow w-100">
+              Mera info
+            </Button>
+          </Col>
+        </Row>
       </Card.Footer>
     </Card>
   );
