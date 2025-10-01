@@ -1,11 +1,10 @@
 
 vy/vyer admin order
-ACL /admin
+ACL
 vertical slice ba
 
 ReactBits ba kör
 react key på alla foreach
-
 
 innan klar:
 config.ts

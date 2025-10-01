@@ -1,234 +1,160 @@
-/* import React from "react";
-import { Col, Container, Row } from "react-bootstrap"; */
-import { useLoaderData, useParams } from "react-router-dom";
-/* import { scrollToElement } from "../utils/Utilities"; */
+import { useLoaderData } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
+import { scrollToElement } from "../utils/Utilities";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import type Order from "../interfaces/Order";
-/* import type OrderItem from "../interfaces/OrderItem";
+import type OrderItem from "../interfaces/OrderItem";
 import type Gear from "../interfaces/Gear";
-import Divider from "../components/Divider";
-import DownArrow from "../components/DownArrow"; */
 import NotFoundPage from "./NotFoundPage";
+import DownArrow from "../components/DownArrow";
+import Divider from "../components/Divider";
 
 export default function OrderPage() {
-  const params = useParams();
   const { user } = useAuth();
 
-
-  const { order /*, orderItems,  gear */ } = useLoaderData() as {
+  const { order, orderItems, gear } = useLoaderData() as {
     order: Order;
-    //orderItems: OrderItem[];
-    //gear: Gear[]; 
+    orderItems: OrderItem[];
+    gear: Gear[];
   };
 
-  /* console.log(params.id);
+  // Throw 404 if something is broken/missing
+  if (!user) return <NotFoundPage />;
+  if (!order?.id) return <NotFoundPage />;
+  if (!orderItems || orderItems.length === 0) return <NotFoundPage />;
+  if (!gear || gear.length === 0) return <NotFoundPage />;
 
-
-  if (!user) {
-    console.log("NO USER");
+  // Only allow user to view their own order
+  if (user.id !== order.userId) {
     return <NotFoundPage />;
   }
 
-  console.log(user);
-
-  if (order) {
-    console.log("NO order");
-    return <NotFoundPage />;
-  } */
-
-
-
-
-
-
-  /* console.log('Order:', orders);
-  console.log('OrderItems:', orderItems); */
-  console.log('Order:', order);
-
-
-
-
-
-
-
-  /* const getOrderTotal = () => {
-    return orderItems.reduce((total, orderItem) => {
-      const totalDays = Math.ceil((Date.now() - new Date(order.created).getTime()) / (1000 * 60 * 60 * 24));
-      const gearItem = gear.find(g => g.id === orderItem.ProductId);
-      const dailyPrice = gearItem?.dailyPrice || 0;
-      return total + (dailyPrice * totalDays);
-    }, 0);
-  }; */
-
-  /* const getTotalDays = () => {
-    return Math.ceil((Date.now() - new Date(order.created).getTime()) / (1000 * 60 * 60 * 24));
-  }; */
+  const getOrderTotal = () => {
+    return orderItems
+      .filter(orderItem => orderItem.orderId === order.id)
+      .reduce((total, orderItem) => {
+        const gearItem = gear.find(g => g.id === orderItem.ProductId);
+        const dailyPrice = gearItem?.dailyPrice || 0;
+        return total + dailyPrice;
+      }, 0);
+  };
 
   return <>
-    <h1 className="text-black"> ORDERPAGE </h1>
-
-    {/*  <section
+    <section
       className="page-section px-2 background-container-img"
       style={{ "--bg-image": "url('/images/video-still-1.png')" } as React.CSSProperties}>
 
       <Container className="space-top-header">
         <Row className="align-items-center py-5">
-          <Col className="text-center text-md-start">
+          <Col md={6} className="text-center text-md-start">
             <h5 className="m-1">Tack för din beställning!</h5>
             <h3 className="pb-2 display-4">
               <span className="text-danger">Bekräftelse</span>
             </h3>
-            <p className="m-1">
+            <p className="m-1 d-none d-md-block">
               Din beställning har registrerats och utrustningen är reserverad.
             </p>
-            <p className="m-1">
+            <p className="m-1 d-none d-md-block">
               Hämta utrustningen när det passar dig, betalning sker vid återlämning.
             </p>
           </Col>
-        </Row>
 
-        <DownArrow onClick={() => scrollToElement("order-details")} />
-      </Container>
-    </section>
+          <Col md={6}>
+            <div className="background-color-overlay-darker p-4 rounded-2 border border-light">
+              <h5 className="text-center fw-bold mb-3">Ordernummer: {order.id}</h5>
+              <p className="mb-1 text-light">Utrustning:</p>
+              <div className="card bg-dark border-light mb-4">
+                <div className="card-body">
+                  {orderItems
+                    .filter(orderItem => orderItem.orderId === order.id)
+                    .map((orderItem, index) => {
+                      const gearItem = gear.find(x => x.id === orderItem.ProductId);
+                      const gearName = gearItem?.name || `Produkt ID: ${orderItem.ProductId}`;
+                      const dailyPrice = gearItem?.dailyPrice || 0; // dangerous fallback ;)
 
-    <Divider /> */}
-
-    {/* <section id="order-details" className="background-color-overlay-darker py-5">
-      <Container>
-        <Row className="justify-content-center">
-          <Col lg={8}>
-            <Card className="bg-dark border-light">
-              <Card.Header className="bg-dark border-light">
-                <h4 className="text-light mb-0">
-                  <i className="bi bi-check-circle-fill text-success me-2"></i>
-                  Order #{order.id}
-                </h4>
-                <small className="text-muted">
-                  Beställd: {new Date(order.created).toLocaleDateString('sv-SE')}
-                </small>
-              </Card.Header>
-
-              <Card.Body>
-                <h5 className="text-light mb-3">Din uthyrda utrustning:</h5>
-
-                {orderItems.map((orderItem, index) => {
-                  const gearItem = gear.find(g => g.id === orderItem.ProductId);
-                  const totalDays = getTotalDays();
-                  const days = totalDays > 1 ? "dagar" : "dag";
-                  const dailyPrice = gearItem?.dailyPrice || 0;
-                  const itemTotal = dailyPrice * totalDays;
-
-                  return (
-                    <div key={index} className="mb-3 p-3 border border-secondary rounded">
-                      <Row className="align-items-center">
-                        <Col md={8}>
-                          <h6 className="text-light mb-1">
-                            {gearItem?.name || `Produkt ID: ${orderItem.ProductId}`}
-                          </h6>
-                          <p className="text-muted small mb-1">
-                            {gearItem?.brand} • {gearItem?.model}
-                          </p>
-                          <p className="text-info small mb-0">
-                            {totalDays} {days} × {dailyPrice} kr/dag
-                          </p>
-                        </Col>
-                        <Col md={4} className="text-md-end">
-                          <span className="text-success fw-bold fs-5">
-                            {itemTotal} kr
+                      return (
+                        <div
+                          key={index}
+                          className="d-flex justify-content-between align-items-center mb-1">
+                          <span className="text-light small">
+                            {index + 1}. {gearName}
                           </span>
-                        </Col>
-                      </Row>
-                    </div>
-                  );
-                })}
+                          <span className="text-success small fw-bold">
+                            {dailyPrice} kr
+                          </span>
+                        </div>
+                      );
+                    })}
 
-                <hr className="border-light my-4" />
-
-                <Row className="align-items-center">
-                  <Col>
-                    <h5 className="text-white mb-0">Totalt belopp:</h5>
-                    <small className="text-muted">
-                      Inkl. {getTotalDays()} {getTotalDays() > 1 ? "dagar" : "dag"} hyra
-                    </small>
-                  </Col>
-                  <Col xs="auto">
-                    <span className="text-success fw-bold display-6">
+                  <hr className="border-light my-2" />
+                  <div className="d-flex justify-content-between align-items-center">
+                    <span className="text-white">Pris/dag:</span>
+                    <span className="text-success">
                       {getOrderTotal()} kr
                     </span>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
-
-            <div className="text-center mt-4">
-              <div className="mb-3">
-                <i className="bi bi-telephone-fill text-light me-2"></i>
-                <a href="tel:+46701234567" className="text-decoration-none text-light">
-                  +46 70 123 45 67
-                </a>
+                  </div>
+                </div>
               </div>
-
-              <Button
-                variant="primary"
-                size="lg"
-                className="me-3 px-4"
-                onClick={() => navigate("/products")}>
-                Hyra mer utrustning
-              </Button>
-
-              <Button
-                variant="outline-light"
-                size="lg"
-                className="px-4"
-                onClick={() => navigate("/")}>
-                Tillbaka till startsidan
-              </Button>
+              <div className="d-flex justify-content-center">
+                <Button
+                  onClick={() => { alert("TODO"); }}
+                  className="btn btn-secondary px-5 py-2 rounded-2 hover-grow">
+                  Ladda ner bekräftelse
+                  <i className="bi bi-download ms-2"></i>
+                </Button>
+              </div>
             </div>
           </Col>
         </Row>
+
+        <DownArrow onClick={() => scrollToElement("section-2")} />
       </Container>
-    </section>
+    </section >
 
     <Divider />
 
-    <section className="background-color-overlay py-5">
-      <Container>
-        <Row className="text-center">
-          <Col>
-            <h4 className="text-light mb-3">Nästa steg</h4>
-            <Row className="g-4">
-              <Col md={4}>
-                <div className="p-3">
-                  <i className="bi bi-1-circle-fill text-danger mb-2" style={{ fontSize: "2rem" }}></i>
-                  <h6 className="text-light">Kontakta oss</h6>
-                  <p className="text-muted small">
-                    Ring eller maila för att boka upphämtningstid
-                  </p>
-                </div>
-              </Col>
-              <Col md={4}>
-                <div className="p-3">
-                  <i className="bi bi-2-circle-fill text-danger mb-2" style={{ fontSize: "2rem" }}></i>
-                  <h6 className="text-light">Hämta utrustning</h6>
-                  <p className="text-muted small">
-                    Kom och hämta din utrustning på överenskommen tid
-                  </p>
-                </div>
-              </Col>
-              <Col md={4}>
-                <div className="p-3">
-                  <i className="bi bi-3-circle-fill text-danger mb-2" style={{ fontSize: "2rem" }}></i>
-                  <h6 className="text-light">Återlämna</h6>
-                  <p className="text-muted small">
-                    Lämna tillbaka utrustningen i samma skick
-                  </p>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+    <section id="section-2" className="background-color-overlay-darker">
+      <Container className="py-4">
+        <div className="py-5 text-center text-sm-start">
+          <div className="d-flex align-items-center justify-content-center justify-content-sm-start">
+            <h2 className="display-4 mb-0">Alltid redo</h2>
+            <i className="bi bi-headset ms-2" style={{ fontSize: "3rem", color: "var(--bs-danger)" }}></i>
+          </div>
+          <p className="lead text-light mb-0">
+            Våra specialister på plats är alltid redo att hjälpa dig snabbt, enkelt och smidigt.
+          </p>
+          <p className="text-light mb-0">
+            Oavsett om du behöver råd inför ett event, hjälp med att välja rätt utrustning eller support på plats kan du alltid räkna med oss.
+          </p>
+          <div className="text-light mt-3">
+            <i className="bi bi-telephone-fill text-light me-2"></i>
+            <a href="tel:+46701234567" className="text-decoration-none text-light">+46 70 123 45 67</a>
+          </div>
+        </div>
       </Container>
-    </section> */}
+    </section >
 
+    <Divider />
+
+    <section className="background-color-overlay">
+      <Container className="py-4">
+        <div className="py-5 text-center text-sm-end">
+          <div className="d-flex align-items-center justify-content-center justify-content-sm-end">
+            <i className="bi bi-award me-2" style={{ fontSize: "3rem", color: "var(--bs-danger)" }}></i>
+            <h2 className="display-4 mb-0">Kvalitet</h2>
+          </div>
+          <p className="lead text-light mb-0">
+            Vi erbjuder noggrant utvald och testad ljudutrustning som alltid är redo för dig.
+          </p>
+          <p className="text-light mb-0">
+            Du kan lita på att vår utrustning håller högsta standard och levereras felfritt varje gång.
+          </p>
+          <div className="text-light mt-3">
+            <i className="bi bi-shield-check text-light me-2"></i>
+            <span className="text-light">100% testad innan leverans</span>
+          </div>
+        </div>
+      </Container>
+    </section>
   </>;
 }

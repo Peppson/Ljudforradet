@@ -70,3 +70,12 @@ export function getCurrentTabName(activeTab: string) {
     default: return "utrustning";
   }
 }
+
+export async function validateCreateOrderResponse(success: Response | null) {
+  if (!success || !success.ok) {
+    return { isValid: false, data: null };
+  }
+
+  const responseData = await success.json();
+  return { isValid: true, data: responseData };
+}

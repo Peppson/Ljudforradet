@@ -34,8 +34,9 @@ const routes: Route[] = [
     path: "/products",
     menuLabel: "Utrustning",
     loader: async () => {
-      const gear = await (await getFetch("api/products"))!.json();
+      const gear = await (await getFetch("/api/products"))!.json();
       const typeSafeGear = forceCorrectType(gear);
+
       return { gear: typeSafeGear };
     }
   },
@@ -50,30 +51,31 @@ const routes: Route[] = [
     menuLabel: "Admin",
     loader: async () => {
       const [gear, users, orders, orderItems] = await Promise.all([
-        (await getFetch("api/products"))!.json(),
-        (await getFetch("api/users"))!.json(),
-        (await getFetch("api/orders"))!.json(),
-        (await getFetch("api/orderItems"))!.json(),
+        (await getFetch("/api/products"))!.json(),
+        (await getFetch("/api/users"))!.json(),
+        (await getFetch("/api/orders"))!.json(),
+        (await getFetch("/api/orderItems"))!.json(),
       ]);
 
       return { gear, users, orders, orderItems };
     }
   },
-
-
-
   {
     element: <OrderPage />,
     path: "/order/:id",
     loader: async ({ params }: { params: { id: string } }) => {
 
-      const order = await (await getFetch(`/api/orders/${params.id}`))!.json();
+      if (!params.id) return NotFoundPage;
 
-      return { order };
+      const [gear, order, orderItems] = await Promise.all([
+        (await getFetch("/api/products"))!.json(),
+        (await getFetch(`/api/orders/${params.id}`))!.json(),
+        (await getFetch("/api/orderItems"))!.json(),
+      ]);
+
+      return { gear, order, orderItems };
     }
   },
-
-
   {
     element: <NotFoundPage />,
     path: "*"

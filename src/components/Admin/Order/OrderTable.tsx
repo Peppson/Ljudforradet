@@ -37,6 +37,7 @@ export default function OrderTable({ order, orderItem, users, gear, onReturnOrde
     <Table striped bordered hover variant="dark" responsive className="admin-tabs">
       <thead>
         <tr>
+          <th>Id</th>
           <th>Användare</th>
           <th>Antal artiklar</th>
           <th>Skapad</th>
@@ -50,6 +51,7 @@ export default function OrderTable({ order, orderItem, users, gear, onReturnOrde
 
             {/* Main order row */}
             <tr>
+              <td>{item.id}</td>
               <td className="text-success">{getUserName(item.userId)}</td>
               <td>{getNumOfGear(item.id)}</td>
               <td>{item.created}</td>
@@ -69,7 +71,6 @@ export default function OrderTable({ order, orderItem, users, gear, onReturnOrde
                   <Table variant="dark" size="sm" className="mb-0">
                     <thead>
                       <tr className="bg-light">
-                        <th>Id</th>
                         <th>Namn</th>
                         <th>Märke</th>
                         <th>Modell</th>
@@ -86,7 +87,6 @@ export default function OrderTable({ order, orderItem, users, gear, onReturnOrde
                           const product = getGearDetails(orderItem.ProductId);
                           return (
                             <tr key={`${item.id}-${orderItem.ProductId}-${index}`}>
-                              <td>{product?.id || ""}</td>
                               <td>{product?.name || ""}</td>
                               <td>{product?.brand || ""}</td>
                               <td>{product?.model || ""}</td>

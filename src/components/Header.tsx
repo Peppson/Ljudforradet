@@ -27,6 +27,12 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const getItemsInCart = () => {
+    if (cartItems.length === 0)
+      return "";
+    return ` (${cartItems.length})`;
+  }
+
   return (
     <header className={isScrolled || isExpanded ? "header scrolled" : "header"}>
       <Navbar
@@ -80,7 +86,7 @@ export default function Header() {
                       <Dropdown.Toggle
                         variant="link"
                         className="nav-link text-white ps-3 fs-5">
-                        {getTrimmedName(user.name)}
+                        {getTrimmedName(user.name)}{getItemsInCart()}
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu
@@ -93,7 +99,7 @@ export default function Header() {
                         )}
 
                         <Dropdown.Item onClick={() => openCart()} className="text-white dropdown-menu-item">
-                          Kundvagn ({cartItems.length})
+                          Kundvagn {getItemsInCart()}
                         </Dropdown.Item>
 
                         <Dropdown.Item onClick={logoutUser} className="text-white dropdown-menu-item">

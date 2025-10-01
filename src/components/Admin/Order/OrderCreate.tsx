@@ -2,6 +2,7 @@ import { Form } from "react-bootstrap";
 import { useApi } from "../../../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
 import { useShowAlert } from "../../../context/AlertProvider";
+import { validateCreateOrderResponse } from "../../../utils/Utilities";
 import type User from "../../../interfaces/User";
 import type Gear from "../../../interfaces/Gear";
 
@@ -29,19 +30,10 @@ export default function OrderCreate({ revalidator, onSuccess, users, gear }: Ord
     setOrderData({ ...OrderData, [name]: trimmedValue });
   }
 
-  async function validateResponse(success: Response | null) {
-    if (!success || !success.ok) {
-      await showAlert({ title: "Error", message: "Något gick fel. Försök igen.", variant: "danger" })
-      return { isValid: false, data: null };
-    }
-    const responseData = await success.json();
-    return { isValid: true, data: responseData };
-  }
-
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
 
-    // Validate at least one item is selected from custom input (no required)
+    // Validate at least one item is selected from custom input (no required attribute here)
     if (OrderData.gearId.length === 0) {
       await showAlert({
         title: "Error",
@@ -53,9 +45,11 @@ export default function OrderCreate({ revalidator, onSuccess, users, gear }: Ord
 
     // Order
     const response = await postFetch("/api/orders", { userId: OrderData.userId });
-    const validation = await validateResponse(response);
-    if (!validation.isValid)
+    const validation = await validateCreateOrderResponse(response);
+    if (!validation.isValid) {
+      await showAlert({ title: "Error", message: "Något gick fel. Försök igen.", variant: "danger" })
       return;
+    }
 
     const orderData = validation.data;
     const orderId = orderData.insertId;

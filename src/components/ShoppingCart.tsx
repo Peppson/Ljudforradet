@@ -1,17 +1,21 @@
 import { useNavigate } from "react-router-dom";
+import { Offcanvas, Button, Row, Col, Modal } from "react-bootstrap";
+import { useState } from "react";
 import { useApi } from "../hooks/useApi";
 import { useShowAlert } from "../context/AlertProvider";
-import { useState } from "react";
-import { Offcanvas, Button, Row, Col } from "react-bootstrap";
 import { useCart } from "../context/ShoppingCartProvider";
+import { useAuth } from "../context/AuthProvider";
+import { validateCreateOrderResponse } from "../utils/Utilities";
 import Divider from "./Divider";
 import Logo from "./logo";
 
 export default function ShoppingCart() {
-  const navigate = useNavigate();
-  const { postFetch } = useApi();
+  const { postFetch, putFetch } = useApi();
   const { showAlert } = useShowAlert();
-  const [isProcessing, setIsProcessing] = useState(false);
+  const { user } = useAuth();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  const navigate = useNavigate();
 
   const {
     showCart,
@@ -26,51 +30,51 @@ export default function ShoppingCart() {
     return cartItems.length === 0;
   };
 
-  const handleCheckout = async () => {
+  const handleCheckoutClick = () => {
+    setShowConfirmModal(true);
+  };
+
+  const handleConfirmCheckout = async () => {
+    setShowConfirmModal(false);
+
     if (cartItems.length === 0) return;
-    setIsProcessing(true);
 
-    navigate("/order/14");
-    closeCart();
-
-    /* try {
-      // Create order
-      const orderData = {
-        items: cartItems.map(item => ({
-          ProductId: item.id,
-          // Add any other order item properties you need
-        }))
-      };
-
-      const response = await postFetch("/api/orders", orderData);
-
-      if (!response || !response.ok) {
-        await showAlert({
-          title: "Fel",
-          message: "Något gick fel vid beställningen. Försök igen.",
-          variant: "danger"
-        });
+    try {
+      // Order
+      const response = await postFetch("/api/orders", { userId: user!.id });
+      const validation = await validateCreateOrderResponse(response);
+      if (!validation.isValid) {
+        await showAlert({ title: "Error", message: "Något gick fel. Försök igen.", variant: "danger" });
         return;
       }
 
-      const order = await response.json();
+      const orderData = validation.data;
+      const orderId = orderData.insertId;
 
-      // Clear cart and close it
+      // OrderItems
+      const orderItemPromises = cartItems.map(item =>
+        postFetch("/api/orderItems", {
+          orderId: orderId,
+          productId: item.id
+        })
+      );
+      await Promise.all(orderItemPromises);
+
+      // Gear
+      const gearUpdatePromises = cartItems.map(item =>
+        putFetch(`/api/products/${item.id}`, {
+          available: 0
+        })
+      );
+      await Promise.all(gearUpdatePromises);
+
       clearCart();
       closeCart();
-
-      // Navigate to confirm page with order ID
-      navigate(`/confirm/${order.id}`);
+      navigate(`/order/${orderId}`);
 
     } catch (error) {
-      await showAlert({
-        title: "Fel",
-        message: "Något gick fel vid beställningen. Försök igen.",
-        variant: "danger"
-      });
-    } finally {
-      setIsProcessing(false);
-    } */
+      await showAlert({ title: "Error", message: "Något gick fel. Försök igen.", variant: "danger" });
+    }
   };
 
   return <>
@@ -140,11 +144,67 @@ export default function ShoppingCart() {
             variant="success"
             className="w-100"
             disabled={isButtonDisabled()}
-            onClick={() => { handleCheckout() }}>
+            onClick={() => { handleCheckoutClick() }}>
             <i className="bi bi-cart-check pe-2"></i>Slutför
           </Button>
         </Col>
       </Row>
     </Offcanvas >
+
+    <Modal
+      show={showConfirmModal}
+      onHide={() => setShowConfirmModal(false)}
+      centered
+      backdrop="static"
+      dialogClassName="custom-modal-border"
+      className="text-dark">
+      <Modal.Header
+        closeButton
+        className="modal-background border-light"
+        closeVariant="white">
+        <Modal.Title>Bekräfta beställning</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body className="modal-background">
+        <p className="text-light ">Är du säker på att du vill slutföra beställningen?</p>
+        <div className="card bg-dark border-light mb-4">
+          <div className="card-body">
+
+            {cartItems.map((item, index) => (
+              <div
+                key={item.id}
+                className="d-flex justify-content-between align-items-center mb-1">
+                <span className="text-light small">
+                  {index + 1}. {item.name}
+                </span>
+                <span className="text-success small fw-bold">
+                  {item.dailyPrice} kr
+                </span>
+              </div>
+            ))}
+            <hr className="border-light my-2" />
+            <div className="d-flex justify-content-between align-items-center">
+              <span className="text-white">Pris/dag:</span>
+              <span className="text-success">
+                {totalPrice} kr
+              </span>
+            </div>
+          </div>
+        </div>
+      </Modal.Body >
+
+      <Modal.Footer className="border-light modal-background">
+        <Button
+          variant="secondary"
+          onClick={() => setShowConfirmModal(false)}>
+          Avbryt
+        </Button>
+        <Button
+          variant="success"
+          onClick={handleConfirmCheckout}>
+          Slutför beställning
+        </Button>
+      </Modal.Footer>
+    </Modal >
   </>;
 }
