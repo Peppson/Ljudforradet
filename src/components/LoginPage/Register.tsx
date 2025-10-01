@@ -5,9 +5,9 @@ import { useErrorMessage } from "../../hooks/useErrorMessage";
 import { useShowAlert } from "../../context/AlertProvider";
 import SubmitButton from "./SubmitButton";
 import config from "../../config/Config";
-import FormText from "../FormFields/FormText";
-import FormEmail from "../FormFields/FormEmail";
-import FormPassword from "../FormFields/FormPassword";
+import FormText from "../formFields/FormText";
+import FormEmail from "../formFields/FormEmail";
+import FormPassword from "../formFields/FormPassword";
 
 export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
   const { showErrorMsg } = useErrorMessage();

@@ -3,9 +3,9 @@ import { useApi } from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { useErrorMessage } from "../../../hooks/useErrorMessage";
 import type Gear from "../../../interfaces/Gear";
-import FormText from "../../FormFields/FormText";
+import FormText from "../../formFields/FormText";
 import { GearTypes } from "../../../interfaces/GearType";
-import FormNumber from "../../FormFields/FormNumber";
+import FormNumber from "../../formFields/FormNumber";
 
 interface GearCreateProps {
   revalidator: { revalidate: () => void };

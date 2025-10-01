@@ -5,8 +5,8 @@ import { useAuth } from "../../context/AuthProvider";
 import { useShowAlert } from "../../context/AlertProvider";
 import SubmitButton from "./SubmitButton";
 import config from "../../config/Config";
-import FormEmail from "../FormFields/FormEmail";
-import FormPassword from "../FormFields/FormPassword";
+import FormEmail from "../formFields/FormEmail";
+import FormPassword from "../formFields/FormPassword";
 
 export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
   const { showAlert } = useShowAlert();

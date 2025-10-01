@@ -3,7 +3,7 @@ Globals = Obj(new
 {
     debugOn = true,
     detailedAclDebug = false,
-    aclOn = true,
+    aclOn = false, // todo
     isSpa = true,
     port = args[0],
     serverName = "Ljudforradet Backend",

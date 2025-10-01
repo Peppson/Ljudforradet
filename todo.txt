@@ -1,19 +1,15 @@
 
-
-ReactBits ba kör
 vy/vyer admin order
 ACL /admin
-react key på alla foreach
 vertical slice ba
-lämna tillbaka ordrar istället för att tabort??
 
+ReactBits ba kör
+react key på alla foreach
 
 
 innan klar:
 config.ts
 rm old databas backend
-ACL
 sesson table empty!
 console.log ta bort
 app.cs ej debug 
-remove bootstrap breakpoints when done

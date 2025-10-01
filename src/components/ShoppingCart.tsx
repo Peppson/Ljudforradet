@@ -1,9 +1,18 @@
-import { useCart } from "../context/ShoppingCartProvider";
+import { useNavigate } from "react-router-dom";
+import { useApi } from "../hooks/useApi";
+import { useShowAlert } from "../context/AlertProvider";
+import { useState } from "react";
 import { Offcanvas, Button, Row, Col } from "react-bootstrap";
+import { useCart } from "../context/ShoppingCartProvider";
 import Divider from "./Divider";
 import Logo from "./logo";
 
 export default function ShoppingCart() {
+  const navigate = useNavigate();
+  const { postFetch } = useApi();
+  const { showAlert } = useShowAlert();
+  const [isProcessing, setIsProcessing] = useState(false);
+
   const {
     showCart,
     closeCart,
@@ -15,6 +24,53 @@ export default function ShoppingCart() {
 
   const isButtonDisabled = () => {
     return cartItems.length === 0;
+  };
+
+  const handleCheckout = async () => {
+    if (cartItems.length === 0) return;
+    setIsProcessing(true);
+
+    navigate("/order/14");
+    closeCart();
+
+    /* try {
+      // Create order
+      const orderData = {
+        items: cartItems.map(item => ({
+          ProductId: item.id,
+          // Add any other order item properties you need
+        }))
+      };
+
+      const response = await postFetch("/api/orders", orderData);
+
+      if (!response || !response.ok) {
+        await showAlert({
+          title: "Fel",
+          message: "Något gick fel vid beställningen. Försök igen.",
+          variant: "danger"
+        });
+        return;
+      }
+
+      const order = await response.json();
+
+      // Clear cart and close it
+      clearCart();
+      closeCart();
+
+      // Navigate to confirm page with order ID
+      navigate(`/confirm/${order.id}`);
+
+    } catch (error) {
+      await showAlert({
+        title: "Fel",
+        message: "Något gick fel vid beställningen. Försök igen.",
+        variant: "danger"
+      });
+    } finally {
+      setIsProcessing(false);
+    } */
   };
 
   return <>
@@ -84,7 +140,7 @@ export default function ShoppingCart() {
             variant="success"
             className="w-100"
             disabled={isButtonDisabled()}
-            onClick={() => { alert("TODO") }}>
+            onClick={() => { handleCheckout() }}>
             <i className="bi bi-cart-check pe-2"></i>Slutför
           </Button>
         </Col>

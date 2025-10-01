@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
 import AdminPage from "../../pages/AdminPage";
 
-export default function AdminRouteWrapper() {
+export default function AdminPageWrapper() {
   const { user } = useAuth();
 
   // Dumb fix for redirect...

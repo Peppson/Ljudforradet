@@ -6,7 +6,8 @@ import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
 import ProductsPage from "./pages/ProductsPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import AdminRouteWrapper from "./components/Admin/AdminRouteWrapper";
+import AdminPageWrapper from "./components/Admin/AdminPageWrapper";
+import OrderPage from "./pages/OrderPage";
 
 interface Route {
   element: JSX.Element;
@@ -35,7 +36,6 @@ const routes: Route[] = [
     loader: async () => {
       const gear = await (await getFetch("api/products"))!.json();
       const typeSafeGear = forceCorrectType(gear);
-
       return { gear: typeSafeGear };
     }
   },
@@ -45,18 +45,35 @@ const routes: Route[] = [
     menuLabel: "Logga in"
   },
   {
-    element: <AdminRouteWrapper />,
+    element: <AdminPageWrapper />,
     path: "/admin",
     menuLabel: "Admin",
     loader: async () => {
-      const gear = await (await getFetch("api/products"))!.json();
-      const users = await (await getFetch("api/users"))!.json();
-      const orders = await (await getFetch("api/orders"))!.json();
-      const orderItems = await (await getFetch("api/orderItems"))!.json();
+      const [gear, users, orders, orderItems] = await Promise.all([
+        (await getFetch("api/products"))!.json(),
+        (await getFetch("api/users"))!.json(),
+        (await getFetch("api/orders"))!.json(),
+        (await getFetch("api/orderItems"))!.json(),
+      ]);
 
       return { gear, users, orders, orderItems };
     }
   },
+
+
+
+  {
+    element: <OrderPage />,
+    path: "/order/:id",
+    loader: async ({ params }: { params: { id: string } }) => {
+
+      const order = await (await getFetch(`/api/orders/${params.id}`))!.json();
+
+      return { order };
+    }
+  },
+
+
   {
     element: <NotFoundPage />,
     path: "*"

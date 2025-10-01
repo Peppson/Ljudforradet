@@ -3,9 +3,9 @@ import { useApi } from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { useErrorMessage } from "../../../hooks/useErrorMessage";
 import type User from "../../../interfaces/User";
-import FormText from "../../FormFields/FormText";
-import FormEmail from "../../FormFields/FormEmail";
-import FormPassword from "../../FormFields/FormPassword";
+import FormText from "../../formFields/FormText";
+import FormEmail from "../../formFields/FormEmail";
+import FormPassword from "../../formFields/FormPassword";
 
 interface UserCreateProps {
   revalidator: { revalidate: () => void };
