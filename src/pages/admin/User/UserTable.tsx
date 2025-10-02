@@ -1,6 +1,6 @@
 import { Table } from "react-bootstrap";
 import type User from "../../../interfaces/User";
-import DropdownMenu from "./../DropdownMenu";
+import DropdownMenu from "../DropdownMenu";
 
 interface UserTableProps {
   user: User[];

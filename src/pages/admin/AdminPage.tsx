@@ -1,21 +1,21 @@
 import { Row, Tab, Tabs } from "react-bootstrap";
 import { Link, useLoaderData, useRevalidator } from "react-router-dom";
 import { useState } from "react";
-import { getCurrentTabName } from "../utils/Utilities";
-import type Gear from "../interfaces/Gear";
-import type User from "../interfaces/User";
-import type Order from "../interfaces/Order";
-import type OrderItem from "../interfaces/OrderItem";
-import Logo from "../components/logo";
-import GearTable from "../components/Admin/Gear/GearTable";
-import SharedPagination from "../components/Admin/SharedPagination";
-import UserTable from "../components/Admin/User/UserTable";
-import config from "../config/Config";
-import ModalDelete from "../components/Admin/Modals/ModalDelete";
-import ModalCreate from "../components/Admin/Modals/ModalCreate";
-import ModalEdit from "../components/Admin/Modals/ModalEdit";
-import OrderTable from "../components/Admin/Order/OrderTable";
-import ModalOrderReturn from "../components/Admin/Modals/ModalOrderReturn";
+import { getCurrentTabName } from "../../utils/Utilities";
+import type Gear from "../../interfaces/Gear";
+import type User from "../../interfaces/User";
+import type Order from "../../interfaces/Order";
+import type OrderItem from "../../interfaces/OrderItem";
+import Logo from "../../components/Logo";
+import SharedPagination from "../../components/SharedPagination";
+import config from "../../config/Config";
+import GearTable from "./gear/GearTable";
+import UserTable from "./user/UserTable";
+import OrderTable from "./order/OrderTable";
+import ModalCreate from "./modals/ModalCreate";
+import ModalEdit from "./modals/ModalEdit";
+import ModalDelete from "./modals/ModalDelete";
+import ModalOrderReturn from "./modals/ModalOrderReturn";
 
 export default function AdminPage() {
   const revalidator = useRevalidator();

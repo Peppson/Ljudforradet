@@ -7,7 +7,7 @@ const config = {
   appName: "Ljudförrådet",
   startupModalStorageKey: "hasShownStartup",
   loadingSpinnerMinDuration: 800,
-  adminPagePaginationSize: 7,
+  adminPagePaginationSize: 6,
   descriptionMaxLength: 70,
 };
 

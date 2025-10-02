@@ -1,13 +1,13 @@
 import type { JSX } from "react";
 import { useApi } from "./hooks/useApi";
 import { forceCorrectType } from "./utils/Utilities";
-import StartPage from "./pages/StartPage";
-import AboutPage from "./pages/AboutPage";
-import LoginPage from "./pages/LoginPage";
-import ProductsPage from "./pages/ProductsPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import AdminPageWrapper from "./components/Admin/AdminPageWrapper";
-import OrderPage from "./pages/OrderPage";
+import StartPage from "./pages/start/StartPage";
+import AboutPage from "./pages/about/AboutPage";
+import LoginPage from "./pages/login/LoginPage";
+import ProductsPage from "./pages/products/ProductsPage";
+import NotFoundPage from "./pages/notFound/NotFoundPage";
+import OrderPage from "./pages/orderConfirmation/OrderPage";
+import AdminPageWrapper from "./pages/admin/AdminPageWrapper";
 
 interface Route {
   element: JSX.Element;

@@ -1,11 +1,11 @@
 import { Row, Col, Container } from "react-bootstrap";
 import { useState } from "react";
-import { scrollToElement } from "../utils/Utilities";
-import Register from "../components/LoginPage/Register";
-import Login from "../components/LoginPage/Login";
-import DownArrow from "../components/DownArrow";
-import Info from "../components/LoginPage/Info";
-import Divider from "../components/Divider";
+import { scrollToElement } from "../../utils/Utilities";
+import Register from "./Register";
+import Login from "./Login";
+import DownArrow from "../../components/DownArrow";
+import Info from "./Info";
+import Divider from "../../components/Divider";
 
 export default function LoginPage() {
   const [isLoginPage, setIsLoginPage] = useState(true);

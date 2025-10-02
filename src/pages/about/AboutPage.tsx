@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { scrollToElement } from "../utils/Utilities";
-import Divider from "../components/Divider";
-import DownArrow from "../components/DownArrow";
+import { scrollToElement } from "../../utils/Utilities";
+import Divider from "../../components/Divider";
+import DownArrow from "../../components/DownArrow";
 
 export default function AboutPage() {
   return <>

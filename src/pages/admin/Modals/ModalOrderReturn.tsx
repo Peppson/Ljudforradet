@@ -5,7 +5,7 @@ import { useShowAlert } from "../../../context/AlertProvider";
 import type Gear from "../../../interfaces/Gear";
 import type Order from "../../../interfaces/Order";
 import type OrderItem from "../../../interfaces/OrderItem";
-import Logo from "../../logo";
+import Logo from "../../../components/Logo";
 
 interface DeleteModalProps {
   show: boolean;

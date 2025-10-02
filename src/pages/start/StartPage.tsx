@@ -1,13 +1,13 @@
 import { useOutletContext } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { useAuth } from "../context/AuthProvider";
-import { getTrimmedName, scrollToElement } from "../utils/Utilities";
+import { useAuth } from "../../context/AuthProvider";
+import { getTrimmedName, scrollToElement } from "../../utils/Utilities";
 import { Button, Container, Row } from "react-bootstrap";
-import InstrumentCard from "../components/StartPage/InstrumentCard";
-import FeatureCard from "../components/StartPage/FeatureCard";
-import DownArrow from "../components/DownArrow";
-import config from "../config/Config";
-import Divider from "../components/Divider";
+import InstrumentCard from "./InstrumentCard";
+import FeatureCard from "./FeatureCard";
+import DownArrow from "../../components/DownArrow";
+import config from "../../config/Config";
+import Divider from "../../components/Divider";
 
 export default function StartPage() {
   const { user } = useAuth();
