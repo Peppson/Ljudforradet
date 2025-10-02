@@ -58,7 +58,7 @@ export default function OrderTable({ order, orderItem, users, gear, onReturnOrde
               <td className="text-center">
                 <div
                   onClick={() => onReturnOrder(item)}
-                  className="text-danger dropdown-menu-item">
+                  className="text-danger dropdown-menu-item cursor-pointer">
                   Avsluta
                 </div>
               </td>
