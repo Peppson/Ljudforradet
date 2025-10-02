@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import routes from "../routes";
 import Divider from "./Divider";
 import config from "../config/Config";
-import Logo from "./logo";
+import Logo from "./Logo";
 
 export default function Footer() {
   const allowedPaths = ["/", "/about-us", "/products"];

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import config from "../config/Config";
-import Logo from "./logo";
+import Logo from "./Logo";
 
 interface StartupModalProps {
   onClose?: () => void;

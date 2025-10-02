@@ -2,10 +2,10 @@ import { Col, Form, Row } from "react-bootstrap";
 import { useApi } from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { useErrorMessage } from "../../../hooks/useErrorMessage";
-import type Gear from "../../../interfaces/Gear";
-import FormText from "../../formFields/FormText";
 import { GearTypes } from "../../../interfaces/GearType";
-import FormNumber from "../../formFields/FormNumber";
+import type Gear from "../../../interfaces/Gear";
+import FormText from "../../../components/formInputs/FormText";
+import FormNumber from "../../../components/formInputs/FormNumber";
 
 interface GearCreateProps {
   revalidator: { revalidate: () => void };

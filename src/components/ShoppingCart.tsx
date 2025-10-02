@@ -7,7 +7,7 @@ import { useCart } from "../context/ShoppingCartProvider";
 import { useAuth } from "../context/AuthProvider";
 import { validateCreateOrderResponse } from "../utils/Utilities";
 import Divider from "./Divider";
-import Logo from "./logo";
+import Logo from "./Logo";
 
 export default function ShoppingCart() {
   const { postFetch, putFetch } = useApi();

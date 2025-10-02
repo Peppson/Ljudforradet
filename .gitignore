@@ -427,9 +427,6 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-
-backend/databases/live.sqlite3
-
 # Logs
 logs
 *.log
@@ -443,7 +440,6 @@ node_modules
 dist
 dist-ssr
 *.local
-backend/_db.sqlite3
 
 # Editor directories and files
 .vscode/*
@@ -455,3 +451,7 @@ backend/_db.sqlite3
 *.njsproj
 *.sln
 *.sw?
+
+
+backend/databases/live.sqlite3
+backend/_db.sqlite3

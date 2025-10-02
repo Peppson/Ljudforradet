@@ -5,7 +5,7 @@ import { getTrimmedName } from "../utils/Utilities";
 import { useCart } from "../context/ShoppingCartProvider";
 import { useAuth } from "../context/AuthProvider";
 import routes from "../routes";
-import Logo from "./logo";
+import Logo from "./Logo";
 import config from "../config/Config";
 
 export default function Header() {

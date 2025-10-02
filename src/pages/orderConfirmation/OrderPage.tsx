@@ -1,14 +1,14 @@
 import { useLoaderData } from "react-router-dom";
-import { useAuth } from "../context/AuthProvider";
-import { scrollToElement } from "../utils/Utilities";
+import { useAuth } from "../../context/AuthProvider";
+import { scrollToElement } from "../../utils/Utilities";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { downloadOrderConfirmation } from "../utils/DownloadOrderConfirmation ";
-import type Order from "../interfaces/Order";
-import type OrderItem from "../interfaces/OrderItem";
-import type Gear from "../interfaces/Gear";
-import NotFoundPage from "./NotFoundPage";
-import DownArrow from "../components/DownArrow";
-import Divider from "../components/Divider";
+import { downloadOrderConfirmation } from "../../utils/DownloadOrderConfirmation ";
+import type Order from "../../interfaces/Order";
+import type OrderItem from "../../interfaces/OrderItem";
+import type Gear from "../../interfaces/Gear";
+import NotFoundPage from "../notFound/NotFoundPage";
+import DownArrow from "../../components/DownArrow";
+import Divider from "../../components/Divider";
 
 export default function OrderPage() {
   const { user } = useAuth();

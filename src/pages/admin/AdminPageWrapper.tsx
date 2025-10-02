@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
-import AdminPage from "../../pages/AdminPage";
+import AdminPage from "../../pages/admin/AdminPage";
 
 export default function AdminPageWrapper() {
   const { user } = useAuth();

@@ -1,63 +1,54 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
-import { useApi } from "../../hooks/useApi";
-import { useErrorMessage } from "../../hooks/useErrorMessage";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthProvider";
 import { useShowAlert } from "../../context/AlertProvider";
 import SubmitButton from "./SubmitButton";
 import config from "../../config/Config";
-import FormText from "../formFields/FormText";
-import FormEmail from "../formFields/FormEmail";
-import FormPassword from "../formFields/FormPassword";
+import FormEmail from "../../components/formInputs/FormEmail";
+import FormPassword from "../../components/formInputs/FormPassword";
 
-export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
-  const { showErrorMsg } = useErrorMessage();
+export default function Login({ setIsLoginPage: setIsLoginPage }: { setIsLoginPage: (value: boolean) => void }) {
   const { showAlert } = useShowAlert();
-  const { postFetch } = useApi();
+  const { loginUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  let [createUser, setCreateUser] = useState({
-    name: "",
+  let [payload, setPayload] = useState<{ email: string; password: string }>({
     email: "",
     password: ""
   });
 
   function setFormProp(event: React.ChangeEvent) {
     let { name, value }: { name: string, value: string | null } = event.target as HTMLInputElement;
-    setCreateUser({ ...createUser, [name]: value.trim() });
+    setPayload({ ...payload, [name]: value.trim() });
   }
 
   async function sendForm(event: React.FormEvent) {
     event.preventDefault();
     setIsLoading(true);
 
-    const success = await postFetch("/api/users", createUser);
+    const success = await loginUser(payload.email, payload.password);
     await Promise.all([success, new Promise((res) => setTimeout(res, config.loadingSpinnerMinDuration))]);
-    const responseData = await success?.json();
 
-    if (success == null || !success.ok) {
-      showErrorMsg(responseData);
+    if (!success) {
+      await showAlert({
+        title: "Error",
+        message: "Inloggning misslyckades, kontrollera dina uppgifter och försök igen.",
+        variant: "danger"
+      })
       setIsLoading(false);
       return;
     }
 
-    // Register successful
-    setIsLoading(false);
-    await showAlert({
-      title: `Välkommen ${createUser.name}!`,
-      message: "Ditt konto är skapat och du kan nu logga in.",
-      variant: "success"
-    })
-    setIsLoginPage(true);
+    // Login successful
+    navigate("/");
   }
 
   return <>
     <Form onSubmit={sendForm} className="py-2 pt-3">
-      <h5 className="text-center fw-bold">Registrera</h5>
+      <h5 className="text-center fw-bold">Logga in</h5>
 
-      <FormText
-        setFormProp={setFormProp}
-        label="Namn"
-        placeholder="Ange ditt namn" />
       <FormEmail
         setFormProp={setFormProp}
         label="E-postadress"
@@ -70,22 +61,22 @@ export default function Register({ setIsLoginPage: setIsLoginPage }: { setIsLogi
       <div className="pt-3 d-flex flex-column">
         <div className="d-grid gap-2">
           <SubmitButton isLoading={isLoading}>
-            Registrera
+            Logga in
           </SubmitButton>
         </div>
 
         <p className="small mt-4 text-center text-light">
-          Har du redan ett konto?{" "}
+          Inget konto?{" "}
           <a
             className="text-danger cursor-pointer text-decoration-none"
             onClick={(e) => {
               e.preventDefault();
-              setIsLoginPage(true);
+              setIsLoginPage(false);
             }}>
-            Logga in
+            Registrera dig
           </a>
         </p>
       </div>
     </Form>
-  </>;
+  </>
 }

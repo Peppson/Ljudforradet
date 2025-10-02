@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
-import { isUserLoggedIn, scrollToElement } from "../utils/Utilities";
-import { useAuth } from "../context/AuthProvider";
-import type Gear from "../interfaces/Gear";
-import type User from "../interfaces/User";
-import Divider from "../components/Divider";
-import ProductModal from "../components/ProductsPage/ProductModal";
-import LoginPromptModal from "../components/ProductsPage/LoginPromptModal";
-import ProductCard from "../components/ProductsPage/ProductCard";
+import { isUserLoggedIn, scrollToElement } from "../../utils/Utilities";
+import { useAuth } from "../../context/AuthProvider";
+import type Gear from "../../interfaces/Gear";
+import type User from "../../interfaces/User";
+import Divider from "../../components/Divider";
+import ProductCard from "./ProductCard";
+import ProductModal from "./ProductModal";
+import LoginPromptModal from "./LoginPromptModal";
 
 export default function ProductsPage() {
   const { user } = useAuth();
