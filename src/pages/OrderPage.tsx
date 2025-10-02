@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import { scrollToElement } from "../utils/Utilities";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { downloadOrderConfirmation } from "../utils/DownloadOrderConfirmation ";
 import type Order from "../interfaces/Order";
 import type OrderItem from "../interfaces/OrderItem";
 import type Gear from "../interfaces/Gear";
@@ -37,6 +38,15 @@ export default function OrderPage() {
         const dailyPrice = gearItem?.dailyPrice || 0;
         return total + dailyPrice;
       }, 0);
+  };
+
+  const handleDownload = () => {
+    downloadOrderConfirmation({
+      order,
+      orderItems,
+      gear,
+      orderTotal: getOrderTotal()
+    });
   };
 
   return <>
@@ -97,7 +107,7 @@ export default function OrderPage() {
               </div>
               <div className="d-flex justify-content-center">
                 <Button
-                  onClick={() => { alert("TODO"); }}
+                  onClick={handleDownload}
                   className="btn btn-secondary px-5 py-2 rounded-2 hover-grow">
                   Ladda ner bekräftelse
                   <i className="bi bi-download ms-2"></i>

@@ -1,14 +1,13 @@
 
-vy/vyer admin order
+Vy/vyer admin order
 ACL
 vertical slice ba
 
-ReactBits ba kör
-react key på alla foreach
 
-innan klar:
+Innan klar:
 config.ts
+react key på alla foreach - kolla
 rm old databas backend
-sesson table empty!
+session table empty!
 console.log ta bort
 app.cs ej debug 
