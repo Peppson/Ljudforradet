@@ -10,12 +10,12 @@ import Logo from "../../components/Logo";
 import SharedPagination from "../../components/SharedPagination";
 import config from "../../config/Config";
 import GearTable from "./gear/GearTable";
-import UserTable from "./user/UserTable";
-import OrderTable from "./order/OrderTable";
 import ModalCreate from "./modals/ModalCreate";
-import ModalEdit from "./modals/ModalEdit";
 import ModalDelete from "./modals/ModalDelete";
+import ModalEdit from "./modals/ModalEdit";
 import ModalOrderReturn from "./modals/ModalOrderReturn";
+import OrderTable from "./order/OrderTable";
+import UserTable from "./user/UserTable";
 
 export default function AdminPage() {
   const revalidator = useRevalidator();
