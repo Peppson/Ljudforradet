@@ -2,12 +2,12 @@
 A fullstack demo e-commerce app for audio equipment, built with React and C#.
 >_This is a fictional app created for demonstration purposes, data is not real._
 
+![home](public/readme/fullsize-pages/home.png)
 
 ## Tech Stack
-- React + TypeScript
+- React + TypeScript + Bootstrap
 - C# ASP.NET Core
 - SQLite
-- Styling with Bootstrap 
 
 
 ## Try it out locally?
